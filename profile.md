@@ -1214,6 +1214,7 @@ In this example, the `nonce`, `preferred_username`, `name `and `email` claims ar
     "acr": "https://refeds.org/profile/mfa"
 }
 
+```
 
 <!-- Footnotes themselves at the bottom. -->
 ## Notes
