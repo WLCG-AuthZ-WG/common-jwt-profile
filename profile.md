@@ -1,13 +1,4 @@
 
-<p style="color: red; font-weight: bold">>>>>>  gd2md-html alert:  ERRORs: 0; WARNINGs: 1; ALERTS: 1.</p>
-<ul style="color: red; font-weight: bold"><li>See top comment block for details on ERRORs and WARNINGs. <li>In the converted Markdown or HTML, search for inline alerts that start with >>>>>  gd2md-html alert:  for specific instances that need correction.</ul>
-
-<p style="color: red; font-weight: bold">Links to alert messages:</p><a href="#gdcalert1">alert1</a>
-
-<p style="color: red; font-weight: bold">>>>>> PLEASE check and correct alert issues and delete this message and the inline alerts.<hr></p>
-
-
-
 # WLCG Common JWT Profiles
 
 _Authored by the WLCG AuthZ Working Group_
@@ -571,7 +562,7 @@ with the following rules:
 
 If an entity is not entitled to a group, the scope requested may be ignored by the server and the corresponding token may not have the corresponding claims; in this case, section 3.3 of RFC 6749 requires the token issuer to inform the client.  A server may also return an error during the authorization request.   Client software implementations should always verify the scopes present in the returned token.
 
-**Examples: **
+**Examples:**
 
 In the following examples, “/cms” is the only default group.
 
@@ -955,12 +946,7 @@ Some authorization flows or capabilities are available only to confidential clie
 
 #### Authorization flows
 
-
-
-<p id="gdcalert1" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/WLCG-Common0.png). Store image on your image server and adjust path/filename if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert2">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-![alt_text](images/WLCG-Common0.png "image_tooltip")
+![](authorization_flows.png)
 
 
 The image above, taken from [here](https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2), describes the abstract OAuth protocol flow. In OAuth terminology, authorization flows describe the interactions among the roles defined above (a client application, the user, the authorization and resource servers) to let a client application obtain controlled access to protected resources with the (possibly implicit) authorization of the end user owning such resources. OAuth/OpenID connect flows can be described as variations of the abstract protocol flow in support of specific authentication and authorization scenarios.
