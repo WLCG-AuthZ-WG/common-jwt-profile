@@ -324,7 +324,22 @@ The contents of the claim may either be a string or URL; we do not currently pro
   </tr>
 </table>
 
+The `aud` claim provides an explicit statement of the intended audience for the token; it is an important mechanism for restricting the scope of the token to one or more relying parties.  Note requiring `aud` is atypical: we believe it is better to have the issuer explicitly state the token may be used by any relying party as opposed to assuming its absence indicates no restrictions.
 
+Relying parties are recommended to accept audiences based on the endpoint name most commonly associated with the provided service.
+That is, if a client would want to access the resource `https://wlcg.example.com/base/file.root`, then the recommended audience for the relying party at this endpoint would be:
+
+```
+https://wlcg.example.com
+```
+
+The audience SHOULD be normalized according to Section 6 of RFC 3986; that is, trailing slashes are discouraged and default ports should not be included.  However, the comparison against the value MUST be done as a case sensitive string as specified in Section 4.1.3 RFC 7519.
+
+Audiences of this form are preferred (as opposed to a human-readable "site name" such as `WLCG_Site_Foo`) because the user can derive the correct audience from a given URL then determine the correct token to request.
+
+Note that a given relying party may accept several audiences.  For example, a storage server may accept an audience based on a load balanced endpoint it participates in (e.g., `https://redirector.example.com`) in addition to its local hostname (`https://server1.example.com`).
+
+If the relying party provides a non-HTTPS-based service, a URI should be used.  For example, a HTCondor-CE running at `condor.example.com` may use an audience of the form `condor:condor.example.com`.
 
 ### ID Token Claims
 
