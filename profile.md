@@ -474,7 +474,7 @@ Examples values of the `scope` claim:
 
 Authorization may be based on the `wlcg.groups` claim. The value of the `wlcg.groups` claim is an ordered JSON array of case-sensitive strings reflecting the asserted group membership of the subject of the token.
 
-For authorization purposes, group membership is considered hierarchical.  That is, membership in a child group (`/cms/uscms`) implies membership in the parent group.  For authorization, calculated implied group memberships should be added to the end of the group list.  That is, the following list of groups:
+For authorization purposes, group membership is considered hierarchical.  That is, membership in a child group (`/cms/uscms`) implies membership in the parent group.  For authorization, calculated implied group memberships MUST be added to the end of the group list.  That is, the following list of groups:
 
 ```
 wlcg.groups = ["/cms/uscms", "/production"]
