@@ -334,9 +334,9 @@ https://wlcg.example.com
 
 The audience SHOULD be normalized according to Section 6 of RFC 3986; that is, trailing slashes are discouraged and default ports should not be included.  However, the comparison against the value MUST be done as a case sensitive string as specified in Section 4.1.3 RFC 7519.
 
-Audiences of this form are preferred (as opposed to a human-readable "site name" such as `WLCG_Site_Foo`) because the user can derive the correct audience from a given URL then determine the correct token to request.
+Note that a given relying party may accept several audiences.  For example, a storage server SHOULD accept an audience based on a load balanced endpoint it participates in (e.g., `https://redirector.example.com`) in addition to its local hostname (`https://server1.example.com`).  The user SHOULD NOT need to request a new token for each HTTP redirect within the same logical service.
 
-Note that a given relying party may accept several audiences.  For example, a storage server may accept an audience based on a load balanced endpoint it participates in (e.g., `https://redirector.example.com`) in addition to its local hostname (`https://server1.example.com`).
+Audiences of this form are preferred (as opposed to a human-readable "site name" such as `WLCG_Site_Foo`) because an end-user can often derive the correct audience from a given URL, allowing them to request an appropriate token.  Site names are often community-specific and would require the user to maintain a lookup table from endpoint to audience.
 
 If the relying party provides a non-HTTPS-based service, a URI should be used.  For example, a HTCondor-CE running at `condor.example.com` may use an audience of the form `condor://condor.example.com`.
 
