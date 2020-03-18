@@ -338,7 +338,7 @@ Audiences of this form are preferred (as opposed to a human-readable "site name"
 
 Note that a given relying party may accept several audiences.  For example, a storage server may accept an audience based on a load balanced endpoint it participates in (e.g., `https://redirector.example.com`) in addition to its local hostname (`https://server1.example.com`).
 
-If the relying party provides a non-HTTPS-based service, a URI should be used.  For example, a HTCondor-CE running at `condor.example.com` may use an audience of the form `condor:condor.example.com`.
+If the relying party provides a non-HTTPS-based service, a URI should be used.  For example, a HTCondor-CE running at `condor.example.com` may use an audience of the form `condor://condor.example.com`.
 
 ### ID Token Claims
 
