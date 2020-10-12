@@ -286,7 +286,7 @@ Usage of this claim is OPTIONAL. However, the <strong><code>wlcg.groups</code></
    </td>
    <td>RFC7519 & OpenID Connect core
    </td>
-   <td>The <strong><code>aud</code></strong> claim represents the audience or audiences the token is intended for. In the general case, the <strong><code>aud</code></strong> value is an array of case sensitive strings. In the common special case when there is one audience, the aud value MAY be a single case sensitive string. The special string value of “https://wlcg.cern.ch/jwt/v1/any” signifies that the issuer intends the token to be valid for all relying parties.  See the discussion below for further guidance on picking values for the `aud` claim.
+   <td>The <strong><code>aud</code></strong> claim represents the audience or audiences the token is intended for. In the general case, the <strong><code>aud</code></strong> value is an array of case sensitive strings. As specified in [RFC 7519 section 4.1.3](https://tools.ietf.org/html/rfc7519#section-4.1.3), in the common special case when there is one audience, the aud value MAY be a single case sensitive string. The special string value of “https://wlcg.cern.ch/jwt/v1/any” signifies that the issuer intends the token to be valid for all relying parties.  See the discussion below for further guidance on picking values for the `aud` claim.
    </td>
    <td>Required
    </td>
