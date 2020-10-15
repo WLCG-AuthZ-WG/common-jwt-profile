@@ -286,8 +286,7 @@ Usage of this claim is OPTIONAL. However, the <strong><code>wlcg.groups</code></
    </td>
    <td>RFC7519 & OpenID Connect core
    </td>
-   <td>The <strong><code>aud</code></strong> claim represents the audience or audiences the token is intended for. In the general case, the <strong><code>aud</code></strong> value is an array of case sensitive strings. In the common special case when there is one audience, the aud value MAY be a single case sensitive string. The special string value of “https://wlcg.cern.ch/jwt/v1/any” signifies that the issuer intends the token to be valid for all relying parties; this string value is required in order to force an issuer to explicitly state the intent that the token is targeted to any relying party.
-The contents of the claim may either be a string or URL; we do not currently provide specific guidance on selecting audience names.
+   <td>The <strong><code>aud</code></strong> claim represents the audience or audiences the token is intended for. In the general case, the <strong><code>aud</code></strong> value is an array of case sensitive strings. As specified in [RFC 7519 section 4.1.3](https://tools.ietf.org/html/rfc7519#section-4.1.3), in the common special case when there is one audience, the aud value MAY be a single case sensitive string. The special string value of “https://wlcg.cern.ch/jwt/v1/any” signifies that the issuer intends the token to be valid for all relying parties.  See the discussion below for further guidance on picking values for the `aud` claim.
    </td>
    <td>Required
    </td>
@@ -324,7 +323,22 @@ The contents of the claim may either be a string or URL; we do not currently pro
   </tr>
 </table>
 
+The `aud` claim provides an explicit statement of the intended audience for the token; it is an important mechanism for restricting the scope of the token to one or more relying parties.  Note requiring `aud` is atypical: we believe it is better to have the issuer explicitly state the token may be used by any relying party as opposed to assuming its absence indicates no restrictions.
 
+Relying parties are recommended to accept audiences based on the endpoint name most commonly associated with the provided service.
+That is, if a client would want to access the resource `https://wlcg.example.com/base/file.root`, then the recommended audience for the relying party at this endpoint would be:
+
+```
+https://wlcg.example.com
+```
+
+The audience SHOULD be normalized according to Section 6 of RFC 3986; that is, trailing slashes are discouraged and default ports should not be included.  However, the comparison against the value MUST be done as a case sensitive string as specified in Section 4.1.3 RFC 7519.
+
+Note that a given relying party may accept several audiences.  For example, a storage server SHOULD accept an audience based on a load balanced endpoint it participates in (e.g., `https://redirector.example.com`) in addition to its local hostname (`https://server1.example.com`).  The user SHOULD NOT need to request a new token for each HTTP redirect within the same logical service.  Implementations may accept additional audiences (if, for example, a single storage system has multiple services and endpoints).
+
+Audiences of this form are preferred (as opposed to a human-readable "site name" such as `WLCG_Site_Foo`) to ease the ability of an end-user or tool to derive an audience from a given URL, allowing them to request an appropriate token.  Site names, on the other hand, are often community-specific and would require the user to maintain a lookup table from endpoint to audience.
+
+If the relying party provides a non-HTTPS-based service, a URI should be used.  For example, a HTCondor-CE running at `condor.example.com` may use an audience of the form `condor://condor.example.com`.
 
 ### ID Token Claims
 
