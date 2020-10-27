@@ -656,6 +656,43 @@ If an entity is not entitled to a capability, the scope requested may be ignored
 
 
 
+## Scope-Based Capability Reduction
+
+Given the hierarchical property of the resource path component in scopes, an entity may request a scope with a resource path that is greater or less than the resource path to which that entity is entitled. In case that the entity requests a resource path that is greater than what is entitled, the token issuer may return a token containing the subset resource path(s) to which that entity is entitled. In the case that the entity requests a resource path that is lesser than what is entitled, the token issuer should return a token containing the resource path as requested, thereby honoring the request for a lesser privilege.
+
+**Examples:**
+
+In the following examples, the entity is entitled to `storage.read:/home/joe` and `storage.read:/home/bob`.
+
+<table>
+  <tr>
+   <td><strong>Scope Request</strong>
+   </td>
+   <td><strong>Claim Result</strong>
+   </td>
+  </tr>
+  <tr>
+   <td><code>scope=storage.read:/</code>
+   </td>
+   <td><code>"scope": "storage.read:/home/joe storage.read:/home/bob"</code>
+   </td>
+  </tr>
+  <tr>
+   <td><code>scope=storage.read:/home/joe/subdir1 storage.read:/home/bob/subdir2</code>
+   </td>
+   <td><code>"scope": "storage.read:/home/joe/subdir1 storage.read:/home/bob/subdir2"</code>
+   </td>
+  </tr>
+  <tr>
+   <td><code>scope=storage.read:/home/joe/subdir1 storage.read:/home/susan/subdir2</code>
+   </td>
+   <td><code>"scope": "storage.read:/home/joe/subdir1"</code>
+   </td>
+  </tr>
+</table>
+
+
+
 ## Requesting Token Versions
 
 To support future evolution of the WLCG token format, a client may add the requested token format as part of the scope request.  A client wanting to receive a WLCG token should add the `wlcg` scope to its requests.  If the client wants a specific version of a WLCG token, it should additionally append a `:` character and the version number (e.g., `wlcg:1.0` for a version 1.0 token).
