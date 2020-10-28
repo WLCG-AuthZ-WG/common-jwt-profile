@@ -658,7 +658,7 @@ If an entity is not entitled to a capability, the scope requested may be ignored
 
 ## Scope-Based Capability Reduction
 
-Given the hierarchical property of the resource path component in scopes, an entity may request a scope with a resource path that is greater or less than the resource path to which that entity is entitled. In case that the entity requests a resource path that is greater than what is entitled, the token issuer may return a token containing the subset resource path(s) to which that entity is entitled. In the case that the entity requests a resource path that is lesser than what is entitled, the token issuer should return a token containing the resource path as requested, thereby honoring the request for a lesser privilege.
+Given the hierarchical property of the resource path component in scopes, an entity may request a scope with a resource path that is greater or less than the resource path to which that entity is entitled. In case that the entity requests a resource path that is greater than what is entitled, the token issuer may return a token containing the subset resource path(s) to which that entity is entitled. In the case that the entity requests a resource path that is lesser than what is entitled, the token issuer should return a token containing the resource path as requested, thereby honoring the request for a lesser privilege. This capability is also used in the [token exchange flow](#token-exchange-flow) to exchange an existing token for one with a reduced resource path for purposes of least privilege delegation.
 
 **Examples:**
 
