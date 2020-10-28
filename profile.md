@@ -348,7 +348,7 @@ OpenID Connect implements authentication as an extension to the OAuth 2.0 author
 
 In the following section we describe the schema for identity related claims included in the ID token. Some of these claims MAY be also included in an access token, when the token is obtained through an OpenID Connect flow, or returned as the result of a call to the [userinfo](http://openid.net/specs/openid-connect-core-1_0.html#UserInfo) endpoint exposed by the OpenID Connect Provider issuing the token, or as the result of an [access token introspection](https://tools.ietf.org/html/rfc7662) at the same provider.
 
-The following additional claims are defined for WLCG ID Tokens. Other identity-related [claims](http://openid.net/specs/openid-connect-core-1_0.html#Claims) could be included in the ID Token**, **or returned in the result of calls to the userinfo or token introspection endpoint,** **following the recommendations of the [OpenID Connect core profile](http://openid.net/specs/openid-connect-core-1_0.html).
+The following additional claims are defined for WLCG ID Tokens. Other identity-related [claims](http://openid.net/specs/openid-connect-core-1_0.html#Claims) could be included in the ID Token, or returned in the result of calls to the userinfo or token introspection endpoint, following the recommendations of the [OpenID Connect core profile](http://openid.net/specs/openid-connect-core-1_0.html).
 
 
 <table>
@@ -396,7 +396,7 @@ When group membership is asserted, it is a statement that the bearer has the acc
 
 When a capability is asserted, it is relative to the VO’s coarse-grained authorization; the resource only maps the token to a VO, then relies on the specified capability in the token for the fine-grained authorization within the VO’s authorized area.  In this way, the VO, not the resource, manages the authorizations within its area.
 
-An access token SHOULD include at least the **<code>scope</code></strong> or <strong><code>wlcg.groups</code></strong> claim.
+An access token SHOULD include at least the <strong><code>scope</code></strong> or <strong><code>wlcg.groups</code></strong> claim.
 
 The following additional claims are defined for Access Tokens.
 
@@ -454,7 +454,7 @@ For a given computing resource, the defined authorization activities include:
 
 *   **compute.read:** “Read” or query information about job status and attributes.
 *   **compute.modify:** Modify or change the attributes of an existing job.
-*   **compute.create:  **Create or submit a new job at the computing resource.
+*   **compute.create:** Create or submit a new job at the computing resource.
 *   **compute.cancel:** Delete a job from the computing resource, potentially terminating a running job.
 
 We use explicit "storage" and "compute" prefixes in the scope names in order to prevent token confusion at the issuer; if the unadorned string “upload” were used for both storage and compute cases, a token meant for uploading job results could potentially be usable for submitting jobs to a computing resource.
@@ -563,8 +563,8 @@ with the following rules:
 
 
 
-*   If the scope is parametric, i.e. it has the form `wlcg.groups:&lt;group_name>`, the authorization server will return the requested group as a value in the `wlcg.groups` claim if the user is a member of the given group. 
-*   To request multiple groups, multiple parametric `wlcg.groups:&lt;group_name>` scopes are included in the authorization request.
+*   If the scope is parametric, i.e. it has the form `wlcg.groups:<group_name>`, the authorization server will return the requested group as a value in the `wlcg.groups` claim if the user is a member of the given group. 
+*   To request multiple groups, multiple parametric `wlcg.groups:<group_name>` scopes are included in the authorization request.
 *   If the scope does not have the parametric part, i.e. its value is `wlcg.groups`, the authorization server will return the list of default groups (order is defined by the VO Administrator) for the user being authenticated for the target client. The default list of groups, including its order, is configurable by VO administrators, possibly even on a per-client basis.
 *   The order of the groups in the returned `wlcg.groups` claim complies with the order in which the `wlcg.groups` scopes were requested. 
 *   If not explicitly included, the non-parametric `wlcg.groups` scope is implicitly added at the end of the requested scopes list whenever any group scopes are included. If no `wlcg.groups` scopes are included then it will not be added, to allow for cases where a client is only interested in capabilities.
@@ -872,9 +872,9 @@ In order to contain security incidents related to the leakage of refresh tokens,
 
 The claims in a WLCG token are meant to indicate an identity or manage access to a resource.  For example, in the authorization schema, additional claims might add restrictions to the corresponding bearer’s authorizations: if an unknown claim is skipped, the resource provider may inadvertently offer overly-broad authorizations.  On the other hand, requiring _all_ claims to be processed may reduce the flexibility and ability to add future features.
 
-To handle this challenge, each token MUST provide a **<code>wlcg.ver</code></strong> (version) attribute, whose value corresponds to an enumerated set of claims described earlier in this document.  For that version of the token format, the corresponding claims MUST be handled by the implementation.  Any additional claim present MUST be ignored (for access tokens, these claims MUST NOT be used in authorization decisions).
+To handle this challenge, each token MUST provide a <strong><code>wlcg.ver</code></strong> (version) attribute, whose value corresponds to an enumerated set of claims described earlier in this document.  For that version of the token format, the corresponding claims MUST be handled by the implementation.  Any additional claim present MUST be ignored (for access tokens, these claims MUST NOT be used in authorization decisions).
 
-Each client library implementation MUST know the versions it supports; if it encounters a token whose **<code>wlcg.ver</code></strong> value is not supported by the implementation, the token MUST be rejected as invalid.
+Each client library implementation MUST know the versions it supports; if it encounters a token whose <strong><code>wlcg.ver</code></strong> value is not supported by the implementation, the token MUST be rejected as invalid.
 
 Additionally, signature algorithms and RS256, ES256 MUST be supported.
 
