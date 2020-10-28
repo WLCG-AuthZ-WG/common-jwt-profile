@@ -415,7 +415,7 @@ The following additional claims are defined for Access Tokens.
   <tr>
    <td>scope
    </td>
-   <td>Inspired by OAuth token exchange draft
+    <td>Inspired by <a href="https://tools.ietf.org/html/rfc8693">OAuth 2.0 Token Exchange</a>
    </td>
    <td>See below
    </td>
@@ -435,7 +435,7 @@ The token profile contains two different approaches to authorization - user attr
 
 ### Capability based Authorization: scope 
 
-Authorization may be based on the scope[^8] claim.  The value of the scope claim is a list of space-delimited, case-sensitive strings (as in [OAuth Token Exchange draft 19, section 4.2](https://tools.ietf.org/html/draft-ietf-oauth-token-exchange-19#section-4.2)) reflecting authorized activities the bearer of this token may perform. 
+Authorization may be based on the scope[^8] claim.  The value of the scope claim is a list of space-delimited, case-sensitive strings (as in OAuth 2.0 Token Exchange [RFC 8693 Section 4.2](https://tools.ietf.org/html/rfc8693#section-4.2)) reflecting authorized activities the bearer of this token may perform. 
 
 We aim to define a common set of authorizations (particularly storage-related authorizations), but envision additional authorizations will be added to meet new use cases. The interpretation of such authorizations would result in a list of operations the bearer is allowed to perform. 
 
@@ -990,7 +990,7 @@ Sometimes client applications need to interact with services in a way that is no
 
 #### Token exchange flow
 
-The [OAuth token exchange](https://tools.ietf.org/html/draft-ietf-oauth-token-exchange-19) flow can be used to implement delegation and token privileges attenuation across a chain of services.
+The [OAuth 2.0 Token Exchange](https://tools.ietf.org/html/rfc8693) flow can be used to implement delegation and token privileges attenuation across a chain of services.
 
 
 ## Examples
@@ -1255,7 +1255,7 @@ In this example, the `nonce`, `preferred_username`, `name `and `email` claims ar
      Such registrations could be made through IETF or appropriate bodies, and made publicly available e.g. https://www.iana.org/assignments/oauth-parameters/oauth-parameters.xml
 
 [^8]:
-     Note that the motivation of using the name “**scope**” here is inspired from the claim language proposed for standardization as part of the OAuth token exchange draft RFC, and due to its existing use in SciTokens.
+     Note that the motivation of using the name “**scope**” here is inspired from the claim language proposed for standardization as part of the OAuth 2.0 Token Exchange specification ([RFC 8693](https://tools.ietf.org/html/rfc8693), and due to its existing use in SciTokens.
 
 [^9]:
      RAF still refers to it as eduPersonAssurance, but it will probably change into `eduperson_assurance`, following the OIDCre whitepaper.
