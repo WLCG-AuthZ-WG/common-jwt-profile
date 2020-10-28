@@ -1255,7 +1255,7 @@ In this example, the `nonce`, `preferred_username`, `name `and `email` claims ar
      Such registrations could be made through IETF or appropriate bodies, and made publicly available e.g. https://www.iana.org/assignments/oauth-parameters/oauth-parameters.xml
 
 [^8]:
-     Note that the motivation of using the name “**scope**” here is inspired from the claim language proposed for standardization as part of the OAuth 2.0 Token Exchange specification ([RFC 8693](https://tools.ietf.org/html/rfc8693), and due to its existing use in SciTokens.
+     Note that the motivation of using the name “**scope**” here is inspired from the claim language proposed for standardization as part of the OAuth 2.0 Token Exchange specification ([RFC 8693](https://tools.ietf.org/html/rfc8693)), and due to its existing use in SciTokens.
 
 [^9]:
      RAF still refers to it as eduPersonAssurance, but it will probably change into `eduperson_assurance`, following the OIDCre whitepaper.
