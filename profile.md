@@ -658,7 +658,7 @@ If an entity is not entitled to a capability, the scope requested may be ignored
 
 ## Group or Role Based Capability Selection
 
-An entity may be entitled to a capability due to membership in a group or entitlement to use a role. The entity may be a member of multiple groups (VOs), with multiple roles, supported by a common implementation (analogous to how VOMS-Admin is operated at CERN). Thus, when requesting capabilities in the scope request, it is also useful to include the group/role context in the scope request to which those capabilities should be applied. This can determine the resulting `iss` and `scope` claims in the issued token.
+An entity may be entitled to a capability due to membership in a group or entitlement to use a role. The entity may be a member of multiple groups (VOs), with multiple roles, supported by a common implementation (analogous to how VOMS-Admin is operated at CERN). To support this scenario, a `wlcg.capabilityset` value may be included in the scope request to specify the group/role context for the scope request. This can determine the resulting `iss` and `scope` claims in the issued token.
 
 **Examples:** 
 
@@ -707,21 +707,21 @@ Since the user is a member of multiple groups (VOs) and also has the `/dune/dune
    </td>
   </tr>
   <tr>
-   <td><code>scope=wlcg.groups:/dune storage.read:/home/joe storage.write:/home/joe storage.read:/dune</code>
+   <td><code>scope=wlcg.capabilityset:/dune storage.read:/home/joe storage.write:/home/joe storage.read:/dune</code>
    </td>
     <td><code>"iss": "https://cilogon.org/fnal/dune"</code><br>
         <code>"scope": "storage.read:/home/joe storage.write:/home/joe storage.read:/dune"</code>
    </td>
   </tr>
   <tr>
-   <td><code>scope=wlcg.groups:/dune/dunepro storage.write:/dune/data</code>
+   <td><code>scope=wlcg.capabilityset:/dune/dunepro storage.write:/dune/data</code>
    </td>
    <td><code>"iss": "https://cilogon.org/fnal/dune"</code><br>
        <code>"scope": "storage.write:/dune/data"</code>
    </td>
   </tr>
   <tr>
-   <td><code>scope=wlcg.groups:/microboone storage.read:/home/joe storage.write:/home/joe storage.read:/microboone</code>
+   <td><code>scope=wlcg.capabilityset:/microboone storage.read:/home/joe storage.write:/home/joe storage.read:/microboone</code>
    </td>
    <td><code>"iss": "https://cilogon.org/fnal/microboone"</code><br>
         <code>"scope": "storage.read:/home/joe storage.write:/home/joe storage.read:/microboone"</code>
