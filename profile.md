@@ -656,6 +656,81 @@ If an entity is not entitled to a capability, the scope requested may be ignored
 
 
 
+## Group or Role Based Capability Selection
+
+An entity may be entitled to a capability due to membership in a group or entitlement to use a role. The entity may be a member of multiple groups (VOs), with multiple roles, supported by a common implementation (analogous to how VOMS-Admin is operated at CERN). To support this scenario, a `wlcg.capabilityset` value may be included in the scope request to specify the group/role context for the scope request. This can determine the resulting `iss` and `scope` claims in the issued token.
+
+**Examples:** 
+
+In the following examples, a user has the following entitlements based on their individual identity and their group/role memberships:
+
+<table>
+  <tr>
+   <td><strong>Group / Role</strong>
+   </td>
+   <td><strong>Entitlements</strong>
+   </td>
+  </tr>
+  <tr>
+   <td>individual
+   </td>
+   <td><code>storage.read:/home/joe storage.write:/home/joe</code>
+   </td>
+  </tr>
+  <tr>
+   <td><code>/dune</code>
+   </td>
+   <td><code>storage.read:/dune</code>
+   </td>
+  </tr>
+  <tr>
+   <td><code>/dune/dunepro</code>
+   </td>
+   <td><code>storage.write:/dune/data</code>
+   </td>
+  </tr>
+  <tr>
+   <td><code>/microboone</code>
+   </td>
+   <td><code>storage.read:/microboone</code>
+   </td>
+  </tr>
+</table>
+
+Since the user is a member of multiple groups (VOs) and also has the `/dune/dunepro` (production) membership, the resulting claims depend on the context indicated in the scope request:
+
+<table>
+  <tr>
+   <td><strong>Scope Request</strong>
+   </td>
+   <td><strong>Claim Result</strong>
+   </td>
+  </tr>
+  <tr>
+   <td><code>scope=wlcg.capabilityset:/dune storage.read:/home/joe storage.write:/home/joe storage.read:/dune</code>
+   </td>
+    <td><code>"iss": "https://cilogon.org/fnal/dune"</code><br>
+        <code>"scope": "storage.read:/home/joe storage.write:/home/joe storage.read:/dune"</code>
+   </td>
+  </tr>
+  <tr>
+   <td><code>scope=wlcg.capabilityset:/dune/dunepro storage.write:/dune/data</code>
+   </td>
+   <td><code>"iss": "https://cilogon.org/fnal/dune"</code><br>
+       <code>"scope": "storage.write:/dune/data"</code>
+   </td>
+  </tr>
+  <tr>
+   <td><code>scope=wlcg.capabilityset:/microboone storage.read:/home/joe storage.write:/home/joe storage.read:/microboone</code>
+   </td>
+   <td><code>"iss": "https://cilogon.org/fnal/microboone"</code><br>
+        <code>"scope": "storage.read:/home/joe storage.write:/home/joe storage.read:/microboone"</code>
+   </td>
+  </tr>
+</table>
+
+
+
 ## Requesting Token Versions
 
 To support future evolution of the WLCG token format, a client may add the requested token format as part of the scope request.  A client wanting to receive a WLCG token should add the `wlcg` scope to its requests.  If the client wants a specific version of a WLCG token, it should additionally append a `:` character and the version number (e.g., `wlcg:1.0` for a version 1.0 token).
