@@ -660,9 +660,11 @@ If an entity is not entitled to a capability, the scope requested may be ignored
 
 An entity may be entitled to a capability due to membership in a group or entitlement to use a role. The entity may be a member of multiple groups (VOs), with multiple roles, supported by a common implementation (analogous to how VOMS-Admin is operated at CERN). To support this scenario, a `wlcg.capabilityset` value may be included in the scope request to specify the group/role context for the scope request. This can determine the resulting `iss` and `scope` claims in the issued token.
 
+Only one `wlcg.capabilityset` should be in a single request.  If there are additional capability scopes in the request with the same name as those in the capability set, they will be used to limit the capability paths requested.  There is no provision for a requester to completely remove a capability from a capability set, but in that case a different capability set can be defined.
+
 **Examples:** 
 
-In the following examples, a user has the following entitlements based on their individual identity and their group/role memberships:
+In the following examples, a user has the following entitlements based on their group/role memberships:
 
 <table>
   <tr>
@@ -672,32 +674,26 @@ In the following examples, a user has the following entitlements based on their 
    </td>
   </tr>
   <tr>
-   <td>individual
+   <td><code>/microboone</code>
    </td>
-   <td><code>storage.read:/home/joe storage.write:/home/joe</code>
+   <td><code>storage.read:/microboone storage.write:/microboone/joe</code>
    </td>
   </tr>
   <tr>
    <td><code>/dune</code>
    </td>
-   <td><code>storage.read:/dune</code>
+   <td><code>storage.read:/dune storage.write:/dune/home/joe</code>
    </td>
   </tr>
   <tr>
    <td><code>/dune/dunepro</code>
    </td>
-   <td><code>storage.write:/dune/data</code>
-   </td>
-  </tr>
-  <tr>
-   <td><code>/microboone</code>
-   </td>
-   <td><code>storage.read:/microboone</code>
+   <td><code>storage.read:/dune storage.write:/dune/data</code>
    </td>
   </tr>
 </table>
 
-Since the user is a member of multiple groups (VOs) and also has the `/dune/dunepro` (production) membership, the resulting claims depend on the context indicated in the scope request:
+Since the user is a member of multiple groups (VOs) and also has the `/dune/dunepro` (production) membership, the resulting claims depend on the capability set indicated in the scope request:
 
 <table>
   <tr>
@@ -707,24 +703,32 @@ Since the user is a member of multiple groups (VOs) and also has the `/dune/dune
    </td>
   </tr>
   <tr>
-   <td><code>scope=wlcg.capabilityset:/dune storage.read:/home/joe storage.write:/home/joe storage.read:/dune</code>
-   </td>
-    <td><code>"iss": "https://cilogon.org/fnal/dune"</code><br>
-        <code>"scope": "storage.read:/home/joe storage.write:/home/joe storage.read:/dune"</code>
-   </td>
-  </tr>
-  <tr>
-   <td><code>scope=wlcg.capabilityset:/dune/dunepro storage.write:/dune/data</code>
-   </td>
-   <td><code>"iss": "https://cilogon.org/fnal/dune"</code><br>
-       <code>"scope": "storage.write:/dune/data"</code>
-   </td>
-  </tr>
-  <tr>
-   <td><code>scope=wlcg.capabilityset:/microboone storage.read:/home/joe storage.write:/home/joe storage.read:/microboone</code>
+   <td><code>scope=wlcg.capabilityset:/microboone</code>
    </td>
    <td><code>"iss": "https://cilogon.org/fnal/microboone"</code><br>
-        <code>"scope": "storage.read:/home/joe storage.write:/home/joe storage.read:/microboone"</code>
+       <code>"scope": "storage.read:/microboone storage.write:/microboone/joe</code>
+    </td>
+   </tr>
+
+  <tr>
+   <td><code>scope=wlcg.capabilityset:/dune</code>
+   </td>
+    <td><code>"iss": "https://cilogon.org/fnal/dune"</code><br>
+        <code>"scope": "storage.read:/dune storage.write:/dune/home/joe"</code>
+   </td>
+  </tr>
+  <tr>
+   <td><code>scope=wlcg.capabilityset:/dune/dunepro</code>
+   </td>
+   <td><code>"iss": "https://cilogon.org/fnal/dune"</code><br>
+       <code>"scope": "storage.read:/dune storage.write:/dune/data"</code>
+   </td>
+  </tr>
+  <tr>
+   <td><code>scope=wlcg.capabilityset:/dune/dunepro storage.read:/dune/data</code>
+   </td>
+   <td><code>"iss": "https://cilogon.org/fnal/dune"</code><br>
+       <code>"scope": "storage.read:/dune/data storage.write:/dune/data"</code>
    </td>
   </tr>
 </table>
