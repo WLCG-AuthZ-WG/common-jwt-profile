@@ -693,7 +693,7 @@ In the following examples, a user has the following entitlements based on their 
   </tr>
 </table>
 
-Since the user is a member of multiple groups (VOs) and also has the `/dune/dunepro` (production) membership, the resulting claims depend on the capability set indicated in the scope request:
+Since the user is a member of multiple groups (VOs) and is also a member of the `/dune/dunepro` (production) subgroup, the resulting claims depend on the capability set indicated in the scope request:
 
 <table>
   <tr>
