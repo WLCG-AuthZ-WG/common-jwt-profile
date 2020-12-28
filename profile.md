@@ -660,7 +660,7 @@ If an entity is not entitled to a capability, the scope requested may be ignored
 
 An entity may be entitled to a capability due to membership in a group or entitlement to use a role. The entity may be a member of multiple groups (VOs), with multiple roles, supported by a common implementation (analogous to how VOMS-Admin is operated at CERN). To support this scenario, a `wlcg.capabilityset` value may be included in the scope request to specify the group/role context for the scope request. This can determine the resulting `iss` and `scope` claims in the issued token.
 
-Only one `wlcg.capabilityset` should be in a single request.  If a scope is additionally requested with the same name as a scope in the capability set, the explicitly requested scope will take precedence; in other words, the scope in the capability set will be ignored.  There is no provision for a requester to completely remove a capability from a capability set, but in that case a different capability set can be defined.
+Only one `wlcg.capabilityset` should be in a single request.  If a scope is additionally requested with the same name as a scope in the capability set, the explicitly requested scope will take precedence; in other words, the scope in the capability set will be ignored.  There is no provision for a requester to remove an individual capability from a capability set, but in that case a different capability set can be defined.
 
 **Examples:** 
 
