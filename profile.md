@@ -454,7 +454,7 @@ For a given computing resource, the defined authorization activities include:
 
 *   **compute.read:** “Read” or query information about job status and attributes.
 *   **compute.modify:** Modify or change the attributes of an existing job.
-*   **compute.create:** Create or submit a new job at the computing resource.
+*   **compute.create:** Create or submit a new job at the computing resource, including the upload of a job's associated input files to the service.
 *   **compute.cancel:** Delete a job from the computing resource, potentially terminating a running job.
 
 We use explicit "storage" and "compute" prefixes in the scope names in order to prevent token confusion at the issuer; if the unadorned string “upload” were used for both storage and compute cases, a token meant for uploading job results could potentially be usable for submitting jobs to a computing resource.
