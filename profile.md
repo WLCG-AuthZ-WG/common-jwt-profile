@@ -373,6 +373,16 @@ The following additional claims are defined for WLCG ID Tokens. Other identity-r
    </td>
   </tr>
   <tr>
+   <td>wlcg.credkey
+   </td>
+   <td>WLCG AuthZ WG
+   </td>
+   <td>The value of the <strong><code>wlcg.credkey</code></strong> claim is a unique string that may be used as a key for storing responses in a shared credential store.  This is often mapped to kerberos principals, so a good source for it is the SAML eduPersonPrincipalName which is in the form "uid@domain".  If the requested scope contains an optional parameter, then if that string exists on the end of the key string, it will be removed.  For example, <strong><code>wlcg.credkey:@cern.ch</code></strong> will convert "user@cern.ch" to "user" but leave alone "user@fnal.gov".  The purpose for this unusual behavior is for permitting access to store derived kerberos principals of the form "user/*" which matches any principal belonging to the user in a configured kerberos domain.
+   </td>
+   <td>Optional, but when requested it MUST be present
+   </td>
+  </tr>
+  <tr>
    <td>General OIDC Claims
    </td>
    <td>OpenID
