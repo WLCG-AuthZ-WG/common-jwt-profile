@@ -469,7 +469,7 @@ For all `storage.*` scopes, `$PATH` MUST be specified (but may be `/` to authori
 
 The scope claim MAY include multiple authorizations of the same scope name, e.g. `storage.create:/foo storage.create:/bar`.
 
-In the case of batch or computing resources, it is not clear how to define finer-grained resources.  Currently, the authorizations of the relevant scopes (`compute.read, compute.modify, compute.create, compute.cancel`) refer to all jobs owned by the issuer.  For example, a token with `compute.read` scope issued by [https://cmsweb.cern.ch](https://cmsweb.cern.ch) would be able to query the status of any CMS job at the resource.
+In the case of batch or computing resources, additional discussion is required to define finer-grained resources.  Currently, the authorizations of the relevant scopes (`compute.read, compute.modify, compute.create, compute.cancel`) refer to all jobs owned by the issuer.  For example, a token with `compute.read` scope issued by [https://cmsweb.cern.ch](https://cmsweb.cern.ch) would be able to query the status of any CMS job at the resource.
 
 When rendered in JSON, the value of the `scope` claim should be a space-separated list if there is more than one authorization present.
 
