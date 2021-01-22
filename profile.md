@@ -658,9 +658,11 @@ If an entity is not entitled to a capability, the scope requested may be ignored
 
 ## Group or Role Based Capability Selection
 
-An entity may be entitled to a capability due to membership in a group or entitlement to use a role. The entity may be a member of multiple groups (VOs), with multiple roles, supported by a common implementation (analogous to how VOMS-Admin is operated at CERN). To support this scenario, a `wlcg.capabilityset` value may be included in the scope request to specify the group/role context for the scope request. This can determine the resulting `iss` and `scope` claims in the issued token.
+An entity may be entitled to capabilities due to membership in a group or entitlement to use a role. The entity may be a member of multiple groups (VOs), with multiple roles, supported by a common implementation. In addition, a client shared by multiple entities may not know which capabilities are available to each entity, and the token issuer has that knowledge.
 
-Only one `wlcg.capabilityset` should be in a single request.  If additionally a scope is requested of the same type (for example `storage.read`) as a scope in the capability set, the explicitly requested scope will take precedence; in other words, any scope of that specific type in the capability set will be ignored.  There is no provision for a requester to remove an individual capability from a capability set, but if there is a need for that the token issuer can define a different capability set or the scopes can be reduced later with a token exchange.
+To support this scenario, a `wlcg.capabilityset` scope may be included in the scope request to specify the group/role context.  The parameter given with the `wlcg.capabilityset` scope is exactly the same as the `group` used with `wlcg.groups` as specified in the [Common-Claims section](#Common-Claims) above.  This can determine the resulting `scope` claims in the issued token.
+
+Only one `wlcg.capabilityset` should be in a single request.  If additionally a scope is requested of the same type (for example `storage.read`) as a scope in the capability set, the explicitly requested scope will take precedence; in other words, any scope of that specific type in the capability set will be effectively ignored (although it might be used by the token issuer to determine whether the explicitly requested scope is permitted).  There is no provision for a requester to remove an individual capability from a capability set, but if there is a need for that the token issuer can define a different capability set or the scopes can be reduced later with a token exchange.
 
 **Examples:** 
 
@@ -705,30 +707,26 @@ Since the user is a member of multiple groups (VOs) and is also a member of the 
   <tr>
    <td><code>scope=wlcg.capabilityset:/microboone</code>
    </td>
-   <td><code>"iss": "https://cilogon.org/fnal/microboone"</code><br>
-       <code>"scope": "storage.read:/microboone storage.write:/microboone/joe</code>
+   <td><code>"scope": "storage.read:/microboone storage.write:/microboone/joe</code>
     </td>
    </tr>
 
   <tr>
    <td><code>scope=wlcg.capabilityset:/dune</code>
    </td>
-    <td><code>"iss": "https://cilogon.org/fnal/dune"</code><br>
-        <code>"scope": "storage.read:/dune storage.write:/dune/home/joe"</code>
+    <td><code>"scope": "storage.read:/dune storage.write:/dune/home/joe"</code>
    </td>
   </tr>
   <tr>
    <td><code>scope=wlcg.capabilityset:/dune/dunepro</code>
    </td>
-   <td><code>"iss": "https://cilogon.org/fnal/dune"</code><br>
-       <code>"scope": "storage.read:/dune storage.write:/dune/data"</code>
+   <td><code>"scope": "storage.read:/dune storage.write:/dune/data"</code>
    </td>
   </tr>
   <tr>
    <td><code>scope=wlcg.capabilityset:/dune/dunepro storage.read:/dune/data</code>
    </td>
-   <td><code>"iss": "https://cilogon.org/fnal/dune"</code><br>
-       <code>"scope": "storage.read:/dune/data storage.write:/dune/data"</code>
+   <td><code>"scope": "storage.read:/dune/data storage.write:/dune/data"</code>
    </td>
   </tr>
 </table>
