@@ -688,14 +688,14 @@ In the following examples, a user has the following entitlements based on their 
    </td>
   </tr>
   <tr>
-   <td><code>/dune/dunepro</code>
+   <td><code>/dune/pro</code>
    </td>
    <td><code>storage.read:/dune storage.write:/dune/data</code>
    </td>
   </tr>
 </table>
 
-Since the user is a member of multiple groups (VOs) and is also a member of the `/dune/dunepro` (production) subgroup, the resulting claims depend on the capability set indicated in the scope request:
+Since the user is a member of multiple groups (VOs) and is also a member of the `/dune/pro` (production) subgroup, the resulting claims depend on the capability set indicated in the scope request:
 
 <table>
   <tr>
@@ -718,13 +718,13 @@ Since the user is a member of multiple groups (VOs) and is also a member of the 
    </td>
   </tr>
   <tr>
-   <td><code>scope=wlcg.capabilityset:/dune/dunepro</code>
+   <td><code>scope=wlcg.capabilityset:/dune/pro</code>
    </td>
    <td><code>"scope": "storage.read:/dune storage.write:/dune/data"</code>
    </td>
   </tr>
   <tr>
-   <td><code>scope=wlcg.capabilityset:/dune/dunepro storage.read:/dune/data</code>
+   <td><code>scope=wlcg.capabilityset:/dune/pro storage.read:/dune/data</code>
    </td>
    <td><code>"scope": "storage.read:/dune/data storage.write:/dune/data"</code>
    </td>
