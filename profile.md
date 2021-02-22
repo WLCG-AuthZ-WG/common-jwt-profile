@@ -728,7 +728,7 @@ Since the user is a member of multiple groups (VOs) and is also a member of the 
   <tr>
    <td><code>scope=wlcg.capabilityset:/dune/pro storage.read:/dune/data</code>
    </td>
-   <td><code>"scope": "storage.read:/dune/data storage.write:/dune/data storage.read:/dune"</code>
+   <td><code>"scope": "storage.read:/dune storage.write:/dune/data storage.read:/dune/data"</code>
    </td>
   </tr>
 </table>
