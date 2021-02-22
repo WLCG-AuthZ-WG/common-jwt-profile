@@ -660,11 +660,11 @@ If an entity is not entitled to a capability, the scope requested may be ignored
 
 An entity may be entitled to capabilities due to membership in a group or entitlement to use a role. The entity may be a member of multiple groups (VOs), with multiple roles, supported by a common implementation. In addition, a client shared by multiple entities may not know which capabilities are available to each entity, and the token issuer has that knowledge.
 
-To support this scenario, a `wlcg.capabilityset` scope may be included in the scope request to specify the group/role context.  The parameter given with the `wlcg.capabilityset` scope is exactly the same as the `group` used with `wlcg.groups` as specified in the [Common-Claims section](#Common-Claims) above.  This can determine the resulting `scope` claims in the issued token.
+To support this scenario, a `wlcg.capabilityset` scope MAY be included in the scope request to specify the group/role context.  The parameter given with the `wlcg.capabilityset` scope is exactly the same as the `group` used with `wlcg.groups` as specified in the [Common-Claims section](#Common-Claims) above.  This can determine the resulting `scope` claims in the issued token.
 
-Only one `wlcg.capabilityset` should be in a single request.  If additionally a scope is requested of the same type (for example `storage.read`) as a scope in the capability set, the explicitly requested scope will be processed as normal and may result in two scopes of the same type in the access token with different values.  There is no provision for a requester to remove an individual capability from a capability set, but if there is a need for that the token issuer can define a different capability set or the scopes can be reduced later with a token exchange.
+Only one `wlcg.capabilityset` SHOULD be in a single request.  If additionally a scope is requested of the same type (for example `storage.read`) as a scope in the capability set, the explicitly requested scope SHOULD be processed as normal and may result in two scopes of the same type in the access token with different values.  There is no provision for a requester to remove an individual capability from a capability set, but if there is a need for that the token issuer can define a different capability set or the scopes can be reduced later with a token exchange.
 
-If the requester is not authorized to use the `wlcg.capabilityset`, an error will be returned; an access token without the requested capbilities will not be issued.
+If the requester is not authorized to use the `wlcg.capabilityset`, an error MUST be returned; an access token without the requested capabilities will not be issued.
 
 **Examples:** 
 
