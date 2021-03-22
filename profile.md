@@ -570,7 +570,7 @@ with the following rules:
 *   If not explicitly included, the non-parametric `wlcg.groups` scope is implicitly added at the end of the requested scopes list whenever any group scopes are included. If no `wlcg.groups` scopes are included then it will not be added, to allow for cases where a client is only interested in capabilities.
 *   The returned `wlcg.groups` claim will not contain duplicates
 
-If an entity is not entitled to a group, an access_denied error as defined in section 4.1.2.1 of RFC 6749 MUST be returned.
+If an entity is not entitled to a group, an access_denied error as defined in section 4.1.2.1 of RFC 6749 SHOULD be returned.  If an error is not returned, the token issuer MUST inform the client according to section 3.3 of RFC 6749.
 
 **Examples:**
 
