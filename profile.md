@@ -664,7 +664,7 @@ To support this scenario, a `wlcg.capabilityset` scope MAY be included in the sc
 
 Only one `wlcg.capabilityset` SHOULD be in a single request.  If additionally a scope is requested of the same type (for example `storage.read`) as a scope in the capability set, the explicitly requested scope SHOULD be processed as normal and may result in two scopes of the same type in the access token.  There is no provision for a requester to remove an individual capability from a capability set, but if there is a need for that the token issuer can define a different capability set or the scopes can be reduced later with a token exchange.
 
-If the requester is not authorized to use the `wlcg.capabilityset` an access_denied error as defined in section 4.1.2.1 of RFC 6749 MUST be returned.
+If the requester is not authorized to use the `wlcg.capabilityset` an access_denied error as defined in section 4.1.2.1 of RFC 6749 SHOULD be returned.  The specific set of capability scopes returned MAY vary per requester, but if a requester is authorized their full set of scopes MUST be returned.
 
 **Examples:** 
 
