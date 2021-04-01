@@ -656,23 +656,23 @@ If an entity is not entitled to a capability, the scope requested may be ignored
 
 
 
-## Group or Role Based Capability Selection
+## Group-Based Capability Selection
 
-An entity may be entitled to capabilities due to membership in a group or entitlement to use a role. The entity may be a member of multiple groups (VOs), with multiple roles, supported by a common implementation. In addition, a client shared by multiple entities may not know which capabilities are available to each entity, and the token issuer has that knowledge.
+An entity may be entitled to capabilities due to membership in a group. The entity may be a member of multiple default and optional groups, supported by a common implementation. In addition, a client shared by multiple entities may not know which capabilities are available to each entity, and the token issuer has that knowledge.
 
-To support this scenario, a `wlcg.capabilityset` scope MAY be included in the scope request to specify the group/role context.  The parameter given with the `wlcg.capabilityset` scope is exactly the same as the `group` used with `wlcg.groups` as specified in the [Common-Claims section](#Common-Claims) above.  This can determine the resulting `scope` claims in the issued token.
+To support this scenario, a `wlcg.capabilityset` scope MAY be included in the scope request to specify the group context.  The parameter given with the `wlcg.capabilityset` scope is exactly the same as the `group` used with `wlcg.groups` as specified in the [Common-Claims section](#Common-Claims) above.  This can determine the resulting `scope` claims in the issued token.
 
-Only one `wlcg.capabilityset` SHOULD be in a single request.  If additionally a scope is requested of the same type (for example `storage.read`) as a scope in the capability set, the explicitly requested scope SHOULD be processed as normal and may result in two scopes of the same type in the access token.  There is no provision for a requester to remove an individual capability from a capability set, but if there is a need for that the token issuer can define a different capability set or the scopes can be reduced later with a token exchange.
+Only one `wlcg.capabilityset` SHOULD be included in a single authorization request.  If additionally a scope is requested of the same type (for example `storage.read`) as a scope in the capability set, the explicitly requested scope SHOULD be processed as normal and may result in two scopes of the same type in the access token.  There is no provision for a requester to remove an individual capability from a capability set, but if there is a need for that the token issuer can define a different capability set or the scopes can be reduced later with a token exchange.
 
 If the requester is not authorized to use the `wlcg.capabilityset` an access_denied error as defined in section 4.1.2.1 of RFC 6749 SHOULD be returned.  The specific set of capability scopes returned MAY vary per requester, but if a requester is authorized their full set of scopes MUST be returned.
 
 **Examples:** 
 
-In the following examples, a user has the following entitlements based on their group/role memberships:
+In the following examples, a user has the following entitlements based on their group memberships:
 
 <table>
   <tr>
-   <td><strong>Group / Role</strong>
+   <td><strong>Group</strong>
    </td>
    <td><strong>Entitlements</strong>
    </td>
@@ -697,7 +697,7 @@ In the following examples, a user has the following entitlements based on their 
   </tr>
 </table>
 
-Since the user is a member of multiple groups (VOs) and is also a member of the `/dune/pro` (production) subgroup, the resulting claims depend on the capability set indicated in the scope request:
+Since the user is a member of multiple default groups and is also a member of the `/dune/pro` (production) optional group, the resulting claims depend on the capability set indicated in the scope request:
 
 <table>
   <tr>
