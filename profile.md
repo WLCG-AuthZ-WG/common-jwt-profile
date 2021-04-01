@@ -656,48 +656,48 @@ If an entity is not entitled to a capability, the scope requested may be ignored
 
 
 
-## Group or Role Based Capability Selection
+## Group-Based Capability Selection
 
-An entity may be entitled to a capability due to membership in a group or entitlement to use a role. The entity may be a member of multiple groups (VOs), with multiple roles, supported by a common implementation (analogous to how VOMS-Admin is operated at CERN). To support this scenario, a `wlcg.capabilityset` value may be included in the scope request to specify the group/role context for the scope request. This can determine the resulting `iss` and `scope` claims in the issued token.
+An entity may be entitled to capabilities due to membership in a group. The entity may be a member of multiple default and optional groups, supported by a common implementation. In addition, a client shared by multiple entities may not know which capabilities are available to each entity, and the token issuer has that knowledge.
+
+To support this scenario, a `wlcg.capabilityset` scope MAY be included in the scope request to specify the group context.  The parameter given with the `wlcg.capabilityset` scope is exactly the same as the `group` used with `wlcg.groups` as specified in the [Common-Claims section](#Common-Claims) above.  This can determine the resulting `scope` claims in the issued token.
+
+Only one `wlcg.capabilityset` SHOULD be included in a single authorization request.  If additionally a scope is requested of the same type (for example `storage.read`) as a scope in the capability set, the explicitly requested scope SHOULD be processed as normal and may result in two scopes of the same type in the access token.  There is no provision for a requester to remove an individual capability from a capability set, but if there is a need for that the token issuer can define a different capability set or the scopes can be reduced later with a token exchange.
+
+If the requester is not authorized to use the `wlcg.capabilityset` an access_denied error as defined in section 4.1.2.1 of RFC 6749 SHOULD be returned.  The specific set of capability scopes returned MAY vary per requester, but if a requester is authorized their full set of scopes MUST be returned.
 
 **Examples:** 
 
-In the following examples, a user has the following entitlements based on their individual identity and their group/role memberships:
+In the following examples, a user has the following entitlements based on their group memberships:
 
 <table>
   <tr>
-   <td><strong>Group / Role</strong>
+   <td><strong>Group</strong>
    </td>
    <td><strong>Entitlements</strong>
    </td>
   </tr>
   <tr>
-   <td>individual
+   <td><code>/microboone</code>
    </td>
-   <td><code>storage.read:/home/joe storage.write:/home/joe</code>
+   <td><code>storage.read:/microboone storage.write:/microboone/joe</code>
    </td>
   </tr>
   <tr>
    <td><code>/dune</code>
    </td>
-   <td><code>storage.read:/dune</code>
+   <td><code>storage.read:/dune storage.write:/dune/home/joe</code>
    </td>
   </tr>
   <tr>
-   <td><code>/dune/dunepro</code>
+   <td><code>/dune/pro</code>
    </td>
-   <td><code>storage.write:/dune/data</code>
-   </td>
-  </tr>
-  <tr>
-   <td><code>/microboone</code>
-   </td>
-   <td><code>storage.read:/microboone</code>
+   <td><code>storage.read:/dune storage.write:/dune/data</code>
    </td>
   </tr>
 </table>
 
-Since the user is a member of multiple groups (VOs) and also has the `/dune/dunepro` (production) membership, the resulting claims depend on the context indicated in the scope request:
+Since the user is a member of multiple default groups and is also a member of the `/dune/pro` (production) optional group, the resulting claims depend on the capability set indicated in the scope request:
 
 <table>
   <tr>
@@ -707,24 +707,28 @@ Since the user is a member of multiple groups (VOs) and also has the `/dune/dune
    </td>
   </tr>
   <tr>
-   <td><code>scope=wlcg.capabilityset:/dune storage.read:/home/joe storage.write:/home/joe storage.read:/dune</code>
+   <td><code>scope=wlcg.capabilityset:/microboone</code>
    </td>
-    <td><code>"iss": "https://cilogon.org/fnal/dune"</code><br>
-        <code>"scope": "storage.read:/home/joe storage.write:/home/joe storage.read:/dune"</code>
+   <td><code>"scope": "storage.read:/microboone storage.write:/microboone/joe</code>
+    </td>
+   </tr>
+
+  <tr>
+   <td><code>scope=wlcg.capabilityset:/dune</code>
+   </td>
+    <td><code>"scope": "storage.read:/dune storage.write:/dune/home/joe"</code>
    </td>
   </tr>
   <tr>
-   <td><code>scope=wlcg.capabilityset:/dune/dunepro storage.write:/dune/data</code>
+   <td><code>scope=wlcg.capabilityset:/dune/pro</code>
    </td>
-   <td><code>"iss": "https://cilogon.org/fnal/dune"</code><br>
-       <code>"scope": "storage.write:/dune/data"</code>
+   <td><code>"scope": "storage.read:/dune storage.write:/dune/data"</code>
    </td>
   </tr>
   <tr>
-   <td><code>scope=wlcg.capabilityset:/microboone storage.read:/home/joe storage.write:/home/joe storage.read:/microboone</code>
+   <td><code>scope=wlcg.capabilityset:/dune/pro storage.read:/dune/data</code>
    </td>
-   <td><code>"iss": "https://cilogon.org/fnal/microboone"</code><br>
-        <code>"scope": "storage.read:/home/joe storage.write:/home/joe storage.read:/microboone"</code>
+   <td><code>"scope": "storage.read:/dune storage.write:/dune/data storage.read:/dune/data"</code>
    </td>
   </tr>
 </table>
