@@ -487,7 +487,7 @@ Examples values of the `scope` claim:
 ### Group Based Authorization: wlcg.groups 
 
 
-Authorization may be based on the `wlcg.groups` claim. The value of the `wlcg.groups` claim is an ordered JSON array of case-sensitive strings reflecting the asserted VO group membership of the subject of the token.
+Authorization may be based on the `wlcg.groups` claim. The value of the `wlcg.groups` claim is an ordered JSON array of case-sensitive strings reflecting the assertion, by the issuer, of group membership of the subject of the token.
 
 Relying parties MUST only consider the group membership asserted in the token for authorization decisions.  Particularly, membership in a child group (`/cms/uscms`) does not implicitly imply membership in the parent group (`/cms`) unless the parent group is explicitly listed in the token.
 
