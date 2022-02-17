@@ -913,7 +913,7 @@ One would utilize the `iss` claim in the payload to download the set of public k
    </td>
    <td>1 hour
    </td>
-   <td>1 day
+   <td>4 days
    </td>
    <td>The public key cache lifetime defines the minimum revocation time of the public key.  The actual lifetime is the maximum allowable downtime of the public key server.
    </td>
