@@ -680,19 +680,19 @@ In the following examples, a user has the following entitlements based on their 
   <tr>
    <td><code>/microboone</code>
    </td>
-   <td><code>storage.read:/microboone storage.write:/microboone/joe</code>
+   <td><code>storage.read:/microboone storage.create:/microboone/joe</code>
    </td>
   </tr>
   <tr>
    <td><code>/dune</code>
    </td>
-   <td><code>storage.read:/dune storage.write:/dune/home/joe</code>
+   <td><code>storage.read:/dune storage.create:/dune/home/joe</code>
    </td>
   </tr>
   <tr>
    <td><code>/dune/pro</code>
    </td>
-   <td><code>storage.read:/dune storage.write:/dune/data</code>
+   <td><code>storage.read:/dune storage.create:/dune/data</code>
    </td>
   </tr>
 </table>
@@ -709,26 +709,26 @@ Since the user is a member of multiple default groups and is also a member of th
   <tr>
    <td><code>scope=wlcg.capabilityset:/microboone</code>
    </td>
-   <td><code>"scope": "storage.read:/microboone storage.write:/microboone/joe</code>
+   <td><code>"scope": "storage.read:/microboone storage.create:/microboone/joe</code>
     </td>
    </tr>
 
   <tr>
    <td><code>scope=wlcg.capabilityset:/dune</code>
    </td>
-    <td><code>"scope": "storage.read:/dune storage.write:/dune/home/joe"</code>
+    <td><code>"scope": "storage.read:/dune storage.create:/dune/home/joe"</code>
    </td>
   </tr>
   <tr>
    <td><code>scope=wlcg.capabilityset:/dune/pro</code>
    </td>
-   <td><code>"scope": "storage.read:/dune storage.write:/dune/data"</code>
+   <td><code>"scope": "storage.read:/dune storage.create:/dune/data"</code>
    </td>
   </tr>
   <tr>
    <td><code>scope=wlcg.capabilityset:/dune/pro storage.read:/dune/data</code>
    </td>
-   <td><code>"scope": "storage.read:/dune storage.write:/dune/data storage.read:/dune/data"</code>
+   <td><code>"scope": "storage.read:/dune storage.create:/dune/data storage.read:/dune/data"</code>
    </td>
   </tr>
 </table>
