@@ -510,7 +510,7 @@ group-membership assertions to authorize operations.  While the
 desired behaviour of the first and second class of services is already
 defined, the intended behaviour of the third class is defined here.
 
-In general, capability-based authorization statements allows for finer
+In general, capability-based authorization statements allow for finer
 grain authorization than is practical with the group-membership
 approach.  Therefore, in general terms, a service that supports both
 capability and group-based authorization should prefer the
@@ -521,9 +521,9 @@ More specifically, a service that supports both capability-based and
 group-membership-based authorization MUST examine each access token to
 see if it contains any of the capability statements defined above.  If
 a token has any such capability statement then the service SHOULD
-authorize a request with this token by consider that token's
-capability statements and ignore any group-membership statements.  If
-the token contains none of the capability statements defined above
+authorize a request with this token by considering that token's
+capability statements and ignoring any group-membership statements.
+If the token contains none of the capability statements defined above
 then the service SHOULD make authorization decisions based on the
 group-membership statements.
 
