@@ -519,8 +519,9 @@ statements.
 
 More specifically, a service that supports both capability-based and
 group-membership-based authorization MUST examine each access token to
-see if it contains any of the capability statements defined above.  If
-a token has any such capability statement then the service SHOULD
+see if it contains any of the capability statements defined above,
+irrespective of their relevance to the service in question.  If a
+token has any such capability statement then the service SHOULD
 authorize a request with this token by considering that token's
 capability statements and ignoring any group-membership statements.
 If the token contains none of the capability statements defined above
