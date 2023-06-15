@@ -5,35 +5,11 @@ _Authored by the WLCG AuthZ Working Group_
 
 **Version History:**
 
-
-<table>
-  <tr>
-   <td><strong>Date</strong>
-   </td>
-   <td><strong>Version</strong>
-   </td>
-   <td><strong>Comment</strong>
-   </td>
-  </tr>
-  <tr>
-   <td>17.09.2019
-   </td>
-   <td>0.1
-   </td>
-   <td>Final version presented to MB
-   </td>
-  </tr>
-  <tr>
-   <td>25.09.2019
-   </td>
-   <td>1.0
-   </td>
-   <td>Version published on Zenodo
-   </td>
-  </tr>
-</table>
-
-
+Date       | Version | Comment
+-----------|---------|------------------------------
+17.09.2019 | 0.1     | Final version presented to MB
+25.09.2019 | 1.0     | Version published on Zenodo
+15.06.2023 | 1.1     | Updates storage capabilities
 
 # Introduction
 
@@ -441,16 +417,19 @@ We aim to define a common set of authorizations (particularly storage-related au
 
 For a given storage resource, the defined authorizations include:
 
-
-
-*   **storage.read**: Read data.  Only applies to “online” resources such as disk (as opposed to “nearline” such as tape where the **stage** authorization should be used in addition).
+*   **storage.read**: Read data. For “nearline” data such as tape, the **stage** authorization should be used in addition.
 *   **storage.create**: Upload data.  This includes renaming files if the destination file does not already exist. This capability includes the creation of directories and subdirectories at the specified path, and the creation of any non-existent directories required to create the path itself (note the server implementation MUST NOT automatically create directories for a client). This authorization DOES NOT permit overwriting or deletion of stored data.  The driving use case for a separate `storage.create` scope is to enable stage-out of data from jobs on a worker node.
 *   **storage.modify**: Change data.  This includes renaming files, creating new files, and writing data.  This permission includes overwriting or replacing stored data in addition to deleting or truncating data.  This is a strict superset of `storage.create`.
-*   **storage.stage**: Read the data, potentially causing data to be staged from a nearline resource to an online resource. This is a superset of `storage.read`.
+*   **storage.stage**: Stage the data from a nearline resource to an online resource, making the data available for access
+    to users bearing a token with the **storage.read** authorization. Storage Endpoints may impose additional constraints
+    on who is authorized to stage data.
+
+For nearline data such as tape, the “stage+transfer” semantics are defined by the tape access protocol independently
+from the authorization scheme. For XRootD, this means “prepare -s” (stage), “query prepare”, “abort prepare”, “evict”
+and “copy”. For HTTP, the semantics are defined in the
+[WLCG Tape REST API](https://cernbox.cern.ch/pdf-viewer/public/vLhBpHDdaXJSqwW/WLCG%20Tape%20REST%20API%20reference%20document.pdf).
 
 For a given computing resource, the defined authorization activities include:
-
-
 
 *   **compute.read:** “Read” or query information about job status and attributes.
 *   **compute.modify:** Modify or change the attributes of an existing job.
@@ -480,7 +459,7 @@ Examples values of the `scope` claim:
 *   `"storage.read:/"  `This would allow a job (or any bearer) to read any file owned by the VO.
 *   `"storage.read:/protected storage.create:/protected/subdir"`  This would allow a job to read the VO’s data in the `/protected` subdirectory but (destructively) write into `/protected/subdir`.
 *   `"compute.create"`  This would allow the bearer to submit jobs to a batch system on behalf of the issuing VO.
-*   `"storage.stage:/tape/subdir storage.read:/protected/data"`  This would allow the bearer to read (and possibly stage) files in `/tape/subdir` and read files in `/protected/data`.
+*   `"storage.stage:/tape/subdir storage.read:/tape/subdir"`  This would allow the bearer to stage files in `/tape/subdir` and read the files after they have been staged.
 *   `"storage.read:/store storage.create:/store/mc/datasetA"`  This would allow the bearer to read from `/store` and create new files (not overwriting existing data) in `/store/mc/datasetA`.
 
 
