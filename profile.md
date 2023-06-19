@@ -6,10 +6,10 @@ _Authored by the WLCG AuthZ Working Group_
 **Version History:**
 
 Date       | Version | Comment
------------|---------|------------------------------
+-----------|---------|-------------------------------------------------------------
 17.09.2019 | 0.1     | Final version presented to MB
 25.09.2019 | 1.0     | Version published on Zenodo
-15.06.2023 | 1.1     | Updates storage capabilities
+15.06.2023 | 1.1     | Changes scope of storage.stage and storage.read capabilities
 
 # Introduction
 
