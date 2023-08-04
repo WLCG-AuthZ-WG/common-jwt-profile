@@ -444,7 +444,7 @@ For a given storage resource, the defined authorizations include:
 
 
 *   **storage.read**: Read data.  Only applies to “online” resources such as disk (as opposed to “nearline” such as tape where the **stage** authorization should be used in addition).
-*   **storage.create**: Upload data.  This includes renaming files if the destination file does not already exist. This capability includes the creation of directories and subdirectories at the specified path, and the creation of any non-existent directories required to create the path itself (note the server implementation MUST NOT automatically create directories for a client). This authorization DOES NOT permit overwriting or deletion of stored data.  The driving use case for a separate `storage.create` scope is to enable stage-out of data from jobs on a worker node.
+*   **storage.create**: Upload data.  This includes renaming files if the destination file does not already exist. This capability includes the creation of directories and subdirectories at the specified path, and the creation of any non-existent directories required to create the path itself. This authorization DOES NOT permit overwriting or deletion of stored data.  The driving use case for a separate `storage.create` scope is to enable stage-out of data from jobs on a worker node.
 *   **storage.modify**: Change data.  This includes renaming files, creating new files, and writing data.  This permission includes overwriting or replacing stored data in addition to deleting or truncating data.  This is a strict superset of `storage.create`.
 *   **storage.stage**: Read the data, potentially causing data to be staged from a nearline resource to an online resource. This is a superset of `storage.read`.
 
