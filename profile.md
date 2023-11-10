@@ -497,6 +497,17 @@ When groups are asserted (in an Access Token or ID Token, or both), it is a stat
 
 When a capability is asserted (only in Access Tokens), it is relative to the VO’s coarse-grained authorization; the resource only maps the token to a VO, then uses the capabilities in the token for fine-grained authorization within the VO’s authorized area.  In this way, the VO, not the resource, manages the authorizations within its area.
 
+For a storage resource, the "authorized area" is typically implemented as a set of one or more request prefixes assigned to a VO, corresponding to file paths on a filesystem.  Requests should be authorized by evaluating the scopes within the context of these prefixes.  For example, suppose a resource server `https://storage.site.org` has associated an issuer `https://vo.example.com` with prefix `/vo`.  Then, a token with scopes `storage.read:/ storage.create:/stageout` can authorize:
+
+- A `GET` request for `https://storage.site.org/vo/sample_file1`
+- A `GET` request for `https://storage.site.org/vo/stageout/sample_file2`
+- A `PUT` request for `https://storage.site.org/vo/stageout/sample_file3`
+
+But it does _not_ authorize requests to:
+
+- A `GET` request for `https://storage.site.org/sample_file`
+- A `PUT` request for `https://storage.site.org/vo/sample_file1`
+
 Access tokens may convey authorization information as both groups and capabilities. If both group membership and capabilities are asserted, then the resource server should grant the union of all authorizations for the groups and capabilities that it understands.  The resource server may choose to not provide authorizations based on capabilities or may choose to not map the asserted groups to any authorization. Both assertions of group membership and capabilities are currently interpreted as positive authorizations.
 
 
