@@ -37,7 +37,18 @@ _Authored by the WLCG AuthZ Working Group_
 
 # Introduction
 
-This document describes how WLCG users may use the available geographically distributed resources without X.509 credentials.  In this model, clients are issued with bearer tokens; these tokens are subsequently used to interact with resources.  The tokens may contain authorization groups and/or capabilities, according to the preference of the VO, applications and relying parties. 
+This document describes how WLCG users may use the available geographically distributed resources without X.509 credentials.  In this model, clients are issued with bearer tokens; these tokens are subsequently used to interact with resources.  The tokens may contain authorization groups and/or capabilities, according to the preference of the virtual organisation, applications and relying parties.
+
+A virtual organisation (VO) is a group of users that are independently
+managed, often with internal structure (such as groups and roles).
+The members of a VO work towards a common goal; for example,
+maximising the scientific output from a specific scientific instrument
+or providing shared services to multiple related projects.  A VO has
+well understood membership criteria, which the members of the VO
+manage themselves.  Their work is often supported through the use of
+resources located at multiple facilities.  Within WLCG, `ATLAS`,
+`CMS`, `LHCb` and `ALICE` are VOs that focus on scientific output,
+while `fermilab` and `osg` are VOs that focus on providing services.
 
 Wherever possible, this document builds on existing standards when describing profiles to support current and anticipated WLCG usage.  In particular, three major technologies are identified as providing the basis for this system: OAuth2 (RFC 6749 & RFC 6750), [OpenID Connect](http://openid.net/developers/specs/)  and JSON Web Tokens (RFC 7519). Additionally, trust roots are established via OpenID Discovery or OAuth2 Authorization Server Metadata (RFC 8414). This document provides a profile for OAuth2 Access Tokens and OIDC ID Tokens. **The WLCG Token Profile version described by this document is “1.0”.**
 
