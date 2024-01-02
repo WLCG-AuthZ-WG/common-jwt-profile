@@ -478,7 +478,14 @@ Examples values of the `scope` claim:
 
 
 *   `"storage.read:/"  `This would allow a job (or any bearer) to read any file owned by the VO.
-*   `"storage.read:/protected storage.create:/protected/subdir"`  This would allow a job to read the VO’s data in the `/protected` subdirectory but (destructively) write into `/protected/subdir`.
+* `"storage.read:/protected storage.create:/protected/subdir"` This
+    allows a job to read data in the `/protected` subdirectory, and
+    create and manage content in the `/protected/subdir` subdirectory,
+    provided the operations are non-destructive.
+* `"storage.read:/protected storage.modify:/protected/subdir"` This
+    allows a job to read the VO’s data in the `/protected`
+    subdirectory, and create, manage and delete content in the
+    `/protected/subdir` directory.
 *   `"compute.create"`  This would allow the bearer to submit jobs to a batch system on behalf of the issuing VO.
 *   `"storage.stage:/tape/subdir storage.read:/protected/data"`  This would allow the bearer to read (and possibly stage) files in `/tape/subdir` and read files in `/protected/data`.
 *   `"storage.read:/store storage.create:/store/mc/datasetA"`  This would allow the bearer to read from `/store` and create new files (not overwriting existing data) in `/store/mc/datasetA`.
