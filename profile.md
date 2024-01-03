@@ -37,7 +37,7 @@ _Authored by the WLCG AuthZ Working Group_
 
 # Introduction
 
-This document describes how WLCG users may use the available geographically distributed resources without X.509 credentials.  In this model, clients are issued with bearer tokens; these tokens are subsequently used to interact with resources.  The tokens may contain authorization groups and/or capabilities, according to the preference of the VO, applications and relying parties. 
+This document describes how WLCG users may use the available geographically distributed resources without X.509 credentials.  In this model, clients are issued with bearer tokens; these tokens are subsequently used to interact with resources.  The tokens may contain authorization groups and/or capabilities, according to the preference of the virtual organization (VO), applications and relying parties.  Each VO acts as an _attribute authority_ with its own policies on the issuance and contents of tokens.
 
 Wherever possible, this document builds on existing standards when describing profiles to support current and anticipated WLCG usage.  In particular, three major technologies are identified as providing the basis for this system: OAuth2 (RFC 6749 & RFC 6750), [OpenID Connect](http://openid.net/developers/specs/)  and JSON Web Tokens (RFC 7519). Additionally, trust roots are established via OpenID Discovery or OAuth2 Authorization Server Metadata (RFC 8414). This document provides a profile for OAuth2 Access Tokens and OIDC ID Tokens. **The WLCG Token Profile version described by this document is “1.0”.**
 
@@ -168,6 +168,22 @@ One item not addressed in detail in this document is how the issuer decides on w
    <td>An entity capable of granting access to a protected resource.  When the resource owner is a person, it is referred to as an end-user. This term is defined by OAuth2.
    </td>
    <td>User/VO
+   </td>
+  </tr>
+  <tr>
+   <td><strong>Virtual Organization</strong>
+   </td>
+   <td>A Virtual Organization (VO) is a grouping of people and/or IT services that is defined only in the specific IT service used to manage the VO and that serves to allow grid resources to be shared just between its members.<br/><br/>
+
+By construction, the members of a VO work towards common goals through the use of grid resources to which they have access. For example:
+- the processing and analysis of data produced by an experiment;
+- the provision of shared services to supported projects.
+
+A VO typically has an internal structure that may be exposed to some extent, such as (sub)groups to which VO members may belong and roles they may take on for specific activities on grid resources.
+
+Each VO has its own membership criteria and each grid site makes its own decisions on which resources to make available to which VOs.
+   </td>
+   <td>LHC experiment VOs
    </td>
   </tr>
 </table>
