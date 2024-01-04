@@ -493,10 +493,18 @@ Examples values of the `scope` claim:
 
 ### Group Based Authorization: wlcg.groups 
 
-Authorization may be based on the `wlcg.groups` claim. The value of the `wlcg.groups` claim is an ordered JSON array of case-sensitive strings reflecting the VO groups of which the token subject is a member. 
+Authorization may be based on the `wlcg.groups` claim. The value of the `wlcg.groups` claim is an ordered JSON array of case-sensitive strings reflecting the assertion, by the issuer, of group membership of the subject of the token.
 
-`wlcg.groups `semantics are equivalent to existing VOMS groups. VOMS roles should be considered as optional (i.e. returned only if requested) `wlcg.groups`; selection of optional groups is discussed below.
+For authorization decisions, relying parties MUST NOT consider any group memberships that are **not** asserted by the OP in the token.  Particularly, membership in a child group (e.g. `/cms/uscms`) does not imply membership in the parent group (`/cms`).
 
+The token MAY list only some of the groups of which the token subject is a member.
+The `wlcg.groups` claim value SHALL be a JSON array of JSON strings, 
+with each array element asserting membership of the group denoted by that element.
+A token MAY omit the `wlcg.groups` claim when its value would be an empty array.
+The user may provide input on the contents and ordering of this claim; 
+this is covered in [Scope-based Group Selection](#Scope-based-Group-Selection).
+
+The `wlcg.groups` claim provides functionality similar to that of VOMS extensions in an X.509 proxy.  For use cases that previously depended on the concept of VOMS _roles_ the `wlcg.groups` claim supports the concept of _optional groups_ instead.
 
 ### Interpretation of Authorization by the Resource Server
 
