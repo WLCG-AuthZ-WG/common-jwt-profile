@@ -490,7 +490,12 @@ Authorization may be based on the `wlcg.groups` claim. The value of the `wlcg.gr
 
 For authorization decisions, relying parties MUST NOT consider any group memberships that are **not** asserted by the OP in the token.  Particularly, membership in a child group (e.g. `/cms/uscms`) does not imply membership in the parent group (`/cms`).
 
-The token does not need to list all groups the user has access to; relying parties MUST utilize only the asserted groups in their given order.  The `wlcg.groups` claim is optional and may either be empty or not provided at all.  The user may provide input on the contents and ordering of this claim; this is covered in [Scope-based Group Selection](#Scope-based-Group-Selection).
+The token MAY list only some of the groups of which the token subject is a member.
+The `wlcg.groups` claim value SHALL be a JSON array of JSON strings, 
+with each array element asserting membership of the group denoted by that element.
+A token MAY omit the `wlcg.groups` claim when its value would be an empty array.
+The user may provide input on the contents and ordering of this claim; 
+this is covered in [Scope-based Group Selection](#Scope-based-Group-Selection).
 
 The `wlcg.groups` claim provides functionality similar to that of VOMS extensions in an X.509 proxy.  For use cases that previously depended on the concept of VOMS _roles_ the `wlcg.groups` claim supports the concept of _optional groups_ instead.
 
