@@ -173,15 +173,15 @@ One item not addressed in detail in this document is how the issuer decides on w
   <tr>
    <td><strong>Virtual Organization</strong>
    </td>
-   <td>A Virtual Organization (VO) is a grouping of people and/or IT services that is defined only in the specific IT service used to manage the VO and that serves to allow grid resources to be shared just between its members.<br/><br/>
+   <td>A Virtual Organization (VO) is a grouping of people and/or IT services that is defined only in the specific IT service used to manage the VO and that serves to allow IT resources to be shared just between its members.<br/><br/>
 
-By construction, the members of a VO work towards common goals through the use of grid resources to which they have access. For example:
+By construction, the members of a VO work towards common goals through the use of the IT resources which they share. For example:
 - the processing and analysis of data produced by an experiment;
 - the provision of shared services to supported projects.
 
-A VO typically has an internal structure that may be exposed to some extent, such as (sub)groups to which VO members may belong and roles they may take on for specific activities on grid resources.
+A VO typically has an internal structure that may be exposed to some extent, such as (sub)groups to which VO members may belong and roles they may take on for specific activities on the resources available to the VO.
 
-Each VO has its own membership criteria and each grid site makes its own decisions on which resources to make available to which VOs.
+Each VO has its own membership criteria and each resource provider makes its own decisions on which resources to make available to which VOs.
    </td>
    <td>LHC experiment VOs
    </td>
