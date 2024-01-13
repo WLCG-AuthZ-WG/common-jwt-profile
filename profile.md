@@ -39,13 +39,13 @@ _Authored by the WLCG AuthZ Working Group_
 
 This document describes how WLCG users may use the available geographically distributed resources without X.509 credentials.  In this model, clients are issued with bearer tokens; these tokens are subsequently used to interact with resources.  The tokens may contain authorization groups and/or capabilities, according to the preference of the VO, applications, and relying parties. 
 
-Wherever possible, this document builds on existing standards when describing profiles to support current and anticipated WLCG usage.  In particular, three major technologies are identified as providing the basis for this system: OAuth2 (RFC 6749 & RFC 6750), [OpenID Connect](http://openid.net/developers/specs/)  and JSON Web Tokens (RFC 7519). Additionally, trust roots are established via OpenID Discovery or OAuth2 Authorization Server Metadata (RFC 8414). This document provides a profile for OAuth2 Access Tokens and OIDC ID Tokens. **The WLCG Token Profile version described by this document is “1.0”.**
+Wherever possible, this document builds on existing standards when describing profiles to support current and anticipated WLCG usage.  In particular, three major technologies are identified as providing the basis for this system: OAuth2 (RFC6749 & RFC6750), [OpenID Connect](http://openid.net/developers/specs/)  and JSON Web Tokens (RFC7519). Additionally, trust roots are established via OpenID Discovery or OAuth2 Authorization Server Metadata (RFC8414). This document provides a profile for OAuth2 Access Tokens and OIDC ID Tokens. **The WLCG Token Profile version described by this document is “1.0”.**
 
-The profile for the usage of JSON Web Tokens (RFC 7519) supports distributed authentication and authorization within the WLCG.  The JWT profile is meant as a mechanism to transition away from the existing GSI-based (Globus) system where authentication is based on X509 proxy certificates and authorization is based on VOMS extensions and identity mapping.
+The profile for the usage of JSON Web Tokens (RFC7519) supports distributed authentication and authorization within the WLCG.  The JWT profile is meant as a mechanism to transition away from the existing GSI-based (Globus) system where authentication is based on X509 proxy certificates and authorization is based on VOMS extensions and identity mapping.
 
 The trust model used in this profile is VO-centric and uses the concept of transitive trust: an individual establishes an identity within the VO (through an identity-proofing mechanism not described here) and any authentication mechanism happens within the scope of the VO.  This is in strong contrast to the current X.509-based system where a global identity is established completely orthogonal to the VO.
 
-The WLCG has identified two strong use cases for these profiles: issuing information about an identity and issuing bearer-token-based authorizations.  Identities are typically needed within a VO’s service, which might provide different views or authorization based on the individual’s identity within the VO.  
+The WLCG has identified two strong use cases for these profiles: issuing information about an identity and issuing bearer-token-based authorizations.  Identities are typically needed within VO’s services, which might provide different views or authorization based on the individual’s identity within the VO.  
 
 We do not see the VO-based identity being authenticated from a bespoke username/password for the WLCG, but rather through the various global identity federations in use by the community.  For CERN-centric VOs, this may be as simple as integrating with CERN SSO; however, it is considered out-of-scope for this document.
 
@@ -71,7 +71,7 @@ One item not addressed in detail in this document is how the issuer decides on w
   <tr>
    <td><strong>OAuth 2.0</strong>
    </td>
-   <td>OAuth 2.0 is the industry-standard protocol for authorization. OAuth 2.0 supersedes the work done on the original OAuth protocol created in 2006. OAuth 2.0 is used for delegating authorization to a client (defined below). In many implementations, the OAuth 2.0-issued Access Tokens build upon JSON Web Tokens (RFC 7519). 
+   <td>OAuth 2.0 is the industry-standard protocol for authorization. OAuth 2.0 supersedes the work done on the original OAuth protocol created in 2006. OAuth 2.0 is used for delegating authorization to a client (defined below). In many implementations, the OAuth 2.0-issued Access Tokens build upon JSON Web Tokens (RFC7519). 
    </td>
    <td> 
    </td>
@@ -87,7 +87,7 @@ One item not addressed in detail in this document is how the issuer decides on w
   <tr>
    <td><strong>Token</strong>
    </td>
-   <td>JSON Web Token (JWT).  A string representing a set of claims (pieces of information about a subject) as a JSON object that is encoded in a JSON Web Signature (<a href="http://tools.ietf.org/html/rfc7515">JWS, RFC 7515</a>) or JSON Web Encryption (<a href="http://tools.ietf.org/html/rfc7516">JWE, RFC 7516</a>), enabling the claims to be digitally signed or MACed and/or encrypted. <a href="http://tools.ietf.org/html/rfc7519">JSON Web Token - RFC 7519</a>.
+   <td>JSON Web Token (JWT).  A string representing a set of claims (pieces of information about a subject) as a JSON object that is encoded in a JSON Web Signature (<a href="http://tools.ietf.org/html/rfc7515">JWS, RFC7515</a>) or JSON Web Encryption (<a href="http://tools.ietf.org/html/rfc7516">JWE, RFC7516</a>), enabling the claims to be digitally signed or MACed and/or encrypted. <a href="http://tools.ietf.org/html/rfc7519">JSON Web Token - RFC7519</a>.
    </td>
    <td>An OIDC or OAuth Token issued by the VO
    </td>
@@ -119,7 +119,7 @@ One item not addressed in detail in this document is how the issuer decides on w
   <tr>
    <td><strong>Authorization Server</strong>
    </td>
-   <td>The entity that produces (“issues”) the token. For WLCG authorization, this is a service run by the VO that is asserting the identity or the authorization to access the VO’s resources. This term is defined by OAuth2, sometimes referred also as Authorization Provider. Is equivalent to an issuer in OIDC terminology.
+   <td>The entity that produces (“issues”) the token. For WLCG authorization, this is a service run by the VO that is asserting the identity or the authorization to access the VO’s resources. This term is defined by OAuth2, sometimes referred to as Authorization Provider. Is equivalent to an issuer in OIDC terminology.
    </td>
    <td rowspan="2" >Future WLCG VO Identity and Attribute Management Service 
    </td>
@@ -181,7 +181,7 @@ A common set of claims is proposed for all WLCG tokens, with additional claims s
 
 ## WLCG Token Claims
 
-This profile inherits from JSON Web Tokens at its base, including a specific claims language from RFC 7519. In this section, we outline the common WLCG-specific usage of the claims, for Access and ID Tokens, denoting any changes in claim criticality.
+This profile inherits from JSON Web Tokens at its base, including a specific claims language from RFC7519. In this section, we outline the common WLCG-specific usage of the claims, for Access and ID Tokens, denoting any changes in claim criticality.
 
 
 ### Common Claims
@@ -286,7 +286,7 @@ Usage of this claim is OPTIONAL. However, the <strong><code>wlcg.groups</code></
    </td>
    <td>RFC7519 & OpenID Connect core
    </td>
-   <td>The <strong><code>aud</code></strong> claim represents the audience or audiences the token is intended for. In the general case, the <strong><code>aud</code></strong> value is an array of case-sensitive strings. As specified in [RFC 7519 section 4.1.3](https://tools.ietf.org/html/rfc7519#section-4.1.3), in the common special case when there is one audience, the aud value MAY be a single case-sensitive string. The special string value of “https://wlcg.cern.ch/jwt/v1/any” signifies that the issuer intends the token to be valid for all relying parties.  See the discussion below for further guidance on picking values for the `aud` claim.
+   <td>The <strong><code>aud</code></strong> claim represents the audience or audiences the token is intended for. In the general case, the <strong><code>aud</code></strong> value is an array of case-sensitive strings. As specified in <a href="https://tools.ietf.org/html/rfc7519#section-4.1.3" target="_blank">RFC7519 section 4.1.3</a>, in the common special case when there is one audience, the aud value MAY be a single case-sensitive string. The special string value of “https://wlcg.cern.ch/jwt/v1/any” signifies that the issuer intends the token to be valid for all relying parties.  See the discussion below for further guidance on picking values for the `aud` claim.
    </td>
    <td>Required
    </td>
@@ -332,7 +332,7 @@ That is, if a client would want to access the resource `https://wlcg.example.com
 https://wlcg.example.com
 ```
 
-The audience SHOULD be normalized according to Section 6 of RFC 3986; that is, trailing slashes are discouraged and default ports should not be included.  However, the comparison against the value MUST be done as a case-sensitive string as specified in [Section 4.1.3 of RFC 7519](https://datatracker.ietf.org/doc/html/rfc7519#page-9).
+The audience SHOULD be normalized according to Section 6 of RFC3986; that is, trailing slashes are discouraged and default ports should not be included.  However, the comparison against the value MUST be done as a case-sensitive string as specified in [Section 4.1.3 of RFC7519](https://datatracker.ietf.org/doc/html/rfc7519#page-9).
 
 Note that a given relying party may accept several audiences.  For example, a storage server SHOULD accept an audience based on a load-balanced endpoint it participates in (e.g., `https://redirector.example.com`) in addition to its local hostname (`https://server1.example.com`).  The user SHOULD NOT need to request a new token for each HTTP redirect within the same logical service.  Implementations may accept additional audiences (if, for example, a single storage system has multiple services and endpoints).
 
@@ -435,7 +435,7 @@ The token profile contains two different approaches to authorization - user attr
 
 ### Capability-based Authorization: scope 
 
-Authorization may be based on the scope[^8] claim.  The value of the scope claim is a list of space-delimited, case-sensitive strings (as in OAuth 2.0 Token Exchange [RFC 8693 Section 4.2](https://tools.ietf.org/html/rfc8693#section-4.2)) reflecting authorized activities the bearer of this token may perform. 
+Authorization may be based on the scope[^8] claim.  The value of the scope claim is a list of space-delimited, case-sensitive strings (as in OAuth 2.0 Token Exchange [RFC8693 Section 4.2](https://tools.ietf.org/html/rfc8693#section-4.2)) reflecting authorized activities the bearer of this token may perform. 
 
 We aim to define a common set of authorizations (particularly storage-related authorizations) but envision additional authorizations will be added to meet new use cases. The interpretation of such authorizations would result in a list of operations the bearer is allowed to perform. 
 
@@ -465,7 +465,7 @@ Scopes MAY additionally provide a resource path, which further limits the author
 
 This authorization scheme is not equivalent to POSIX semantics.  When mapping this authorization scheme to a POSIX-like filesystem, some considerations must be made for user and group ownership.  For example, if a token is issued with authorization `storage`.`read:/home`, an implementation MUST override normal POSIX access control and give the bearer access to all users’ home directories.
 
-For all `storage.*` scopes, `$PATH` MUST be specified (but it may be `/` to authorize the entire resource associated with the issuer); if not specified for these scopes, the token MUST be rejected.  A token issuer MUST utilize absolute paths and normalize them according to section 6 of RFC 3986; as in RFC 3986, each component of the path must be URL-escaped. If a relying party encounters a non-conforming token, then it is implementation-defined if it rejects the token or performs path normalization.
+For all `storage.*` scopes, `$PATH` MUST be specified (but it may be `/` to authorize the entire resource associated with the issuer); if not specified for these scopes, the token MUST be rejected.  A token issuer MUST utilize absolute paths and normalize them according to section 6 of RFC3986; as in RFC3986, each component of the path must be URL-escaped. If a relying party encounters a non-conforming token, then it is implementation-defined if it rejects the token or performs path normalization.
 
 The scope claim MAY include multiple authorizations of the same scope name, e.g. `storage.create:/foo storage.create:/bar`.
 
@@ -606,7 +606,7 @@ with the following rules:
 *   If not explicitly included, the non-parametric `wlcg.groups` scope is implicitly added at the end of the requested scopes list whenever any group scopes are included. If no `wlcg.groups` scopes are included then it will not be added, to allow for cases where a client is only interested in capabilities.
 *   The returned `wlcg.groups` claim will not contain duplicates
 
-If an entity is not entitled to a group, an access_denied error as defined in section 4.1.2.1 of RFC 6749 SHOULD be returned.  If an error is not returned, the token issuer MUST inform the client according to section 3.3 of RFC 6749.
+If an entity is not entitled to a group, an access_denied error as defined in section 4.1.2.1 of RFC6749 SHOULD be returned.  If an error is not returned, the token issuer MUST inform the client according to section 3.3 of RFC6749.
 
 **Examples:**
 
@@ -656,9 +656,9 @@ In the following examples, “/cms” is the only default group.
 
 ## Scope-Based Capability Selection
 
-Each desired capability should be requested in the scope request, following the recommendations of section 3.3 of RFC 6749. 
+Each desired capability should be requested in the scope request, following the recommendations of section 3.3 of RFC6749. 
 
-If an entity is not entitled to a capability, the scope requested may be ignored by the server and the corresponding token may not have the corresponding claims; in this case, section 3.3 of RFC 6749 requires the token issuer to inform the client.  A server may also return an error during the authorization request.   Client software implementations should always verify the scopes present in the returned token.
+If an entity is not entitled to a capability, the scope requested may be ignored by the server and the corresponding token may not have the corresponding claims; in this case, section 3.3 of RFC6749 requires the token issuer to inform the client.  A server may also return an error during the authorization request.   Client software implementations should always verify the scopes present in the returned token.
 
 **Examples:** 
 
@@ -700,7 +700,7 @@ To support this scenario, a `wlcg.capabilityset` scope MAY be included in the sc
 
 Only one `wlcg.capabilityset` SHOULD be included in a single authorization request.  If additionally a scope is requested of the same type (for example `storage.read`) as a scope in the capability set, the explicitly requested scope SHOULD be processed as normal and may result in two scopes of the same type in the access token.  There is no provision for a requester to remove an individual capability from a capability set, but if there is a need for that the token issuer can define a different capability set or the scopes can be reduced later with a token exchange.
 
-If the requester is not authorized to use the `wlcg.capabilityset` an access_denied error as defined in section 4.1.2.1 of RFC 6749 SHOULD be returned.  The specific set of capability scopes returned MAY vary per requester, but if a requester is authorized their full set of scopes MUST be returned.
+If the requester is not authorized to use the `wlcg.capabilityset` an access_denied error as defined in section 4.1.2.1 of RFC6749 SHOULD be returned.  The specific set of capability scopes returned MAY vary per requester, but if a requester is authorized their full set of scopes MUST be returned.
 
 **Examples:** 
 
@@ -829,15 +829,15 @@ Here, the service administrator explicitly lists the issuers they trust (such as
 
 ## Token Verification
 
-A token MUST be a properly formatted JSON Web Token (JWT), as described by RFC 7519.  In this subsection, we describe a mechanism to verify the token’s authenticity in line with the standard.
+A token MUST be a properly formatted JSON Web Token (JWT), as described by RFC7519.  In this subsection, we describe a mechanism to verify the token’s authenticity in line with the standard.
 
 The token MUST be signed with an asymmetric key (RSA- or EC-based signatures); the public key to use to verify the token signature MUST be determined with the following algorithm.
 
 
 
 *   Extract the `iss` claim from the unverified token, check that the issuer is among the trusted ones, and determine the JWKS URI using the approach described in the Metadata Lookup section in the Appendix.
-*   The content of the JWKS URI MUST be compliant with RFC 7517.  It provides a list of public keys associated with the issuer.   The token MUST contain a key ID (`kid`) claim; the public key used to sign the token MUST be identified by matching the token’s `kid` claim with the corresponding key ID in the JWKS key set.
-*   Once the public key is determined, the verification of the token and its signature can proceed as outlined in RFC 7519.
+*   The content of the JWKS URI MUST be compliant with RFC7517.  It provides a list of public keys associated with the issuer.   The token MUST contain a key ID (`kid`) claim; the public key used to sign the token MUST be identified by matching the token’s `kid` claim with the corresponding key ID in the JWKS key set.
+*   Once the public key is determined, the verification of the token and its signature can proceed as outlined in RFC7519.
 
 All communication between the resource and the issuer MUST be done over a valid HTTPS connection with hostname verification.  The token issuer SHOULD advertise the public key lifetime by setting the appropriate HTTP caching headers.  The Client SHOULD use HTTP headers to avoid unnecessary downloads. The recommended lifetime of the public key cache is one day but SHOULD be kept to less than 7 days.  Client implementations SHOULD cache the public key for an authorization server for at least 1 hour, regardless of the server-provided value. Reducing the lifetime of a key will likely impact network traffic.
 
@@ -850,7 +850,7 @@ That is, if the issuer is `https://dteam.wlcg.example`, then the server metadata
 
 The token issuer endpoint is a crucial point of trust between the service and the VO; hence, the TLS connection MUST be validated and verified according to best practices.  The trust roots will be needed by a wide variety of agents, including browser-based and terminal-based clients[^14].
 
-Signature algorithms are enumerated in [RFC 7518 section 3](https://tools.ietf.org/html/rfc7518#section-3).  The HMAC algorithms are incompatible with the WLCG JWT approach; implementations should use the recommended algorithms from the RFC (as of July 2018, this is ES256 or RS256; ES256 should be used when token length is a concern).  Changes to the allowable signature algorithms will be handled using the versioning mechanism described in the Token Validation section.
+Signature algorithms are enumerated in [RFC7518 section 3](https://tools.ietf.org/html/rfc7518#section-3).  The HMAC algorithms are incompatible with the WLCG JWT approach; implementations should use the recommended algorithms from the RFC (as of July 2018, this is ES256 or RS256; ES256 should be used when token length is a concern).  Changes to the allowable signature algorithms will be handled using the versioning mechanism described in the Token Validation section.
 
 
 ### Verification Example
@@ -969,7 +969,7 @@ One would utilize the `iss` claim in the payload to download the set of public k
 </table>
 
 
-Note the combination of **nbf** (not before) (or **iat**) and **exp** (expiration) provides a notion of token valid lifetime.  WLCG token issuers MUST issue Access tokens with a valid lifetime of less than 6 hours; they SHOULD aim for a token lifetime of 20 minutes.  Resource providers MUST NOT accept tokens that have validity longer than 6 hours.  As a pragmatic guard against minor clock skews, they SHOULD accept expired tokens that are expired by less than 60 seconds.  See the recommendations in [sections 5.3](https://tools.ietf.org/html/rfc6750#section-5.3) and [5.2](https://tools.ietf.org/html/rfc6750#section-5.2) in RFC 6750.  These tokens are purposely shorter-lived as they do not have a token revocation mechanism; the token lifetime should be shorter than the expected revocation response time for authorizations.
+Note the combination of **nbf** (not before) (or **iat**) and **exp** (expiration) provides a notion of token valid lifetime.  WLCG token issuers MUST issue Access tokens with a valid lifetime of less than 6 hours; they SHOULD aim for a token lifetime of 20 minutes.  Resource providers MUST NOT accept tokens that have validity longer than 6 hours.  As a pragmatic guard against minor clock skews, they SHOULD accept expired tokens that are expired by less than 60 seconds.  See the recommendations in [sections 5.3](https://tools.ietf.org/html/rfc6750#section-5.3) and [5.2](https://tools.ietf.org/html/rfc6750#section-5.2) in RFC6750.  These tokens are purposely shorter-lived as they do not have a token revocation mechanism; the token lifetime should be shorter than the expected revocation response time for authorizations.
 
 
 ### Refresh tokens and token revocation
@@ -982,7 +982,7 @@ As clarified in the [OAuth specification](https://tools.ietf.org/html/rfc6749#se
 
 The [OAuth specification](https://datatracker.ietf.org/doc/html/rfc6749#section-6) also states that the authorization server MAY issue a new refresh token during a refresh request, in which case the client MUST discard the old refresh token and replace it with the new refresh token. Through this mechanism, long-lived processes (e.g. "robots") may periodically obtain new refresh tokens for indefinite ongoing operation, without human intervention, where the lifetime of each refresh token does not exceed the maximum specified above. The authorization server MAY revoke the old refresh token after issuing a new refresh token to the client, but for purposes of fault-tolerance (for example, in case the client fails to save the new refresh token to persistent storage), it is RECOMMENDED that the authorization server allow some grace period (e.g. one day) during which the old refresh token may be used prior to revocation. Further, it is RECOMMENDED that the grace period be configurable, so the authorization server operators can change the grace period value as needed based on operational considerations.
 
-To contain security incidents related to the leakage of refresh tokens, it is recommended that any solution that will be used as the WLCG OAuth authorization server MUST support the [OAuth token revocation standard](https://tools.ietf.org/html/rfc7009) (RFC 7009) at least for refresh tokens.
+To contain security incidents related to the leakage of refresh tokens, it is recommended that any solution that will be used as the WLCG OAuth authorization server MUST support the [OAuth token revocation standard](https://tools.ietf.org/html/rfc7009) (RFC7009) at least for refresh tokens.
 
 
 ### Claim and Token validation
@@ -1024,7 +1024,7 @@ For the [OAuth authorization server metadata](https://datatracker.ietf.org/doc/d
 
 ### Well-known URIs
 
-According to [RFC 5785](https://tools.ietf.org/html/rfc5785), a well-known URI is a URI whose path component begins with the characters “/.well-known/”, and whose scheme is "HTTP", "HTTPS", or another scheme that has explicitly been specified to use well-known URIs.
+According to [RFC5785](https://tools.ietf.org/html/rfc5785), a well-known URI is a URI whose path component begins with the characters “/.well-known/”, and whose scheme is "HTTP", "HTTPS", or another scheme that has explicitly been specified to use well-known URIs.
 
 
 #### The OpenID connect approach to well-known URIs
@@ -1036,7 +1036,7 @@ The OpenID Connect discovery mechanism states that the well-known URI for an Ope
 1. if the Issuer does not contain any path component, the openid-configuration is resolved by querying the “/.well-known/openid-configuration” endpoint. Example: for `https://wlcg.example` the configuration URI would be `https://wlcg.example/.well-known/openid-configuration`
 2. if the Issuer contains a path component, the “/.well-known/openid-configuration” path is appended to the Issuer string after having removed any terminating “/” character. Example: for `https://wlcg.example/dteam` the configuration URI would be `https://wlcg.example/dteam/.well-known/openid-configuration` 
 
-As clarified [here](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfigurationRequest), “using path components enables supporting multiple issuers per host. This is required in some multi-tenant hosting configurations. This use of .well-known is for supporting multiple issuers per host; unlike its use in RFC 5785, it does not provide general information about the host.”
+As clarified [here](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfigurationRequest), “using path components enables supporting multiple issuers per host. This is required in some multi-tenant hosting configurations. This use of .well-known is for supporting multiple issuers per host; unlike its use in RFC5785, it does not provide general information about the host.”
 
 
 #### The OAuth approach to well-known URIs
@@ -1083,7 +1083,7 @@ OAuth is about delegating access to resources to third-party applications. This 
 
 #### Authorization code flow
 
-The authorization code flow is defined in [RFC 6749](https://tools.ietf.org/html/rfc6749#section-4.1 ) and extended in the [OpenID Connect core specification](http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth ). This flow is used to obtain access tokens, ID tokens and refresh tokens and is optimized for confidential clients (i.e., server-side applications).
+The authorization code flow is defined in [RFC6749](https://tools.ietf.org/html/rfc6749#section-4.1 ) and extended in the [OpenID Connect core specification](http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth ). This flow is used to obtain access tokens, ID tokens and refresh tokens and is optimized for confidential clients (i.e., server-side applications).
 
 In WLCG, we require the use of the OpenID Connect version of the code flow, as described [here](http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth), which in practice means that the “openid” scope must be always included in authorization requests.
 
@@ -1372,7 +1372,7 @@ In this example, the `nonce`, `preferred_username`, `name`, and `email` claims a
      Such registrations could be made through IETF or appropriate bodies and made publicly available, e.g. https://www.iana.org/assignments/oauth-parameters/oauth-parameters.xml
 
 [^8]:
-     Note that the motivation for using the name “**scope**” here is inspired by the claim language proposed for standardization as part of the OAuth 2.0 Token Exchange specification ([RFC 8693](https://tools.ietf.org/html/rfc8693)), and due to its existing use in SciTokens.
+     Note that the motivation for using the name “**scope**” here is inspired by the claim language proposed for standardization as part of the OAuth 2.0 Token Exchange specification ([RFC8693](https://tools.ietf.org/html/rfc8693)), and due to its existing use in SciTokens.
 
 [^9]:
      RAF still refers to it as eduPersonAssurance, but it will probably change into `eduperson_assurance`, following the OIDCre whitepaper.
@@ -1387,7 +1387,7 @@ In this example, the `nonce`, `preferred_username`, `name`, and `email` claims a
      [https://openid.net/specs/openid-connect-registration-1_0.html](https://openid.net/specs/openid-connect-registration-1_0.html)
 
 [^13]:
-     Note that the OpenID Connect Discovery paper highlights a mechanism that is NOT RFC 5785 compliant and is not aligned with the OAuth discovery standard. After some discussion, this group decided to embrace the OpenID Connect Discovery approach. More details are in the appendix.
+     Note that the OpenID Connect Discovery paper highlights a mechanism that is NOT RFC5785 compliant and is not aligned with the OAuth discovery standard. After some discussion, this group decided to embrace the OpenID Connect Discovery approach. More details are in the appendix.
 
 [^14]:
      Each OS platform has its own set of acceptable CAs; suitable certificates should be used to facilitate client development and maintain the existing level of trust. Discussions will be held between the WLCG Authorization Working Group, IGTF, and relevant partners. 
