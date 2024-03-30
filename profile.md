@@ -477,9 +477,35 @@ We use explicit "storage" and "compute" prefixes in the scope names in order to 
 
 The operation definitions are currently kept open-ended and intended to be interpreted and evolved by the WLCG community.
 
-Scopes MAY additionally provide a resource path, which further limits the authorization. These paths are provided in the form `$AUTHZ:$PATH`. For example, the scope `storage`.`read:/foo` would provide a read authorization for the resource at `/foo` but not `/bar`. Resources allow a hierarchical relationship to be expressed; an authorization for `storage.modify:/baz` implies a write authorization for the resources at `/baz/qux` (this is similar for `storage`.`read`) authorizations. Resources accepting scopes MUST handle these resource-based authorizations as described in this document; implementers should be aware this differs from the standard handling of OAuth2 scopes.
+A scope MAY additionally provide a resource path, which further limits the authorization.
+A path is provided following the template `$AUTHZ:$PATH` where `$AUTHZ` denotes
+a specific authorization and `$PATH` denotes the path.
+For example, the scope `storage.read:/foo` would provide a read authorization for the
+resource(s) at `/foo` but not `/bar`.
+Resources allow a hierarchical relationship to be expressed.  For example, an authorization
+for `storage.modify:/baz` implies a write authorization for the resources at `/baz/qux`.
+Resources accepting scopes MUST handle these resource-based authorizations as described in this
+document; implementers should be aware this differs from the standard handling of OAuth2 scopes.
 
 This authorization scheme is not equivalent to POSIX semantics.  When mapping this authorization scheme to a POSIX-like filesystem, some considerations must be made for user and group ownership.  For example, if a token is issued with authorization `storage`.`read:/home`, an implementation MUST override normal POSIX access control and give the bearer access to all users’ home directories.
+
+`$PATH` MUST be treated as an **exact** match for a directory or a file,
+depending on the requested operation(s) to which the authorization applies.
+If it has a trailing `/` character, `$PATH` MUST be treated as a directory.
+
+For example, a scope `storage.create:/foo/bar` must **allow** the creation of:
+* a leading directory `/foo` if that path does not exist yet;
+* a directory or file `/foo/bar` if `/foo` is a directory;
+* a directory or file `/foo/bar/qux` if `/foo/bar` is a directory;
+* etc.
+
+That same scope must **deny** the creation of:
+* a file `/foo`;
+* a directory or file `/foo/bargain`.
+
+A scope `storage.create:/foo/bar/` where `$PATH` has a trailing `/`
+must also **deny** the creation of:
+* a file `/foo/bar`.
 
 For all `storage.*` scopes, `$PATH` MUST be specified (but may be `/` to authorize the entire resource associated with the issuer); if not specified for these scopes, the token MUST be rejected.  A token issuer MUST utilize absolute paths and normalize them according to section 6 of RFC 3986; as in RFC 3986, each component of the path must be URL-escaped. If a relying party encounters a non-conforming token, then it is implementation-defined if it rejects the token or performs path normalization.
 
