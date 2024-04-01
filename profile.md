@@ -87,7 +87,7 @@ One item not addressed in detail in this document is how the issuer decides on w
   <tr>
    <td><strong>Token</strong>
    </td>
-   <td>JSON Web Token (JWT).  A string representing a set of claims (pieces of information about a subject) as a JSON object that is encoded in a JSON Web Signature (<a href="http://tools.ietf.org/html/rfc7515">JWS, RFC 7515</a>) or JSON Web Encryption (<a href="http://tools.ietf.org/html/rfc7516">JWE, RFC 7516</a>), enabling the claims to be digitally signed or MACed and/or encrypted. <a href="http://tools.ietf.org/html/rfc7519">JSON Web Token - RFC 7519</a>.
+   <td>JSON Web Token (<a href="http://tools.ietf.org/html/rfc7519">JWT, RFC 7519</a>).  A string representing a set of claims (pieces of information about a subject) as a JSON object that is encoded in a JSON Web Signature (<a href="http://tools.ietf.org/html/rfc7515">JWS, RFC 7515</a>) or JSON Web Encryption (<a href="http://tools.ietf.org/html/rfc7516">JWE, RFC 7516</a>), enabling the claims to be digitally signed or MACed and/or encrypted.
    </td>
    <td>An OIDC or OAuth Token issued by the VO
    </td>
