@@ -342,19 +342,19 @@ Usage of this claim is OPTIONAL. However, the <strong><code>wlcg.groups</code></
 The `aud` claim provides an explicit statement of the intended audience for the token; it is an important mechanism for restricting the scope of the token to one or more relying parties.  Note requiring `aud` is atypical: we believe it is better to have the issuer explicitly state the token may be used by any relying party as opposed to assuming its absence indicates no restrictions.
 
 Relying parties are recommended to accept audiences based on the endpoint name most commonly associated with the provided service.
-That is, if a client would want to access the resource `https://wlcg.example.com/base/file.root`, then the recommended audience for the relying party at this endpoint would be:
+That is, if a client would want to access the resource `https://wlcg.example.org/base/file.root`, then the recommended audience for the relying party at this endpoint would be:
 
 ```
-https://wlcg.example.com
+https://wlcg.example.org
 ```
 
 The audience SHOULD be normalized according to Section 6 of RFC 3986; that is, trailing slashes are discouraged and default ports should not be included.  However, the comparison against the value MUST be done as a case-sensitive string as specified in [Section 4.1.3 of RFC 7519](https://datatracker.ietf.org/doc/html/rfc7519#page-9).
 
-Note that a given relying party may accept several audiences.  For example, a storage server SHOULD accept an audience based on a load-balanced endpoint it participates in (e.g., `https://redirector.example.com`) in addition to its local hostname (`https://server1.example.com`).  The user SHOULD NOT need to request a new token for each HTTP redirect within the same logical service.  Implementations may accept additional audiences (if, for example, a single storage system has multiple services and endpoints).
+Note that a given relying party may accept several audiences.  For example, a storage server SHOULD accept an audience based on a load-balanced endpoint it participates in (e.g., `https://redirector.example.org`) in addition to its local hostname (`https://server1.example.org`).  The user SHOULD NOT need to request a new token for each HTTP redirect within the same logical service.  Implementations may accept additional audiences (if, for example, a single storage system has multiple services and endpoints).
 
 Audiences of this form are preferred (as opposed to a human-readable "site name" such as `WLCG_Site_Foo`) to ease the ability of an end-user or tool to derive an audience from a given URL, allowing them to request an appropriate token.  Site names, on the other hand, are often community-specific and would require the user to maintain a lookup table from endpoint to audience.
 
-If the relying party provides a non-HTTPS-based service, a URI should be used.  For example, an HTCondor-CE running at `condor.example.com` may use an audience of the form `condor://condor.example.com`.
+If the relying party provides a non-HTTPS-based service, a URI should be used.  For example, an HTCondor-CE running at `condor.example.org` may use an audience of the form `condor://condor.example.org`.
 
 ### ID Token Claims
 
@@ -1091,7 +1091,7 @@ The [OAuth authorization server metadata standard](https://tools.ietf.org/html/r
 
 "Authorization servers supporting metadata MUST make a JSON document containing metadata as specified in Section 2 available at a path formed by inserting a well-known URI string into the authorization server's issuer identifier between the host component and the path component, if any. By default, the well-known URI string used is '/.well-known/oauth-authorization-server'."
 
-The OAuth approach is equivalent to the one standardized in OpenID connect discovery when the Issuer URI does not contain path components. However, the two standards differ when a path component is present, since OpenID connect states that the well-known URI string is appended to the issuer string (`https://example.com/issuer1/.well-known/openid-configuration`)  while OAuth states that the well-known URI should be inserted before the path component (`https://example.com/.well-known/openid-configuration/issuer1`).
+The OAuth approach is equivalent to the one standardized in OpenID connect discovery when the Issuer URI does not contain path components. However, the two standards differ when a path component is present, since OpenID connect states that the well-known URI string is appended to the issuer string (`https://example.org/issuer1/.well-known/openid-configuration`)  while OAuth states that the well-known URI should be inserted before the path component (`https://example.org/.well-known/openid-configuration/issuer1`).
 
 
 The OAuth discovery standard states also that "when deployed in legacy environments in which the OpenID Connect Discovery 1.0 transformation is already used, it may be necessary during a transition period to publish metadata for issuer identifiers containing a path component at both locations.  During this transition period, applications should first apply the transformation defined in this specification and attempt to retrieve the authorization server metadata from the resulting location; only if the retrieval from that location fails should they fall back to attempting to retrieve it from the alternate location obtained using the transformation defined by OpenID Connect Discovery 1.0."
@@ -1123,7 +1123,7 @@ Some authorization flows or capabilities are available only to confidential clie
 ![](authorization_flows.png)
 
 
-The image above, taken from [here](https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2), describes the abstract OAuth protocol flow. In OAuth terminology, authorization flows describe the interactions among the roles defined above (a client application, the user, and the authorization and resource servers) to let a client application obtain controlled access to protected resources with the (possibly implicit) authorization of the end user owning such resources. OAuth/OpenID connect flows can be described as variations of the abstract protocol flow in support of specific authentication and authorization scenarios.
+The image above, taken from [here](https://www.digitalocean.org/community/tutorials/an-introduction-to-oauth-2), describes the abstract OAuth protocol flow. In OAuth terminology, authorization flows describe the interactions among the roles defined above (a client application, the user, and the authorization and resource servers) to let a client application obtain controlled access to protected resources with the (possibly implicit) authorization of the end user owning such resources. OAuth/OpenID connect flows can be described as variations of the abstract protocol flow in support of specific authentication and authorization scenarios.
 
 OAuth is about delegating access to resources to third-party applications. This delegation process starts with an authorization request (step 1. in the figure above) issued by the application that wants to access the resources to the user owning the resources to get an 'authorization grant', i.e. permission. Note that in some flows and under certain conditions (e.g., a trusted client application, a previous user authorization stored in the authorization server) the grant can be 'implicit', i.e. no explicit user intervention is required. The application then exchanges the grant obtained from the user with an access token. This access token is then presented to the resource server to get access to resources. The resource server will validate the token and grant access to the requested resources only if the token presented by the client application is valid and provides enough privileges to access the requested resources.
 
@@ -1323,7 +1323,7 @@ Note this is a very minimal token for this JWT profile, contains no group inform
     ],
     "preferred_username": "aresearcher",  
     "nonce": "334b0e05b65a3",
-    "aud": "https:///dteam-test-client.example.com",
+    "aud": "https:///dteam-test-client.example.org",
     "auth_time": 1523363636,
     "name": "A Researcher",
     "exp": 1523365436,
@@ -1350,7 +1350,7 @@ In this example, the `nonce`, `preferred_username`, `name`, and `email` claims a
     "iss": "https://demo.scitokens.org",
     "nbf": 1555059791,
     "wlcg.ver": "1.0",
-    "aud": "https://dteam-test-client.example.com",
+    "aud": "https://dteam-test-client.example.org",
     "exp": 1555060391,
     "iat": 1555059791,
     "jti": "aef94c8c-0fea-490f-9027-ff444dd66d8c",
@@ -1377,7 +1377,7 @@ In this example, the `nonce`, `preferred_username`, `name`, and `email` claims a
     "iss": "https://demo.scitokens.org",
     "nbf": 1555059791,
     "wlcg.ver": "1.0",
-    "aud": "https://dteam-test-client.example.com",
+    "aud": "https://dteam-test-client.example.org",
     "exp": 1555060391,
     "iat": 1555059791,
     "jti": "aef94c8c-0fea-490f-9027-ff444dd66d8c",
