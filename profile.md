@@ -6,32 +6,10 @@ _Authored by the WLCG AuthZ Working Group_
 **Version History:**
 
 
-<table>
-  <tr>
-   <td><strong>Date</strong>
-   </td>
-   <td><strong>Version</strong>
-   </td>
-   <td><strong>Comment</strong>
-   </td>
-  </tr>
-  <tr>
-   <td>17.09.2019
-   </td>
-   <td>0.1
-   </td>
-   <td>Final version presented to MB
-   </td>
-  </tr>
-  <tr>
-   <td>25.09.2019
-   </td>
-   <td>1.0
-   </td>
-   <td>Version published on Zenodo
-   </td>
-  </tr>
-</table>
+| **Date** | **Version** | **Comment** |
+| --- | --- | --- |
+| 17.09.2019 | 0.1 | Final version presented to MB |
+| 25.09.2019 | 1.0 | Version published on Zenodo |
 
 
 
@@ -59,134 +37,22 @@ One item not addressed in detail in this document is how the issuer decides on w
 ## Glossary
 
 
-<table>
-  <tr>
-   <td><strong>Term</strong>
-   </td>
-   <td><strong>Definition</strong>
-   </td>
-   <td><strong>WLCG Example (if applicable)</strong>
-   </td>
-  </tr>
-  <tr>
-   <td><strong>OAuth 2.0</strong>
-   </td>
-   <td>OAuth 2.0 is the industry-standard protocol for authorization. OAuth 2.0 supersedes the work done on the original OAuth protocol created in 2006. OAuth 2.0 is used for delegating authorization to a client (defined below). In many implementations, the OAuth 2.0-issued Access Tokens build upon JSON Web Tokens (RFC 7519). 
-   </td>
-   <td> 
-   </td>
-  </tr>
-  <tr>
-   <td><strong>OIDC (or OpenID Connect)</strong>
-   </td>
-   <td>OpenID Connect (OIDC) is an authentication layer on top of OAuth 2.0. It leverages a specific OAuth 2.0 flow to provide authentication information and relevant identity attributes. OIDC flows may issue OAuth2 Access Tokens, Refresh Tokens as well as ID Tokens.
-   </td>
-   <td>
-   </td>
-  </tr>
-  <tr>
-   <td><strong>Token</strong>
-   </td>
-   <td>JSON Web Token (<a href="http://tools.ietf.org/html/rfc7519">JWT, RFC 7519</a>).  A string representing a set of claims (pieces of information about a subject) as a JSON object that is encoded in a JSON Web Signature (<a href="http://tools.ietf.org/html/rfc7515">JWS, RFC 7515</a>) or JSON Web Encryption (<a href="http://tools.ietf.org/html/rfc7516">JWE, RFC 7516</a>), enabling the claims to be digitally signed or MACed and/or encrypted.
-   </td>
-   <td>An OIDC or OAuth Token issued by the VO
-   </td>
-  </tr>
-  <tr>
-   <td><strong>Access Token</strong>
-   </td>
-   <td>Access tokens are credentials used to access protected resources.  An access token is a string representing an authorization issued to the client[^1].
-   </td>
-   <td>
-   </td>
-  </tr>
-  <tr>
-   <td><strong>ID Token</strong>
-   </td>
-   <td>A JWT specified by OIDC that contains user information, represented in the form of claims[^2].
-   </td>
-   <td>
-   </td>
-  </tr>
-  <tr>
-   <td><strong>Issuer </strong>
-   </td>
-   <td>Any token issuer. This refers to both Authorization Servers and OpenID Providers.
-   </td>
-   <td>VO https URL
-   </td>
-  </tr>
-  <tr>
-   <td><strong>Authorization Server</strong>
-   </td>
-   <td>The entity that produces ('issues') the token. For WLCG authorization, this is a service run by the VO that is asserting the identity or the authorization to access the VO's resources. This term is defined by OAuth2 and is sometimes referred to as Authorization Provider. Is equivalent to an issuer in OIDC terminology.
-   </td>
-   <td rowspan="2" >Future WLCG VO Identity and Attribute Management Service 
-   </td>
-  </tr>
-  <tr>
-   <td><strong>OpenID Connect Provider</strong> <strong>(OP) </strong>
-   </td>
-   <td>A specific implementation of the OAuth Authorization server, which provides user authentication and represents an entity that offers user authentication as a service. It provides additional functionality, such as a /userinfo endpoint. This term is defined by OpenID Connect.
-   </td>
-  </tr>
-  <tr>
-   <td><strong>Client</strong>
-   </td>
-   <td>An application making protected resource requests on behalf of the user and with its authorization. The term 'client' does not imply any particular implementation characteristics (e.g., whether the application executes on a server, a desktop, or other devices).
-   </td>
-   <td>E.g. HTCondor submit host or an experiment framework
-   </td>
-  </tr>
-  <tr>
-   <td><strong>Relying Party</strong> <strong>(RP) </strong>
-   </td>
-   <td>Can be applied to both OAuth client and resource provider roles; it is an application that outsources its user authentication function to an external Identity Provider. This term has been adopted by OpenID Connect. It is often used synonymously with 'Client'.
-   </td>
-   <td>E.g. PanDA framework
-   </td>
-  </tr>
-  <tr>
-   <td><strong>Bearer</strong>
-   </td>
-   <td>A user's agent that holds the token and is able to send it securely to a third party.
-   </td>
-   <td>E.g. a job
-   </td>
-  </tr>
-  <tr>
-   <td><strong>Resource Provider</strong>
-   </td>
-   <td>An entity that receives a Token, validates it, and decides whether to provide the bearer access to a corresponding resource. This term is defined by OAuth2 and may be referred to as the Resource Server.
-   </td>
-   <td>E.g. a Storage Element
-   </td>
-  </tr>
-  <tr>
-   <td><strong>Resource owner</strong>
-   </td>
-   <td>An entity capable of granting access to a protected resource.  When the resource owner is a person, it is referred to as an end-user. This term is defined by OAuth2.
-   </td>
-   <td>User/VO
-   </td>
-  </tr>
-  <tr>
-   <td><strong>Virtual Organization</strong>
-   </td>
-   <td>A Virtual Organization (VO) is a grouping of people and/or IT services that is defined only in the specific IT service used to manage the VO and that serves to allow IT resources to be shared just between its members.<br/><br/>
-
-By construction, the members of a VO work towards common goals through the use of the IT resources which they share. For example:
-- the processing and analysis of data produced by an experiment;
-- the provision of shared services to supported projects.
-
-A VO typically has an internal structure that may be exposed to some extent, such as (sub)groups to which VO members may belong and roles they may take on for specific activities on the resources available to the VO.
-
-Each VO has its own membership criteria and each resource provider makes its own decisions on which resources to make available to which VOs.
-   </td>
-   <td>LHC experiment VOs
-   </td>
-  </tr>
-</table>
+| **Term** | **Definition** | **WLCG Example (if applicable)** |
+| --- | --- | --- |
+| **OAuth 2.0** | OAuth 2.0 is the industry-standard protocol for authorization. OAuth 2.0 supersedes the work done on the original OAuth protocol created in 2006. OAuth 2.0 is used for delegating authorization to a client (defined below). In many implementations, the OAuth 2.0-issued Access Tokens build upon JSON Web Tokens (RFC 7519).  |   |
+| **OIDC (or OpenID Connect)** | OpenID Connect (OIDC) is an authentication layer on top of OAuth 2.0. It leverages a specific OAuth 2.0 flow to provide authentication information and relevant identity attributes. OIDC flows may issue OAuth2 Access Tokens, Refresh Tokens as well as ID Tokens. |  |
+| **Token** | JSON Web Token ([JWT, RFC 7519](http://tools.ietf.org/html/rfc7519)).  A string representing a set of claims (pieces of information about a subject) as a JSON object that is encoded in a JSON Web Signature ([JWS, RFC 7515](http://tools.ietf.org/html/rfc7515)) or JSON Web Encryption ([JWE, RFC 7516](http://tools.ietf.org/html/rfc7516)), enabling the claims to be digitally signed or MACed and/or encrypted. | An OIDC or OAuth Token issued by the VO |
+| **Access Token** | Access tokens are credentials used to access protected resources.  An access token is a string representing an authorization issued to the client [^1] . |  |
+| **ID Token** | A JWT specified by OIDC that contains user information, represented in the form of claims [^2] . |  |
+| **Issuer** | Any token issuer. This refers to both Authorization Servers and OpenID Providers. | VO https URL |
+| **Authorization Server** | The entity that produces ('issues') the token. For WLCG authorization, this is a service run by the VO that is asserting the identity or the authorization to access the VO's resources. This term is defined by OAuth2 and is sometimes referred to as Authorization Provider. Is equivalent to an issuer in OIDC terminology. |
+| **OpenID Connect Provider** **(OP)** | A specific implementation of the OAuth Authorization server, which provides user authentication and represents an entity that offers user authentication as a service. It provides additional functionality, such as a /userinfo endpoint. This term is defined by OpenID Connect. |
+| **Client** | An application making protected resource requests on behalf of the user and with its authorization. The term 'client' does not imply any particular implementation characteristics (e.g., whether the application executes on a server, a desktop, or other devices). | E.g. HTCondor submit host or an experiment framework |
+| **Relying Party** **(RP)** | Can be applied to both OAuth client and resource provider roles; it is an application that outsources its user authentication function to an external Identity Provider. This term has been adopted by OpenID Connect. It is often used synonymously with 'Client'. | E.g. PanDA framework |
+| **Bearer** | A user's agent that holds the token and is able to send it securely to a third party. | E.g. a job |
+| **Resource Provider** | An entity that receives a Token, validates it, and decides whether to provide the bearer access to a corresponding resource. This term is defined by OAuth2 and may be referred to as the Resource Server. | E.g. a Storage Element |
+| **Resource owner** | An entity capable of granting access to a protected resource.  When the resource owner is a person, it is referred to as an end-user. This term is defined by OAuth2. | User/VO |
+| **Virtual Organization** | A Virtual Organization (VO) is a grouping of people and/or IT services that is defined only in the specific IT service used to manage the VO and that serves to allow IT resources to be shared just between its members. <br/><br/>By construction, the members of a VO work towards common goals through the use of the IT resources which they share. For example:<br/>- the processing and analysis of data produced by an experiment;<br/>- the provision of shared services to supported projects.<br/><br/>A VO typically has an internal structure that may be exposed to some extent, such as (sub)groups to which VO members may belong and roles they may take on for specific activities on the resources available to the VO.<br/><br/>Each VO has its own membership criteria and each resource provider makes its own decisions on which resources to make available to which VOs.| LHC experiment VOs |
 
 
 
@@ -205,139 +71,19 @@ This profile inherits from JSON Web Tokens at its base, including a specific cla
 The following claims may be included in both Access and Identity tokens.
 
 
-<table>
-  <tr>
-   <td><strong>Claim</strong>
-   </td>
-   <td><strong>Origin</strong>
-   </td>
-   <td><strong>Usage Note</strong>
-   </td>
-   <td><strong>Required</strong>[^3]<strong>?</strong>
-   </td>
-  </tr>
-  <tr>
-   <td>sub
-   </td>
-   <td>RFC7519 & OpenID Connect core
-   </td>
-   <td>Typically indicates the individual or entity this token was originally issued to. The subject (<strong><code>sub</code></strong>) must be locally unique for a specific issuer, i.e. within the WLCG VO. It must be ASCII-encoded, not exceeding 255 characters in length, and is a case-sensitive string.
-Suggested use cases for the <strong><code>sub</code></strong> claim are suspending access to resources, auditing, user-level accounting, monitoring, or tracing. Due to privacy concerns, VOs SHOULD issue non-human-readable subjects. The <strong><code>sub</code></strong> MUST be unique and non-reassigned within the VO. A VO MUST NOT use the same subject for multiple entities.
-   </td>
-   <td>Required
-   </td>
-  </tr>
-  <tr>
-   <td>exp
-   </td>
-   <td>RFC7519 & OpenID Connect core
-   </td>
-   <td>The interpretation for <strong><code>exp</code></strong> is unchanged from the RFC, it represents the expiration time on or after which the Token MUST NOT be accepted for processing. 
-   </td>
-   <td>Required
-   </td>
-  </tr>
-  <tr>
-   <td>iss
-   </td>
-   <td>RFC7519 & OpenID Connect core
-   </td>
-   <td>The issuer (<strong><code>iss</code></strong>) of the WLCG JWT. It MUST contain a unique URL for the organization[^4]; it is to be used in verification as described in the 'Token Verification' section. For WLCG this would be the VO.
-   </td>
-   <td>Required
-   </td>
-  </tr>
-  <tr>
-   <td>wlcg.ver
-   </td>
-   <td>WLCG AuthZ WG
-   </td>
-   <td>We add the <strong><code>wlcg.ver</code></strong> claim to denote the version of the WLCG token profile the relying party must understand to validate the token (claim validation is covered in the next section).  <strong><code>wlcg.ver</code></strong> names MUST comply with the following grammar: 
-<code>vername ::= [0-9]+\.[0-9]+</code>
-<p>
-The <strong><code>wlcg.ver</code></strong> claim corresponds to a version of this document. The initial version of this document constitutes version '1.0'. Although versions are expected to be treated as strings, we adopt a numeric format for simplicity. 
-   </td>
-   <td>Required
-   </td>
-  </tr>
-  <tr>
-   <td>eduperson_assurance
-   </td>
-   <td>REFEDS
-   </td>
-   <td>See below
-   </td>
-   <td>Optional
-   </td>
-  </tr>
-  <tr>
-   <td>acr
-   </td>
-   <td>OpenID Connect core
-   </td>
-   <td>The <strong>acr</strong> claim conveys the assurance of the authentication, e.g. Multi or Single Factor. It is typically included in addition to the eduperson_assurance claim.
-   </td>
-   <td>Optional
-   </td>
-  </tr>
-  <tr>
-   <td>wlcg.groups
-   </td>
-   <td>WLCG AuthZ WG
-   </td>
-   <td>The <strong> <code>wlcg.groups</code> </strong>claim conveys group membership about an authenticated end-user.  The claim value is an ordered JSON array of strings that contains the names of groups of which the user is a member in the context of the VO that issued the Token. Group names are formatted following the rules in the next section. Group names MUST comply with the following grammar[^5] where group is defined recursively:
-<p>
-<code>group ::= '/' groupname | group '/' groupname</code>
-<p>
-<code>groupname :: = [a-zA-Z0-9][a-zA-Z0-9_.-]*</code>
-<p>
-Usage of this claim is OPTIONAL. However, the <strong><code>wlcg.groups</code></strong> claim is REQUIRED in all tokens issued as a result of an OpenID Connect authentication flow in which wlcg.groups are requested via scopes and the subject is entitled to the groups in question. The group request mechanism is described in more detail in section 'Scope-based Attribute Selection' of this document.
-<em>Note: it is expected that a more verbose syntax and different claim (eduperson_entitlement), as recommended by AARC</em>[^6]<em> Guidelines, could also be required in the event that authorization information is exchanged with external Infrastructures.</em>
-   </td>
-   <td>Optional, but when requested it MUST be present in both token types.
-   </td>
-  </tr>
-  <tr>
-   <td>aud
-   </td>
-   <td>RFC7519 & OpenID Connect core
-   </td>
-   <td>The <strong><code>aud</code></strong> claim represents the audience or audiences the token is intended for. In the general case, the <strong><code>aud</code></strong> value is an array of case-sensitive strings. As specified in <a href="https://tools.ietf.org/html/rfc7519#section-4.1.3" target="_blank">RFC 7519 section 4.1.3</a>, in the common special case when there is one audience, the aud value MAY be a single case-sensitive string. The special string value of 'https://wlcg.cern.ch/jwt/v1/any' signifies that the issuer intends the token to be valid for all relying parties.  See the discussion below for further guidance on picking values for the `aud` claim.
-   </td>
-   <td>Required
-   </td>
-  </tr>
-  <tr>
-   <td>iat
-   </td>
-   <td>RFC7519
-   </td>
-   <td>The claim represents the time at which the token was issued. Its value is a JSON number representing the number of seconds from 1970-01-01T0:0:0Z UTC until the token issue time in UTC. 
-   </td>
-   <td>Required
-   </td>
-  </tr>
-  <tr>
-   <td>nbf
-   </td>
-   <td>RFC7519
-   </td>
-   <td>The interpretation for <strong><code>nbf</code></strong> (not before) is unchanged from the RFC.  For example, usage of nbf allows the issuer to make the token valid prior to the issue instant, potentially easing clock skew issues in a distributed environment.
-   </td>
-   <td>Optional
-   </td>
-  </tr>
-  <tr>
-   <td>jti
-   </td>
-   <td>RFC7519
-   </td>
-   <td>The interpretation for <strong><code>jti</code></strong> (JWT ID) is unchanged from the RFC. It is a unique identifier that protects against replay attacks and improves the traceability of tokens through the distributed system. It MUST be unique within an issuer and SHOULD be unique across issuers.
-   </td>
-   <td>Required
-   </td>
-  </tr>
-</table>
+| **Claim** | **Origin** | **Usage Note** | **Required** [^3] **?** |
+| --- | --- | --- | --- |
+| sub | RFC7519 & OpenID Connect core | Typically indicates the individual or entity this token was originally issued to. The subject (**`sub`**) must be locally unique for a specific issuer, i.e. within the WLCG VO. It must be ASCII-encoded, not exceeding 255 characters in length, and is a case-sensitive string. <br/>Suggested use cases for the **`sub`** claim are suspending access to resources, auditing, user-level accounting, monitoring, or tracing. Due to privacy concerns, VOs SHOULD issue non-human-readable subjects. The **`sub`** MUST be unique and non-reassigned within the VO. A VO MUST NOT use the same subject for multiple entities.| Required |
+| exp | RFC7519 & OpenID Connect core | The interpretation for **`exp`** is unchanged from the RFC, it represents the expiration time on or after which the Token MUST NOT be accepted for processing.  | Required |
+| iss | RFC7519 & OpenID Connect core | The issuer (**`iss`**) of the WLCG JWT. It MUST contain a unique URL for the organization [^4] ; it is to be used in verification as described in the 'Token Verification' section. For WLCG this would be the VO. | Required |
+| wlcg.ver | WLCG AuthZ WG | We add the **`wlcg.ver`** claim to denote the version of the WLCG token profile the relying party must understand to validate the token (claim validation is covered in the next section).  **`wlcg.ver`** names MUST comply with the following grammar:  <br/>`vername ::= [0-9]+\.[0-9]+`<br/><p><br/>The **`wlcg.ver`** claim corresponds to a version of this document. The initial version of this document constitutes version '1.0'. Although versions are expected to be treated as strings, we adopt a numeric format for simplicity. | Required |
+| eduperson_assurance | REFEDS | See below | Optional |
+| acr | OpenID Connect core | The **acr** claim conveys the assurance of the authentication, e.g. Multi or Single Factor. It is typically included in addition to the eduperson_assurance claim. | Optional |
+| wlcg.groups | WLCG AuthZ WG | The ** `wlcg.groups`**claim conveys group membership about an authenticated end-user.  The claim value is an ordered JSON array of strings that contains the names of groups of which the user is a member in the context of the VO that issued the Token. Group names are formatted following the rules in the next section. Group names MUST comply with the following grammar [^5]  where group is defined recursively: <br/><p><br/>`group ::= '/' groupname | group '/' groupname`<br/><p><br/>`groupname :: = [a-zA-Z0-9][a-zA-Z0-9_.-]*`<br/><p><br/>Usage of this claim is OPTIONAL. However, the **`wlcg.groups`** claim is REQUIRED in all tokens issued as a result of an OpenID Connect authentication flow in which wlcg.groups are requested via scopes and the subject is entitled to the groups in question. The group request mechanism is described in more detail in section 'Scope-based Attribute Selection' of this document.<br/>_Note: it is expected that a more verbose syntax and different claim (eduperson_entitlement), as recommended by AARC_ [^6] _Guidelines, could also be required in the event that authorization information is exchanged with external Infrastructures._| Optional, but when requested it MUST be present in both token types. |
+| aud | RFC7519 & OpenID Connect core | The **`aud`** claim represents the audience or audiences the token is intended for. In the general case, the **`aud`** value is an array of case-sensitive strings. As specified in [RFC 7519 section 4.1.3](https://tools.ietf.org/html/rfc7519#section-4.1.3), in the common special case when there is one audience, the aud value MAY be a single case-sensitive string. The special string value of 'https://wlcg.cern.ch/jwt/v1/any' signifies that the issuer intends the token to be valid for all relying parties.  See the discussion below for further guidance on picking values for the `aud` claim. | Required |
+| iat | RFC7519 | The claim represents the time at which the token was issued. Its value is a JSON number representing the number of seconds from 1970-01-01T0:0:0Z UTC until the token issue time in UTC.  | Required |
+| nbf | RFC7519 | The interpretation for **`nbf`** (not before) is unchanged from the RFC.  For example, usage of nbf allows the issuer to make the token valid prior to the issue instant, potentially easing clock skew issues in a distributed environment. | Optional |
+| jti | RFC7519 | The interpretation for **`jti`** (JWT ID) is unchanged from the RFC. It is a unique identifier that protects against replay attacks and improves the traceability of tokens through the distributed system. It MUST be unique within an issuer and SHOULD be unique across issuers. | Required |
 
 The `aud` claim provides an explicit statement of the intended audience for the token; it is an important mechanism for restricting the scope of the token to one or more relying parties.  Note requiring `aud` is atypical: we believe it is better to have the issuer explicitly state the token may be used by any relying party as opposed to assuming its absence indicates no restrictions.
 
@@ -367,38 +113,10 @@ In the following section we describe the schema for identity-related claims incl
 The following additional claims are defined for WLCG ID Tokens. Other identity-related [claims](http://openid.net/specs/openid-connect-core-1_0.html#Claims) could be included in the ID Token, or returned in the result of calls to the userinfo or token introspection endpoint, following the recommendations of the [OpenID Connect core profile](http://openid.net/specs/openid-connect-core-1_0.html).
 
 
-<table>
-  <tr>
-   <td><strong>Claim</strong>
-   </td>
-   <td><strong>Origin</strong>
-   </td>
-   <td><strong>Usage Note</strong>
-   </td>
-   <td><strong>Required?</strong>
-   </td>
-  </tr>
-  <tr>
-   <td>auth_time
-   </td>
-   <td>OpenID
-   </td>
-   <td>The <strong><code>auth_time</code></strong> claim represents the time when the End-User authentication occurred. The claim value is a JSON number representing the number of seconds from 1970-01-01T0:0:0Z as measured in UTC until the End-User authentication time. As in the <a href="http://openid.net/specs/openid-connect-core-1_0.html">OpenID Connect core profile</a>, the claim is REQUIRED when requested explicitly in the authentication request, otherwise is OPTIONAL.
-   </td>
-   <td>Optional, but when requested it MUST be present
-   </td>
-  </tr>
-  <tr>
-   <td>General OIDC Claims
-   </td>
-   <td>OpenID
-   </td>
-   <td>General OIDC <a href="https://openid.net/specs/openid-connect-core-1_0.html#Claims">claims</a> may be included in tokens. For example, the <strong><code>nonce</code></strong>, <strong><code>preferred_username</code></strong>, and <strong><code>email</code></strong> claims that are derived from the OIDC core specification and follow the rules prescribed there. 
-   </td>
-   <td>Optional
-   </td>
-  </tr>
-</table>
+| **Claim** | **Origin** | **Usage Note** | **Required?** |
+| --- | --- | --- | --- |
+| auth_time | OpenID | The **`auth_time`** claim represents the time when the End-User authentication occurred. The claim value is a JSON number representing the number of seconds from 1970-01-01T0:0:0Z as measured in UTC until the End-User authentication time. As in the [OpenID Connect core profile](http://openid.net/specs/openid-connect-core-1_0.html), the claim is REQUIRED when requested explicitly in the authentication request, otherwise is OPTIONAL. | Optional, but when requested it MUST be present |
+| General OIDC Claims | OpenID | General OIDC [claims](https://openid.net/specs/openid-connect-core-1_0.html#Claims) may be included in tokens. For example, the **`nonce`**, **`preferred_username`**, and **`email`** claims that are derived from the OIDC core specification and follow the rules prescribed there.  | Optional |
 
 
 
@@ -412,36 +130,17 @@ When group membership is asserted, it is a statement that the bearer has the acc
 
 When a capability is asserted, it is relative to the VO's coarse-grained authorization; the resource only maps the token to a VO, and then relies on the specified capability in the token for the fine-grained authorization within the VO's authorized area.  In this way, the VO, not the resource, manages the authorizations within its area.
 
-An access token SHOULD include at least the <strong><code>scope</code></strong> or <strong><code>wlcg.groups</code></strong> claim.
+An access token SHOULD include at least the **`scope`** or **`wlcg.groups`** claim.
 
 The following additional claims are defined for Access Tokens.
 
 
-<table>
-  <tr>
-   <td><strong>Claim</strong>
-   </td>
-   <td><strong>Origin</strong>
-   </td>
-   <td><strong>Usage Note</strong>
-   </td>
-   <td><strong>Required?</strong>
-   </td>
-  </tr>
-  <tr>
-   <td>scope
-   </td>
-    <td>Inspired by <a href="https://tools.ietf.org/html/rfc8693">OAuth 2.0 Token Exchange</a>
-   </td>
-   <td>See below
-   </td>
-   <td>Optional
-   </td>
-  </tr>
-</table>
+| **Claim** | **Origin** | **Usage Note** | **Required?** |
+| --- | --- | --- | --- |
+| scope | Inspired by [OAuth 2.0 Token Exchange](https://tools.ietf.org/html/rfc8693) | See below | Optional |
 
 
-Claims defined by the WLCG Authorization Working Group should ideally be registered appropriately in the public domain[^7].
+Claims defined by the WLCG Authorization Working Group should ideally be registered appropriately in the public domain [^7] .
 
 
 ## Authorization
@@ -451,7 +150,7 @@ The token profile contains two different approaches to authorization - user attr
 
 ### Capability-based Authorization: scope 
 
-Authorization may be based on the scope[^8] claim.  The value of the scope claim is a list of space-delimited, case-sensitive strings (as in OAuth 2.0 Token Exchange [RFC 8693 Section 4.2](https://tools.ietf.org/html/rfc8693#section-4.2)) reflecting authorized activities the bearer of this token may perform. 
+Authorization may be based on the scope [^8]  claim.  The value of the scope claim is a list of space-delimited, case-sensitive strings (as in OAuth 2.0 Token Exchange [RFC 8693 Section 4.2](https://tools.ietf.org/html/rfc8693#section-4.2)) reflecting authorized activities the bearer of this token may perform. 
 
 We aim to define a common set of authorizations (particularly storage-related authorizations), but envision additional authorizations will be added to meet new use cases. The interpretation of such authorizations would result in a list of operations the bearer is allowed to perform. 
 
@@ -588,7 +287,7 @@ group-membership statements.
 
 The REFEDS Assurance Framework ([RAF v1.0](https://wiki.refeds.org/display/ASS/REFEDS+Assurance+Framework+ver+1.0)) splits assurance into three orthogonal components, namely, identifier uniqueness, identity assurance, and attribute assurance. For simplicity, RAF collapses the components into two assurance profiles Cappuccino and Espresso. [AARC-G021](https://wiki.geant.org/download/attachments/92573909/AARC-G021-Exchange-of-specific-assurance-information-between-Infrastructures.pdf) extends RAF with additional assurance profiles recommended to be used between infrastructures: IGTF-BIRCH, IGTF-DOGWOOD and a new specific profile addressing assurance derived from social-identity sources, AARC-Assam.
 
-Since the assurance of authentication is not covered by RAF, the above profiles need to be used in conjunction with specifications focusing on authentication, such as the [REFEDS SFA](https://refeds.org/profile/sfa) and [REFEDS MFA](https://refeds.org/profile/mfa) profiles. We adopt the `eduperson_assurance` multi-valued claim proposed by RAF[^9] to convey the assurance component values and profile. The `acr` claim is included in addition to the `eduperson_assurance` claim to specifically convey the authentication assurance.
+Since the assurance of authentication is not covered by RAF, the above profiles need to be used in conjunction with specifications focusing on authentication, such as the [REFEDS SFA](https://refeds.org/profile/sfa) and [REFEDS MFA](https://refeds.org/profile/mfa) profiles. We adopt the `eduperson_assurance` multi-valued claim proposed by RAF [^9]  to convey the assurance component values and profile. The `acr` claim is included in addition to the `eduperson_assurance` claim to specifically convey the authentication assurance.
 
 In the case of this profile, identity assurance information will be sent by the WLCG token issuer whenever a user authentication flow is used to obtain the token.
 
@@ -661,44 +360,13 @@ If an entity is not entitled to a group, an access_denied error as defined in se
 In the following examples, '/cms' is the only default group.
 
 
-<table>
-  <tr>
-   <td><strong>Scope Request</strong>
-   </td>
-   <td><strong>Claim Result</strong>
-   </td>
-  </tr>
-  <tr>
-   <td><code>scope=wlcg.groups</code>
-   </td>
-   <td><code>"wlcg.groups": ["/cms"]</code>
-   </td>
-  </tr>
-  <tr>
-   <td><code>scope=wlcg.groups:/cms/uscms wlcg.groups:/cms/ALARM </code>
-   </td>
-   <td><code>"wlcg.groups": ["/cms/uscms","/cms/ALARM", "/cms"]</code>
-   </td>
-  </tr>
-  <tr>
-   <td><code>scope=wlcg.groups:/cms/uscms wlcg.groups:/cms/ALARM wlcg.groups</code>
-   </td>
-   <td><code>"wlcg.groups": ["/cms/uscms","/cms/ALARM", "/cms"]</code>
-   </td>
-  </tr>
-  <tr>
-   <td><code>scope=wlcg.groups wlcg.groups:/cms/uscms wlcg.groups:/cms/ALARM </code>
-   </td>
-   <td><code>"wlcg.groups": ["/cms", "/cms/uscms","/cms/ALARM"]</code>
-   </td>
-  </tr>
-  <tr>
-   <td><code>scope=wlcg.groups:/cms wlcg.groups:/cms/uscms wlcg.groups:/cms/ALARM</code>
-   </td>
-   <td><code>"wlcg.groups": ["/cms", "/cms/uscms","/cms/ALARM"]</code>
-   </td>
-  </tr>
-</table>
+| **Scope Request** | **Claim Result** |
+| --- | --- |
+| `scope=wlcg.groups` | `"wlcg.groups": ["/cms"]` |
+| `scope=wlcg.groups:/cms/uscms wlcg.groups:/cms/ALARM ` | `"wlcg.groups": ["/cms/uscms","/cms/ALARM", "/cms"]` |
+| `scope=wlcg.groups:/cms/uscms wlcg.groups:/cms/ALARM wlcg.groups` | `"wlcg.groups": ["/cms/uscms","/cms/ALARM", "/cms"]` |
+| `scope=wlcg.groups wlcg.groups:/cms/uscms wlcg.groups:/cms/ALARM ` | `"wlcg.groups": ["/cms", "/cms/uscms","/cms/ALARM"]` |
+| `scope=wlcg.groups:/cms wlcg.groups:/cms/uscms wlcg.groups:/cms/ALARM` | `"wlcg.groups": ["/cms", "/cms/uscms","/cms/ALARM"]` |
 
 
 
@@ -711,32 +379,11 @@ If an entity is not entitled to a capability, the scope requested may be ignored
 **Examples:** 
 
 
-<table>
-  <tr>
-   <td><strong>Scope Request</strong>
-   </td>
-   <td><strong>Claim Result</strong>
-   </td>
-  </tr>
-  <tr>
-   <td><code>scope=storage.read:/home/joe</code>
-   </td>
-   <td><code>"scope": "storage.read:/home/joe"</code>
-   </td>
-  </tr>
-  <tr>
-   <td><code>scope=storage.read:/home/joe storage.read:/home/bob</code>
-   </td>
-   <td><code>"scope": "storage.read:/home/joe storage.read:/home/bob"</code>
-   </td>
-  </tr>
-  <tr>
-   <td><code>scope=storage.create:/ storage.read:/home/bob</code>
-   </td>
-   <td><code>"scope": "storage.create:/ storage.read:/home/bob"</code>
-   </td>
-  </tr>
-</table>
+| **Scope Request** | **Claim Result** |
+| --- | --- |
+| `scope=storage.read:/home/joe` | `"scope": "storage.read:/home/joe"` |
+| `scope=storage.read:/home/joe storage.read:/home/bob` | `"scope": "storage.read:/home/joe storage.read:/home/bob"` |
+| `scope=storage.create:/ storage.read:/home/bob` | `"scope": "storage.create:/ storage.read:/home/bob"` |
 
 
 
@@ -754,68 +401,20 @@ If the requester is not authorized to use the `wlcg.capabilityset` an access_den
 
 In the following examples, a user has the following entitlements based on their group memberships:
 
-<table>
-  <tr>
-   <td><strong>Group</strong>
-   </td>
-   <td><strong>Entitlements</strong>
-   </td>
-  </tr>
-  <tr>
-   <td><code>/microboone</code>
-   </td>
-   <td><code>storage.read:/microboone storage.create:/microboone/joe</code>
-   </td>
-  </tr>
-  <tr>
-   <td><code>/dune</code>
-   </td>
-   <td><code>storage.read:/dune storage.create:/dune/home/joe</code>
-   </td>
-  </tr>
-  <tr>
-   <td><code>/dune/pro</code>
-   </td>
-   <td><code>storage.read:/dune storage.create:/dune/data</code>
-   </td>
-  </tr>
-</table>
+| **Group** | **Entitlements** |
+| --- | --- |
+| `/microboone` | `storage.read:/microboone storage.create:/microboone/joe` |
+| `/dune` | `storage.read:/dune storage.create:/dune/home/joe` |
+| `/dune/pro` | `storage.read:/dune storage.create:/dune/data` |
 
 Since the user is a member of multiple default groups and is also a member of the `/dune/pro` (production) optional group, the resulting claims depend on the capability set indicated in the scope request:
 
-<table>
-  <tr>
-   <td><strong>Scope Request</strong>
-   </td>
-   <td><strong>Claim Result</strong>
-   </td>
-  </tr>
-  <tr>
-   <td><code>scope=wlcg.capabilityset:/microboone</code>
-   </td>
-   <td><code>"scope": "storage.read:/microboone storage.create:/microboone/joe"</code>
-    </td>
-   </tr>
-
-  <tr>
-   <td><code>scope=wlcg.capabilityset:/dune</code>
-   </td>
-    <td><code>"scope": "storage.read:/dune storage.create:/dune/home/joe"</code>
-   </td>
-  </tr>
-  <tr>
-   <td><code>scope=wlcg.capabilityset:/dune/pro</code>
-   </td>
-   <td><code>"scope": "storage.read:/dune storage.create:/dune/data"</code>
-   </td>
-  </tr>
-  <tr>
-   <td><code>scope=wlcg.capabilityset:/dune/pro storage.read:/dune/data</code>
-   </td>
-   <td><code>"scope": "storage.read:/dune storage.create:/dune/data storage.read:/dune/data"</code>
-   </td>
-  </tr>
-</table>
+| **Scope Request** | **Claim Result** |
+| --- | --- |
+| `scope=wlcg.capabilityset:/microboone` | `"scope": "storage.read:/microboone storage.create:/microboone/joe"` |
+| `scope=wlcg.capabilityset:/dune` | `"scope": "storage.read:/dune storage.create:/dune/home/joe"` |
+| `scope=wlcg.capabilityset:/dune/pro` | `"scope": "storage.read:/dune storage.create:/dune/data"` |
+| `scope=wlcg.capabilityset:/dune/pro storage.read:/dune/data` | `"scope": "storage.read:/dune storage.create:/dune/data storage.read:/dune/data"` |
 
 
 
@@ -951,68 +550,12 @@ One would utilize the `iss` claim in the payload to download the set of public k
 ### Token Lifetime Guidance
 
 
-<table>
-  <tr>
-   <td><strong>Token Type</strong>
-   </td>
-   <td><strong>Recommended Lifetime</strong>
-   </td>
-   <td><strong>Minimum Lifetime</strong>
-   </td>
-   <td><strong>Maximum Lifetime</strong>
-   </td>
-   <td><strong>Justification</strong>
-   </td>
-  </tr>
-  <tr>
-   <td>Access Token & ID Token[^15]  
-   </td>
-   <td>20 minutes
-   </td>
-   <td>5 minutes
-   </td>
-   <td>6 hours
-   </td>
-   <td>Access token lifetime should be short as we do not foresee the deployment of a revocation mechanism.  The granted lifetime has implications for  the maximum allowable downtime of the Access Token server.
-   </td>
-  </tr>
-  <tr>
-   <td>Refresh Token
-   </td>
-   <td>10 days
-   </td>
-   <td>1 day
-   </td>
-   <td>30 days
-   </td>
-   <td>Refresh token lifetimes should be kept bounded, but can be longer-lived as they are revocable.  Meant to be long-lived enough to be on a 'human timescale.'  Refresh tokens are not necessarily signed and not tied to the issuer's public key lifetime.
-   </td>
-  </tr>
-  <tr>
-   <td>Issuer Public Key Cache
-   </td>
-   <td>6 hours
-   </td>
-   <td>1 hour
-   </td>
-   <td>4 days
-   </td>
-   <td>The public key cache lifetime defines the minimum revocation time of the public key.  The actual lifetime is the maximum allowable downtime of the public key server.
-   </td>
-  </tr>
-  <tr>
-   <td>Issuer Public Key
-   </td>
-   <td>6 months
-   </td>
-   <td>2 days
-   </td>
-   <td>12 months
-   </td>
-   <td>JWT has built-in mechanisms for key rotation; these do not need to live as long as CAs. This may evolve following operational experience, provision should be made for flexible lifetimes.
-   </td>
-  </tr>
-</table>
+| **Token Type** | **Recommended Lifetime** | **Minimum Lifetime** | **Maximum Lifetime** | **Justification** |
+| --- | --- | --- | --- | --- |
+| Access Token & ID Token[^15]   | 20 minutes | 5 minutes | 6 hours | Access token lifetime should be short as we do not foresee the deployment of a revocation mechanism.  The granted lifetime has implications for  the maximum allowable downtime of the Access Token server. |
+| Refresh Token | 10 days | 1 day | 30 days | Refresh token lifetimes should be kept bounded, but can be longer-lived as they are revocable.  Meant to be long-lived enough to be on a 'human timescale.'  Refresh tokens are not necessarily signed and not tied to the issuer's public key lifetime. |
+| Issuer Public Key Cache | 6 hours | 1 hour | 4 days | The public key cache lifetime defines the minimum revocation time of the public key.  The actual lifetime is the maximum allowable downtime of the public key server. |
+| Issuer Public Key | 6 months | 2 days | 12 months | JWT has built-in mechanisms for key rotation; these do not need to live as long as CAs. This may evolve following operational experience, provision should be made for flexible lifetimes. |
 
 
 Note the combination of **nbf** (not before) (or **iat**) and **exp** (expiration) provides a notion of token valid lifetime.  WLCG token issuers MUST issue Access tokens with valid lifetime of less than 6 hours; they SHOULD aim for a token lifetime of 20 minutes.  Resource providers MUST NOT accept tokens that have validity longer than 6 hours.  As a pragmatic guard against minor clock skews, they SHOULD accept tokens that are expired since less than 60 seconds.  See the recommendations in [sections 5.3](https://tools.ietf.org/html/rfc6750#section-5.3) and [5.2](https://tools.ietf.org/html/rfc6750#section-5.2) in RFC 6750.  These tokens are purposely shorter-lived as they do not have a token revocation mechanism; the token lifetime should be shorter than the expected revocation response time for authorizations.
@@ -1035,9 +578,9 @@ To contain security incidents related to the leakage of refresh tokens, it is re
 
 The claims in a WLCG token are meant to indicate an identity or manage access to a resource.  For example, in the authorization schema, additional claims might add restrictions to the corresponding bearer's authorizations: if an unknown claim is skipped, the resource provider may inadvertently offer overly broad authorizations.  On the other hand, requiring _all_ claims to be processed may reduce the flexibility and ability to add future features.
 
-To handle this challenge, each token MUST provide a <strong><code>wlcg.ver</code></strong> (version) attribute, whose value corresponds to an enumerated set of claims described earlier in this document.  For that version of the token format, the corresponding claims MUST be handled by the implementation.  Any additional claim present MUST be ignored (for access tokens, these claims MUST NOT be used in authorization decisions).
+To handle this challenge, each token MUST provide a **`wlcg.ver`** (version) attribute, whose value corresponds to an enumerated set of claims described earlier in this document.  For that version of the token format, the corresponding claims MUST be handled by the implementation.  Any additional claim present MUST be ignored (for access tokens, these claims MUST NOT be used in authorization decisions).
 
-Each client library implementation MUST know the versions it supports; if it encounters a token whose <strong><code>wlcg.ver</code></strong> value is not supported by the implementation, the token MUST be rejected as invalid.
+Each client library implementation MUST know the versions it supports; if it encounters a token whose **`wlcg.ver`** value is not supported by the implementation, the token MUST be rejected as invalid.
 
 Additionally, signature algorithms RS256 and ES256 MUST be supported.
 
@@ -1393,35 +936,35 @@ In this example, the `nonce`, `preferred_username`, `name`, and `email` claims a
 <!-- Footnotes themselves at the bottom. -->
 ## Notes
 
-[^1]:
+ [^1] :
 <p>
      https://tools.ietf.org/html/rfc6749#section-1.4
 
-[^2]:
+ [^2] :
 <p>
      Note: in the OpenID Connect core specification, the ID token is intended primarily to contain information about the authentication, while profile information such as the user's name and email is typically retrieved via the UserInfo endpoint. Since this puts a strain on the OP, we prefer to make - as much as possible - use of self-contained tokens and return all the claims in the ID token
 
-[^3]:
+ [^3] :
 <p>
      Is the token issuer required to send this claim?
 
-[^4]:
+ [^4] :
      This implies running a token issuer in a high availability mode behind a single URL.
 
-[^5]:
+ [^5] :
      From GFD-I.182, the VOMS spec for FQANs (Sect. 3.4.1.4)
 
-[^6]:
+ [^6] :
 <p>
      https://aarc-project.eu/guidelines
 
-[^7]:
+ [^7] :
      Such registrations could be made through IETF or appropriate bodies and made publicly available, e.g. https://www.iana.org/assignments/oauth-parameters/oauth-parameters.xml
 
-[^8]:
+ [^8] :
      Note that the motivation for using the name 'scope' here is inspired by the claim language proposed for standardization as part of the OAuth 2.0 Token Exchange specification ([RFC 8693](https://tools.ietf.org/html/rfc8693)), and due to its existing use in SciTokens.
 
-[^9]:
+ [^9] :
      RAF still refers to it as eduPersonAssurance, but it will probably change into `eduperson_assurance`, following the OIDCre whitepaper.
 
 [^10]:
