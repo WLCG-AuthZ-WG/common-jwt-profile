@@ -938,7 +938,7 @@ The content served through the JWKS URI contains the VO's signing keys; an examp
             "e": "AQAB",
             "kid": "key1",
             "kty": "RSA",
-            "n": "oj5UxvZGgQU2UHGdO2ViR6zkilHjTSFdTA_Jtb1KPKmqr3I7W-5YqI3xrIJoYNeazXGA8l0w89BWfbet3NY8rlEocupmLpmeSRTh29DAIIskVKBevr2QbF-9qwunaLoMpal2ZFJTkbMweiFiq-duhzcKI1JuaNkUJJpd6BGXVoszn31KHlVkUxd739FYyKLArUnnLRzQ6Ld6VDiJrhRLnkUdXgitJuCy0gPaky9dWIVcKnjCI6F7F2o77II1m5lk3J9g6Dn6rfT6QppBQPz_7t1LN-PIs-lO50nEsiDPHhb7GI0XucajA9ZAGXIPR11okFZqRuUaVnxizNXb1rHPmQ==",
+            "n": "oj5UxvZGgQ[...]mQ==",
             "use": "sig"
         }
     ]
@@ -1248,12 +1248,12 @@ And gets back the requested tokens:
 
 ```
 {
-  "access_token": "eyJraWQiOiJyc2ExIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIyNDE2ODdlOC01Mzc0LTQ1NDktYjlmNi1hMzg2NmYwYmY2ZGEiLCJzY29wZSI6ImVtYWlsIG9wZW5pZCBvZmZsaW5lX2FjY2VzcyBwcm9maWxlIiwiaXNzIjoiaHR0cHM6XC9cL2lhbS1lc2NhcGUuY2xvdWQuY25hZi5pbmZuLml0XC8iLCJleHAiOjE1Njc3ODI2MzAsImlhdCI6MTU2Nzc3OTAzMCwianRpIjoiN2JhMDdlY2YtY2NkOS00MTA3LWJkMzMtOWRlNWNjOGJkMjU5In0.KRlCP26GIqxcgK-B43j8cIQP8DSape9ekTyY46P6ojGQnfjLdZRS3sOvyWM6SGDRbsMdjfIr96iExt2yj-82nVOiv6yq2MIxgmLI1Ue_gQYnI-D9fh75b6z-S6FhMwsbsE1Ox9s1BthPkbbofYVwPCLNFKKga39qqSe-urUMN9E",
+  "access_token": "eyJraWQiOi[...]MN9E",
   "token_type": "Bearer",
-  "refresh_token": "eyJhbGciOiJub25lIn0.eyJqdGkiOiJmZTU0MGMzMi0xMDZlLTRhMDQtYjMyYy05MGNhOTBjNzY2MDUifQ.",
+  "refresh_token": "eyJhbGciOi[...]ifQ.",
   "expires_in": 3599,
   "scope": "email openid offline_access profile",
-  "id_token": "eyJraWQiOiJyc2ExIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIyNDE2ODdlOC01Mzc0LTQ1NDktYjlmNi1hMzg2NmYwYmY2ZGEiLCJhdWQiOiJkb21hLXRlc3QiLCJraWQiOiJyc2ExIiwiaXNzIjoiaHR0cHM6XC9cL2lhbS1lc2NhcGUuY2xvdWQuY25hZi5pbmZuLml0XC8iLCJuYW1lIjoiQW5kcmVhIENlY2NhbnRpIiwiZ3JvdXBzIjpbImVzY2FwZSIsImVzY2FwZVwvcGlsb3RzIiwiZXNjYXBlXC94ZmVycyJdLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJhbmRyZWEiLCJvcmdhbmlzYXRpb25fbmFtZSI6ImVzY2FwZSIsImV4cCI6MTU2Nzc3OTYzMCwiaWF0IjoxNTY3Nzc5MDMwLCJqdGkiOiJkNDExNGEyNS0wZDA4LTRiNWEtYmQ1Zi00YzIzYTM2NmZhODciLCJlbWFpbCI6ImFuZHJlYS5jZWNjYW50aUBnbWFpbC5jb20ifQ.XUjVHQmBel1_W_7qlF62ysQKnjSMHSGtGTzVmNPKZkzuEiI3wGZiwJussPWkhC3-TiNtO--_G33kre6gXqJusYLEH-LUPYVcfBZ85KLPmmG17EE10XmKBFg3-eyonstaRAHoXwM4YHvMnA5tgtkawZsry4ssSA2WZz7BKBhffWQ"
+  "id_token": "eyJraWQiOi[...]ffWQ"
 }
 ```
 
@@ -1297,7 +1297,7 @@ grant_type=client_credentials&expire_in=3600&scope=storage.read:/home/joe
 < Content-Length: 374
 < Content-Type: application/json
 < 
-{"access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6ImtleS1yczI1NiJ9.eyJpYXQiOjE1NTUwNjAxMjAsInN1YiI6ImpvZSIsImV4cCI6MTU1NTA2MDcyMCwiaXNzIjoiaHR0cHM6Ly9kZW1vLnNjaXRva2Vucy5vcmciLCJqdGkiOiJhNDZhZTk5MS02ZjFjLTRlMDYtOTc5Yi05Njc5NjY3NDBhYmIiLCJ3bGNnLnZlciI6IjEuMCIsIm5iZiI6MTU1NTA2MDEyMCwic2NvcGUiOiJzdG9yYWdlLnJlYWQ6L2hvbWUvam9lIn0.VOxWM_PV3aikQK875xs1AabBmk3VvMLJZ9Rrp08juN9Jux-NMUwHQGANA3-dd4_IWGLYtmCn4lyr4aiPuGCRk5D35Or7W1TjSTHmD116iuH3_U_WPgE5-TOGHnAYoE8nsdVUQ4UOKj64DqPOXABdBsgsqRML-MpYiS5p6K2yhcIdPAk-M5kXYVWu2vr8A-VLUNXwM7oYoe9mJ_9_rYCZs-aWqZ-x22AmnoTtTVKx5Wur4cSmL308CBr-yltZf_OtM4eIjjrDFbioIjbl-hG-y51oJU0n7n07-hxHeqWXO6RWpo_fUWwrrlrm8FRJXbk_8d33bdhodQ5w8DwEbF79fQ", "token_type": "bearer", "expires_in": 3600}
+{"access_token": "eyJ0eXAiOi[...]79fQ", "token_type": "bearer", "expires_in": 3600}
 ```
 
 
