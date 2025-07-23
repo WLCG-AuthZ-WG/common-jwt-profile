@@ -95,7 +95,9 @@ One item not addressed in detail in this document is how the issuer decides on w
   <tr>
    <td><strong>Access Token</strong>
    </td>
-   <td>Access tokens are credentials used to access protected resources.  An access token is a string representing an authorization issued to the client[^1].
+   <td>Access tokens are credentials used to access protected resources.  An access token is a string representing an authorization issued to the client.
+
+   [^1] <!-- must follow a blank line to be recognized within an HTML table! -->
    </td>
    <td>
    </td>
@@ -103,7 +105,9 @@ One item not addressed in detail in this document is how the issuer decides on w
   <tr>
    <td><strong>ID Token</strong>
    </td>
-   <td>A JWT specified by OIDC that contains user information, represented in the form of claims[^2].
+   <td>A JWT specified by OIDC that contains user information, represented in the form of claims.
+
+   [^2] <!-- must follow a blank line to be recognized within an HTML table! -->
    </td>
    <td>
    </td>
@@ -213,7 +217,9 @@ The following claims may be included in both Access and Identity tokens.
    </td>
    <td><strong>Usage Note</strong>
    </td>
-   <td><strong>Required</strong>[^3]<strong>?</strong>
+   <td><strong>Required?</strong>
+
+   [^3] <!-- must follow a blank line to be recognized within an HTML table! -->
    </td>
   </tr>
   <tr>
@@ -242,7 +248,9 @@ Suggested use cases for the <strong><code>sub</code></strong> claim are suspendi
    </td>
    <td>RFC7519 & OpenID Connect core
    </td>
-   <td>The issuer (<strong><code>iss</code></strong>) of the WLCG JWT. It MUST contain a unique URL for the organization[^4]; it is to be used in verification as described in the 'Token Verification' section. For WLCG this would be the VO.
+   <td>The issuer (<strong><code>iss</code></strong>) of the WLCG JWT. It MUST contain a unique URL for the organization; it is to be used in verification as described in the 'Token Verification' section. For WLCG this would be the VO.
+
+   [^4] <!-- must follow a blank line to be recognized within an HTML table! -->
    </td>
    <td>Required
    </td>
@@ -285,14 +293,19 @@ The <strong><code>wlcg.ver</code></strong> claim corresponds to a version of thi
    </td>
    <td>WLCG AuthZ WG
    </td>
-   <td>The <strong> <code>wlcg.groups</code> </strong>claim conveys group membership about an authenticated end-user.  The claim value is an ordered JSON array of strings that contains the names of groups of which the user is a member in the context of the VO that issued the Token. Group names are formatted following the rules in the next section. Group names MUST comply with the following grammar[^5] where group is defined recursively:
+   <td>The <strong> <code>wlcg.groups</code> </strong>claim conveys group membership about an authenticated end-user.  The claim value is an ordered JSON array of strings that contains the names of groups of which the user is a member in the context of the VO that issued the Token. Group names are formatted following the rules in the next section. Group names MUST comply with the following grammar where group is defined recursively:
+
+   [^5] <!-- must follow a blank line to be recognized within an HTML table! -->
 <p>
 <code>group ::= '/' groupname | group '/' groupname</code>
 <p>
 <code>groupname :: = [a-zA-Z0-9][a-zA-Z0-9_.-]*</code>
 <p>
 Usage of this claim is OPTIONAL. However, the <strong><code>wlcg.groups</code></strong> claim is REQUIRED in all tokens issued as a result of an OpenID Connect authentication flow in which wlcg.groups are requested via scopes and the subject is entitled to the groups in question. The group request mechanism is described in more detail in section 'Scope-based Attribute Selection' of this document.
-<em>Note: it is expected that a more verbose syntax and different claim (eduperson_entitlement), as recommended by AARC</em>[^6]<em> Guidelines, could also be required in the event that authorization information is exchanged with external Infrastructures.</em>
+
+<em>Note: it is expected that a more verbose syntax and different claim (eduperson_entitlement), as recommended by <strong>AARC</strong> Guidelines, could also be required in the event that authorization information is exchanged with external Infrastructures.</em>
+
+   [^6] <!-- must follow a blank line to be recognized within an HTML table! -->
    </td>
    <td>Optional, but when requested it MUST be present in both token types.
    </td>
@@ -1394,15 +1407,12 @@ In this example, the `nonce`, `preferred_username`, `name`, and `email` claims a
 ## Notes
 
 [^1]:
-<p>
      https://tools.ietf.org/html/rfc6749#section-1.4
 
 [^2]:
-<p>
      Note: in the OpenID Connect core specification, the ID token is intended primarily to contain information about the authentication, while profile information such as the user's name and email is typically retrieved via the UserInfo endpoint. Since this puts a strain on the OP, we prefer to make - as much as possible - use of self-contained tokens and return all the claims in the ID token
 
 [^3]:
-<p>
      Is the token issuer required to send this claim?
 
 [^4]:
@@ -1412,7 +1422,6 @@ In this example, the `nonce`, `preferred_username`, `name`, and `email` claims a
      From GFD-I.182, the VOMS spec for FQANs (Sect. 3.4.1.4)
 
 [^6]:
-<p>
      https://aarc-project.eu/guidelines
 
 [^7]:
@@ -1440,7 +1449,6 @@ In this example, the `nonce`, `preferred_username`, `name`, and `email` claims a
      Each OS platform has its own set of acceptable CAs; suitable certificates should be used to facilitate client development and maintain the existing level of trust. Discussions will be held between the WLCG Authorization Working Group, IGTF, and relevant partners. 
 
 [^15]:
-<p>
      It is not required that the two token lifetimes be identical. Typically Access Tokens are longer lived than ID Tokens.
 
 [^16]:
