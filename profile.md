@@ -1090,7 +1090,7 @@ abuse of a refresh token implies the credentials of that client have been
 compromised as well, in which case a first remedy would be to disable the latter,
 which would also make its stolen refresh tokens useless.
 It might seem desirable for standard workflows to revoke a refresh token as soon
-as it is deemed to be no longer needed, but such would add to the request rates
+as it is deemed to be no longer needed, but such behaviour would add to the request rates
 experienced by the issuer, without much benefit in terms of security.
 
 
