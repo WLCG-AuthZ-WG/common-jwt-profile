@@ -1083,7 +1083,7 @@ First, if access tokens are kept short-lived, the maximum lifetime of refresh
 tokens may need to cover up to O(1 day) that some grid job payloads may need.
 Similarly, a file transfer request may need to wait for up to several days in
 the queue of a File Transfer Service (FTS) instance. It therefore is desirable
-to allow refresh tokens to have a maximum lifetime of at least 1 day,
+to allow refresh tokens to have a lifetime of at least 1 day,
 while FTS workflows may rather need multiple days.
 As a refresh token can only be used by the client to which it was issued,
 abuse of a refresh token implies the credentials of that client have been
