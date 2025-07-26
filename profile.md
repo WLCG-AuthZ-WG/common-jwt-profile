@@ -558,7 +558,7 @@ For a storage resource, the "authorized area" is typically implemented as a set 
 - A `GET` request for `https://storage.site.org/vo/stageout/sample_file2`
 - A `PUT` request for `https://storage.site.org/vo/stageout/sample_file3`
 
-But it does ***not*** authorize requests to:
+But it does ***not*** authorize:
 
 - A `GET` request for `https://storage.site.org/sample_file`
 - A `PUT` request for `https://storage.site.org/vo/sample_file1`
