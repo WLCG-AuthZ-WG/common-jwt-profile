@@ -1044,7 +1044,22 @@ of that workflow at a level that is deemed acceptable:
 </table>
 
 
-Note the combination of **nbf** (not before) (or **iat**) and **exp** (expiration) provides a notion of token valid lifetime.  As a pragmatic guard against minor clock skews, resource providers SHOULD accept tokens that are expired since less than 60 seconds.  See the recommendations in [sections 5.3](https://tools.ietf.org/html/rfc6750#section-5.3) and [5.2](https://tools.ietf.org/html/rfc6750#section-5.2) in RFC 6750.  By default, tokens are purposely short-lived as they do not have a revocation mechanism.
+Note the combination of **nbf** (not before) and **exp** (expiration)
+provides a notion of token valid lifetime.  As a pragmatic guard against
+minor clock skews, the **nbf** claim can be slightly backdated w.r.t. the
+actual time of issuance recorded in the **iat** claim, to allow freshly
+minted tokens to be used immediately at services whose clocks skews lie
+within an acceptable range 
+([RFC 7519 section 4.1.5](https://tools.ietf.org/html/rfc7519#section-4.1.5)).
+That range would in practice be limited to a few minutes at most, with a default
+recommended value of 60 seconds. We are not concerned about the effects of
+clock skews near the end of a token's lifetime, because any use of tokens
+near the end of their validity is fragile in practice and would not be helped
+much by adding a further, short grace period.  By default, access tokens are
+purposely short-lived as they do not have a revocation mechanism.  See the
+recommendations in RFC 6750 sections
+[5.3](https://tools.ietf.org/html/rfc6750#section-5.3) and
+[5.2](https://tools.ietf.org/html/rfc6750#section-5.2).
 
 
 ### Refresh tokens and token revocation
