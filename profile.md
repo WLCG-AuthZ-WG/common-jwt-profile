@@ -975,7 +975,10 @@ for the increased risk inherent to longer lifetimes. Major examples are:
     - specific audiences.
 
 Token lifetime recommendations should rather be considered per workflow,
-with the following table providing **default** values:
+with the following table providing **default** values. If these values 
+are not suitable for a given workflow, alternative mitigation MUST be 
+agreed within the community and put in place to keep the security risks 
+of that workflow at a level that is deemed acceptable:
 
 <table>
   <tr>
