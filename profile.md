@@ -976,8 +976,9 @@ for the increased risk inherent to longer lifetimes. Major examples are:
 
 Token lifetime recommendations should rather be considered per workflow,
 with the following table providing **default** values. If these values 
-are not suitable for a given workflow, alternative mitigation MUST be 
-agreed within the community and put in place to keep the security risks 
+are not suitable for a given workflow, alternative **mitigation** MUST be 
+**agreed** through a risk assessment involving security experts within 
+the affected community and **put in place** to keep the security risks 
 of that workflow at a level that is deemed acceptable:
 
 <table>
