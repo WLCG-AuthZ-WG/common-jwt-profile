@@ -1051,7 +1051,7 @@ minor clock skews, the **nbf** claim can be slightly backdated w.r.t. the
 actual time of issuance recorded in the **iat** claim, to allow freshly
 minted tokens to be used immediately at services whose clocks skews lie
 within an acceptable range 
-([RFC 7519 section 4.1.5](https://tools.ietf.org/html/rfc7519#section-4.1.5)).
+([RFC 7519 section 4.1.5](https://www.rfc-editor.org/rfc/rfc7519.html#section-4.1.5)).
 That range would in practice be limited to a few minutes at most, with a default
 recommended value of 60 seconds. We are not concerned about the effects of
 clock skews near the end of a token's lifetime, because any use of tokens
