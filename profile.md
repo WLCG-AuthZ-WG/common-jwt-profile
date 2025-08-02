@@ -457,12 +457,28 @@ We aim to define a common set of authorizations (particularly storage-related au
 
 For a given storage resource, the defined authorizations include:
 
-
-
-*   **storage.read**: Read data.  Only applies to 'online' resources such as disk, as opposed to 'nearline' resources such as tape, where the **stage** authorization should be used instead.
+*   **storage.read**: Read data.  Only applies to 'online' resources 
+    such as disk, as opposed to 'nearline' resources such as tape, 
+    where the **stage** authorization may need to be used instead (see below), 
+    because the `storage.read` scope only allows _staged_ data to be read.
 *   **storage.create**: Upload data.  This includes renaming files if the destination file does not already exist. This capability includes the creation of directories and subdirectories at the specified path, and the creation of any non-existent directories required to create the path itself. This authorization does **not** permit overwriting or deletion of stored data.  The driving use case for a separate `storage.create` scope is to enable the stage-out of data from jobs on a worker node.
 *   **storage.modify**: Change data.  This includes renaming files, creating new files, and writing data.  This permission includes overwriting or replacing stored data in addition to deleting or truncating data.  This is a strict superset of `storage.create`.
-*   **storage.stage**: Stage and/or read data. This scope causes data to be staged, when needed, from a nearline resource to an online resource, to allow the data to be read. Because staging is always done in order to read the given data next, the `storage.stage` scope has been made a superset of `storage.read`. This allows the same token to be used for both operations, while avoiding the need to include the `storage.read` scope for every given path in addition. Note: storage services may impose additional constraints on who is authorized to stage data.
+*   **storage.stage**: Stage and/or read data, plus related operations.
+    This scope allows data to be _staged_, when needed, from a 'nearline'
+    resource to an 'online' resource, to allow the data to be read.
+    Because staging is always done in order to read the given data next,
+    the `storage.stage` scope has been made a superset of `storage.read`.
+    This allows the same token to be used for both operations, while
+    avoiding the need to include the `storage.read` scope for every given
+    path in addition.
+    Related operations include:
+    * `poll` - Inquire about the localities of the given files.
+      * A separate scope for that operation is under discussion (Aug 2025).
+    * `abort` - Ask for a stage operation to be canceled.
+    * `release` - Indicate the given files no longer need to be kept online.
+
+    **Note:** storage services may impose additional constraints on who is
+    authorized to stage data.
 
 For a given computing resource, the defined authorization activities include:
 
