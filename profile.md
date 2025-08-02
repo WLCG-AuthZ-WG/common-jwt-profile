@@ -87,7 +87,7 @@ One item not addressed in detail in this document is how the issuer decides on w
   <tr>
    <td><strong>Token</strong>
    </td>
-   <td>JSON Web Token (<a href="http://tools.ietf.org/html/rfc7519">JWT, RFC 7519</a>).  A string representing a set of claims (pieces of information about a subject) as a JSON object that is encoded in a JSON Web Signature (<a href="http://tools.ietf.org/html/rfc7515">JWS, RFC 7515</a>) or JSON Web Encryption (<a href="http://tools.ietf.org/html/rfc7516">JWE, RFC 7516</a>), enabling the claims to be digitally signed or MACed and/or encrypted.
+   <td>JSON Web Token (<a href="https://www.rfc-editor.org/rfc/rfc7519.html">JWT, RFC 7519</a>).  A string representing a set of claims (pieces of information about a subject) as a JSON object that is encoded in a JSON Web Signature (<a href="https://www.rfc-editor.org/rfc/rfc7515.html">JWS, RFC 7515</a>) or JSON Web Encryption (<a href="https://www.rfc-editor.org/rfc/rfc7516.html">JWE, RFC 7516</a>), enabling the claims to be digitally signed or MACed and/or encrypted.
    </td>
    <td>An OIDC or OAuth Token issued by the VO
    </td>
@@ -315,7 +315,7 @@ Usage of this claim is OPTIONAL. However, the <strong><code>wlcg.groups</code></
    </td>
    <td>RFC7519 & OpenID Connect core
    </td>
-   <td>The <strong><code>aud</code></strong> claim represents the audience or audiences the token is intended for. In the general case, the <strong><code>aud</code></strong> value is an array of case-sensitive strings. As specified in <a href="https://tools.ietf.org/html/rfc7519#section-4.1.3" target="_blank">RFC 7519 section 4.1.3</a>, in the common special case when there is one audience, the aud value MAY be a single case-sensitive string. The special string value of 'https://wlcg.cern.ch/jwt/v1/any' signifies that the issuer intends the token to be valid for all relying parties.  See the discussion below for further guidance on picking values for the `aud` claim.
+   <td>The <strong><code>aud</code></strong> claim represents the audience or audiences the token is intended for. In the general case, the <strong><code>aud</code></strong> value is an array of case-sensitive strings. As specified in <a href="https://www.rfc-editor.org/rfc/rfc7519.html#section-4.1.3" target="_blank">RFC 7519 section 4.1.3</a>, in the common special case when there is one audience, the aud value MAY be a single case-sensitive string. The special string value of 'https://wlcg.cern.ch/jwt/v1/any' signifies that the issuer intends the token to be valid for all relying parties.  See the discussion below for further guidance on picking values for the `aud` claim.
    </td>
    <td>Required
    </td>
@@ -361,7 +361,7 @@ That is, if a client would want to access the resource `https://wlcg.example.org
 https://wlcg.example.org
 ```
 
-The audience SHOULD be normalized according to Section 6 of RFC 3986; that is, trailing slashes are discouraged and default ports should not be included.  However, the comparison against the value MUST be done as a case-sensitive string as specified in [Section 4.1.3 of RFC 7519](https://datatracker.ietf.org/doc/html/rfc7519#page-9).
+The audience SHOULD be normalized according to Section 6 of RFC 3986; that is, trailing slashes are discouraged and default ports should not be included.  However, the comparison against the value MUST be done as a case-sensitive string as specified in [Section 4.1.3 of RFC 7519](https://www.rfc-editor.org/rfc/rfc7519.html#page-9).
 
 Note that a given relying party may accept several audiences.  For example, a storage server SHOULD accept an audience based on a load-balanced endpoint it participates in (e.g., `https://redirector.example.org`) in addition to its local hostname (`https://server1.example.org`).  The user SHOULD NOT need to request a new token for each HTTP redirect within the same logical service.  Implementations may accept additional audiences (if, for example, a single storage system has multiple services and endpoints).
 
@@ -375,7 +375,7 @@ For the ID Token schema, we rely on the OpenID Connect (OIDC) standard, and in p
 
 OpenID Connect implements authentication as an extension to the OAuth 2.0 authorization process. Use of this extension is requested by Clients by including the `openid` scope value in the Authorization Request. Information about the authentication performed is returned in a JSON Web Token (JWT) often called an ID Token. The discussion on the OpenID Connect flows used to obtain the ID token is out of the scope of this document but referred to in the Appendix.
 
-In the following section we describe the schema for identity-related claims included in the ID token. Some of these claims MAY also be included in an access token, when the token is obtained through an OpenID Connect flow, or returned as the result of a call to the [userinfo](http://openid.net/specs/openid-connect-core-1_0.html#UserInfo) endpoint exposed by the OpenID Connect Provider issuing the token, or as the result of an [access token introspection](https://tools.ietf.org/html/rfc7662) at the same provider.
+In the following section we describe the schema for identity-related claims included in the ID token. Some of these claims MAY also be included in an access token, when the token is obtained through an OpenID Connect flow, or returned as the result of a call to the [userinfo](http://openid.net/specs/openid-connect-core-1_0.html#UserInfo) endpoint exposed by the OpenID Connect Provider issuing the token, or as the result of an [access token introspection](https://www.rfc-editor.org/rfc/rfc7662.html) at the same provider.
 
 The following additional claims are defined for WLCG ID Tokens. Other identity-related [claims](http://openid.net/specs/openid-connect-core-1_0.html#Claims) could be included in the ID Token, or returned in the result of calls to the userinfo or token introspection endpoint, following the recommendations of the [OpenID Connect core profile](http://openid.net/specs/openid-connect-core-1_0.html).
 
@@ -444,7 +444,7 @@ The following additional claims are defined for Access Tokens.
   <tr>
    <td>scope
    </td>
-    <td>Inspired by <a href="https://tools.ietf.org/html/rfc8693">OAuth 2.0 Token Exchange</a>
+    <td>Inspired by <a href="https://www.rfc-editor.org/rfc/rfc8693.html">OAuth 2.0 Token Exchange</a>
    </td>
    <td>See below
    </td>
@@ -464,7 +464,7 @@ The token profile contains two different approaches to authorization - user attr
 
 ### Capability-based Authorization: scope 
 
-Authorization may be based on the scope[^8] claim.  The value of the scope claim is a list of space-delimited, case-sensitive strings (as in OAuth 2.0 Token Exchange [RFC 8693 Section 4.2](https://tools.ietf.org/html/rfc8693#section-4.2)) reflecting authorized activities the bearer of this token may perform. 
+Authorization may be based on the scope[^8] claim.  The value of the scope claim is a list of space-delimited, case-sensitive strings (as in OAuth 2.0 Token Exchange [RFC 8693 Section 4.2](https://www.rfc-editor.org/rfc/rfc8693.html#section-4.2)) reflecting authorized activities the bearer of this token may perform. 
 
 We aim to define a common set of authorizations (particularly storage-related authorizations), but envision additional authorizations will be added to meet new use cases. The interpretation of such authorizations would result in a list of operations the bearer is allowed to perform. 
 
@@ -637,7 +637,7 @@ We propose to use **scopes** to implement an attribute selection mechanism equiv
 
 *   [https://openid.net/specs/openid-connect-core-1_0.html#ScopeClaims](https://openid.net/specs/openid-connect-core-1_0.html#ScopeClaims)
 
-where scopes are defined and mapped to claims that are returned in access tokens, ID tokens, and results for [userinfo endpoint](https://openid.net/specs/openid-connect-core-1_0.html#UserInfo) and [token introspection](https://tools.ietf.org/html/rfc7662)requests.
+where scopes are defined and mapped to claims that are returned in access tokens, ID tokens, and results for [userinfo endpoint](https://openid.net/specs/openid-connect-core-1_0.html#UserInfo) and [token introspection](https://www.rfc-editor.org/rfc/rfc7662.html)requests.
 
 In the proposed model, there are two types of groups:
 
@@ -909,7 +909,7 @@ That is, if the issuer is `https://dteam.wlcg.example`, then the server metadata
 
 The token issuer endpoint is a crucial point of trust between the service and the VO; hence, the TLS connection MUST be validated and verified according to best practices.  The trust roots will be needed by a wide variety of agents, including browser-based and terminal-based clients[^14].
 
-Signature algorithms are enumerated in [RFC 7518 section 3](https://tools.ietf.org/html/rfc7518#section-3).  The HMAC algorithms are incompatible with the WLCG JWT approach; implementations should use the recommended algorithms from the RFC (as of July 2018, this is ES256 or RS256; ES256 should be used when token length is a concern).  Changes to the allowable signature algorithms will be handled using the versioning mechanism described in the Token Validation section.
+Signature algorithms are enumerated in [RFC 7518 section 3](https://www.rfc-editor.org/rfc/rfc7518.html#section-3).  The HMAC algorithms are incompatible with the WLCG JWT approach; implementations should use the recommended algorithms from the RFC (as of July 2018, this is ES256 or RS256; ES256 should be used when token length is a concern).  Changes to the allowable signature algorithms will be handled using the versioning mechanism described in the Token Validation section.
 
 
 ### Verification Example
@@ -1037,11 +1037,11 @@ Refresh tokens are credentials that can be used by client applications to obtain
 
 Refresh tokens are typically longer lived than access tokens, and are used in support of long-running computational activities that last longer than the lifetime of a single access token. 
 
-As clarified in the [OAuth specification](https://tools.ietf.org/html/rfc6749#section-10.4), Refresh tokens MUST be kept confidential in transit and storage, and shared only among the authorization server and the client to whom the refresh tokens were issued. Delegation across services in support of long-running jobs MUST leverage the token exchange flow.  Refresh tokens SHOULD be kept on centrally maintained (non-grid) services while long-running jobs SHOULD get only access tokens[^16].  Grid jobs SHOULD NOT be OAuth clients.
+As clarified in the [OAuth specification](https://www.rfc-editor.org/rfc/rfc6749.html#section-10.4), Refresh tokens MUST be kept confidential in transit and storage, and shared only among the authorization server and the client to whom the refresh tokens were issued. Delegation across services in support of long-running jobs MUST leverage the token exchange flow.  Refresh tokens SHOULD be kept on centrally maintained (non-grid) services while long-running jobs SHOULD get only access tokens[^16].  Grid jobs SHOULD NOT be OAuth clients.
 
-The [OAuth specification](https://datatracker.ietf.org/doc/html/rfc6749#section-6) also states that the authorization server MAY issue a new refresh token during a refresh request, in which case the client MUST discard the old refresh token and replace it with the new refresh token. Through this mechanism, long-lived processes (e.g. "robots") may periodically obtain new refresh tokens for indefinite ongoing operation, without human intervention, where the lifetime of each refresh token does not exceed the maximum specified above. The authorization server MAY revoke the old refresh token after issuing a new refresh token to the client, but for purposes of fault-tolerance (for example, in case the client fails to save the new refresh token to persistent storage), it is RECOMMENDED that the authorization server allow some grace period (e.g. one day) during which the old refresh token may be used prior to revocation. Further, it is RECOMMENDED that the grace period be configurable, so the authorization server operators can change the grace period value as needed based on operational considerations.
+The [OAuth specification](https://www.rfc-editor.org/rfc/rfc6749.html#section-6) also states that the authorization server MAY issue a new refresh token during a refresh request, in which case the client MUST discard the old refresh token and replace it with the new refresh token. Through this mechanism, long-lived processes (e.g. "robots") may periodically obtain new refresh tokens for indefinite ongoing operation, without human intervention, where the lifetime of each refresh token does not exceed the maximum specified above. The authorization server MAY revoke the old refresh token after issuing a new refresh token to the client, but for purposes of fault-tolerance (for example, in case the client fails to save the new refresh token to persistent storage), it is RECOMMENDED that the authorization server allow some grace period (e.g. one day) during which the old refresh token may be used prior to revocation. Further, it is RECOMMENDED that the grace period be configurable, so the authorization server operators can change the grace period value as needed based on operational considerations.
 
-To contain security incidents related to the leakage of refresh tokens, it is recommended that any solution that will be used as the WLCG OAuth authorization server MUST support the [OAuth token revocation standard](https://tools.ietf.org/html/rfc7009) (RFC 7009) at least for refresh tokens.
+To contain security incidents related to the leakage of refresh tokens, it is recommended that any solution that will be used as the WLCG OAuth authorization server MUST support the [OAuth token revocation standard](https://www.rfc-editor.org/rfc/rfc7009.html) (RFC 7009) at least for refresh tokens.
 
 
 ### Claim and Token validation
@@ -1083,7 +1083,7 @@ For the [OAuth authorization server metadata](https://datatracker.ietf.org/doc/d
 
 ### Well-known URIs
 
-According to [RFC 5785](https://tools.ietf.org/html/rfc5785), a well-known URI is a URI whose path component begins with the characters '/.well-known/', and whose scheme is "HTTP", "HTTPS", or another scheme that has explicitly been specified to use well-known URIs.
+According to [RFC 5785](https://www.rfc-editor.org/rfc/rfc5785.html), a well-known URI is a URI whose path component begins with the characters '/.well-known/', and whose scheme is "HTTP", "HTTPS", or another scheme that has explicitly been specified to use well-known URIs.
 
 
 #### The OpenID connect approach to well-known URIs
@@ -1100,7 +1100,7 @@ As clarified [here](https://openid.net/specs/openid-connect-discovery-1_0.html#P
 
 #### The OAuth approach to well-known URIs
 
-The [OAuth authorization server metadata standard](https://tools.ietf.org/html/rfc8414#section-3) states that:
+The [OAuth authorization server metadata standard](https://www.rfc-editor.org/rfc/rfc8414.html#section-3) states that:
 
 "Authorization servers supporting metadata MUST make a JSON document containing metadata as specified in Section 2 available at a path formed by inserting a well-known URI string into the authorization server's issuer identifier between the host component and the path component, if any. By default, the well-known URI string used is '/.well-known/oauth-authorization-server'."
 
@@ -1143,14 +1143,14 @@ OAuth is about delegating access to resources to third-party applications. This 
 
 #### Authorization code flow
 
-The authorization code flow is defined in [RFC 6749](https://tools.ietf.org/html/rfc6749#section-4.1 ) and extended in the [OpenID Connect core specification](http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth ). This flow is used to obtain access tokens, ID tokens and refresh tokens and is optimized for confidential clients (i.e., server-side applications).
+The authorization code flow is defined in [RFC 6749](https://www.rfc-editor.org/rfc/rfc6749.html#section-4.1 ) and extended in the [OpenID Connect core specification](http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth ). This flow is used to obtain access tokens, ID tokens and refresh tokens and is optimized for confidential clients (i.e., server-side applications).
 
 In WLCG, we require the use of the OpenID Connect version of the code flow, as described [here](http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth), which in practice means that the 'openid' scope must be always included in authorization requests.
 
 
 #### Refresh token flow
 
-The [refresh token flow](https://tools.ietf.org/html/rfc6749#section-6) is also targeted at confidential clients and is used to obtain new access tokens when tokens are expired or about to expire. This flow does not require the user's presence and is mainly used to support offline activities, when a client application needs to act on behalf of a user for a possibly unbounded amount of time.
+The [refresh token flow](https://www.rfc-editor.org/rfc/rfc6749.html#section-6) is also targeted at confidential clients and is used to obtain new access tokens when tokens are expired or about to expire. This flow does not require the user's presence and is mainly used to support offline activities, when a client application needs to act on behalf of a user for a possibly unbounded amount of time.
 
 Refresh tokens can be obtained using any flow that supports them (e.g., the authorization code flow), typically by including the recommended 'offline_access' scope in authorization requests.
 
@@ -1162,12 +1162,12 @@ The [device flow](https://tools.ietf.org/html/draft-ietf-oauth-device-flow-15) i
 
 #### Client credentials flow
 
-Sometimes client applications need to interact with services in a way that is not bound to any specific user, but to the client application itself. In support of this use case OAuth provides the [client credentials flow](https://tools.ietf.org/html/rfc6749#section-4.4).
+Sometimes client applications need to interact with services in a way that is not bound to any specific user, but to the client application itself. In support of this use case OAuth provides the [client credentials flow](https://www.rfc-editor.org/rfc/rfc6749.html#section-4.4).
 
 
 #### Token exchange flow
 
-The [OAuth 2.0 Token Exchange](https://tools.ietf.org/html/rfc8693) flow can be used to implement delegation and token privileges attenuation across a chain of services.
+The [OAuth 2.0 Token Exchange](https://www.rfc-editor.org/rfc/rfc8693.html) flow can be used to implement delegation and token privileges attenuation across a chain of services.
 
 
 ## Examples
@@ -1407,7 +1407,7 @@ In this example, the `nonce`, `preferred_username`, `name`, and `email` claims a
 ## Notes
 
 [^1]:
-     https://tools.ietf.org/html/rfc6749#section-1.4
+     https://www.rfc-editor.org/rfc/rfc6749.html#section-1.4
 
 [^2]:
      Note: in the OpenID Connect core specification, the ID token is intended primarily to contain information about the authentication, while profile information such as the user's name and email is typically retrieved via the UserInfo endpoint. Since this puts a strain on the OP, we prefer to make - as much as possible - use of self-contained tokens and return all the claims in the ID token
@@ -1428,7 +1428,7 @@ In this example, the `nonce`, `preferred_username`, `name`, and `email` claims a
      Such registrations could be made through IETF or appropriate bodies and made publicly available, e.g. https://www.iana.org/assignments/oauth-parameters/oauth-parameters.xml
 
 [^8]:
-     Note that the motivation for using the name 'scope' here is inspired by the claim language proposed for standardization as part of the OAuth 2.0 Token Exchange specification ([RFC 8693](https://tools.ietf.org/html/rfc8693)), and due to its existing use in SciTokens.
+     Note that the motivation for using the name 'scope' here is inspired by the claim language proposed for standardization as part of the OAuth 2.0 Token Exchange specification ([RFC 8693](https://www.rfc-editor.org/rfc/rfc8693.html)), and due to its existing use in SciTokens.
 
 [^9]:
      RAF still refers to it as eduPersonAssurance, but it will probably change into `eduperson_assurance`, following the OIDCre whitepaper.
