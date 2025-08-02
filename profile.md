@@ -1059,8 +1059,10 @@ near the end of their validity is fragile in practice and would not be helped
 much by adding a further, short grace period.  By default, access tokens are
 purposely short-lived as they do not have a revocation mechanism.  See the
 recommendations in RFC 6750 sections
-[5.3](https://tools.ietf.org/html/rfc6750#section-5.3) and
-[5.2](https://tools.ietf.org/html/rfc6750#section-5.2).
+[5.3](https://www.rfc-editor.org/rfc/rfc6750.html#section-5.3) and
+[5.2](https://www.rfc-editor.org/rfc/rfc6750.html#section-5.2),
+[RFC 6819 section 5.1.5](https://www.rfc-editor.org/rfc/rfc6819.html#section-5.1.5), and
+[RFC 9700 section 2.3](https://www.rfc-editor.org/rfc/rfc9700.html#section-2.3).
 
 
 ### Refresh tokens and token revocation
