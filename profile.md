@@ -1030,6 +1030,7 @@ One would utilize the `iss` claim in the payload to download the set of public k
 
 Note the combination of **nbf** (not before) (or **iat**) and **exp** (expiration) provides a notion of token valid lifetime.  WLCG token issuers MUST issue Access tokens with valid lifetime of less than 6 hours; they SHOULD aim for a token lifetime of 20 minutes.  Resource providers MUST NOT accept tokens that have validity longer than 6 hours.  As a pragmatic guard against minor clock skews, they SHOULD accept tokens that are expired since less than 60 seconds.  See the recommendations in [sections 5.3](https://tools.ietf.org/html/rfc6750#section-5.3) and [5.2](https://tools.ietf.org/html/rfc6750#section-5.2) in RFC 6750.  These tokens are purposely shorter-lived as they do not have a token revocation mechanism; the token lifetime should be shorter than the expected revocation response time for authorizations.
 
+
 ### Refresh tokens and token revocation
 
 Refresh tokens are credentials that can be used by client applications to obtain new access or ID tokens (when such tokens are about to expire) or to obtain access tokens with identical or narrower scope from an OAuth Authorization Server. Unlike access tokens, refresh tokens are intended for use only with authorization servers and are never sent to resource servers. Furthermore, the client needs to authenticate at the Authorization Server using its client credentials when using its refresh tokens.
