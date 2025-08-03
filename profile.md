@@ -975,7 +975,13 @@ for the increased risk inherent to longer lifetimes. Major examples are:
     - specific audiences.
 
 Token lifetime recommendations should rather be considered per workflow,
-with the following table providing **default** values. If these values 
+with the following table providing **default** values recommended in
+the `AARC-G081`
+[draft](https://docs.google.com/document/d/1U9vvJfWuE8oO7u0FcGVGr3KySvBqwjnkzKO8TKzgoX4/)
+guidelines, to be published
+[here](https://aarc-community.org/guidelines/aarc-g081/)
+as part of the catalog of
+[AARC guidelines](https://aarc-community.org/guidelines/). If these values 
 are not suitable for a given workflow, alternative **mitigation** MUST be 
 **agreed** through a risk assessment involving security experts within 
 the affected community and **put in place** to keep the security risks 
@@ -995,11 +1001,13 @@ of that workflow at a level that is deemed acceptable:
    </td>
   </tr>
   <tr>
-   <td>Access Token & ID Token[^15]
+   <td>Access Token & ID Token
+
+   [^15] <!-- must follow a blank line to be recognized within an HTML table! -->
    </td>
-   <td>20 minutes
+   <td>1 hour
    </td>
-   <td>5 minutes
+   <td>15 minutes
    </td>
    <td>6 hours
    </td>
@@ -1009,11 +1017,11 @@ of that workflow at a level that is deemed acceptable:
   <tr>
    <td>Refresh Token
    </td>
-   <td>10 days
+   <td>30 days
    </td>
    <td>1 day
    </td>
-   <td>30 days
+   <td>400 days
    </td>
    <td>Refresh token lifetimes should be kept bounded, but can be longer-lived as they are revocable.  Meant to be long-lived enough to be on a 'human timescale.'  Refresh tokens are not necessarily signed and not tied to the issuer's public key lifetime.
    </td>
