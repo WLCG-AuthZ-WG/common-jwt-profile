@@ -31,6 +31,14 @@ _Authored by the WLCG AuthZ Working Group_
    <td>Version published on Zenodo
    </td>
   </tr>
+  <tr>
+   <td>DD.MM.2025
+   </td>
+   <td>x.y
+   </td>
+   <td>under construction
+   </td>
+  </tr>
 </table>
 
 
@@ -39,7 +47,7 @@ _Authored by the WLCG AuthZ Working Group_
 
 This document describes how WLCG users may use the available geographically distributed resources without X.509 credentials.  In this model, clients are issued with bearer tokens; these tokens are subsequently used to interact with resources.  The tokens may contain authorization groups and/or capabilities, according to the preference of the virtual organization (VO), applications, and relying parties.  Each VO acts as an _attribute authority_ with its own policies on the issuance and contents of tokens.
 
-Wherever possible, this document builds on existing standards when describing profiles to support current and anticipated WLCG usage.  In particular, three major technologies are identified as providing the basis for this system: OAuth2 (RFC 6749 & RFC 6750), [OpenID Connect](http://openid.net/developers/specs/)  and JSON Web Tokens (RFC 7519). Additionally, trust roots are established via OpenID Discovery or OAuth2 Authorization Server Metadata (RFC 8414). This document provides a profile for OAuth2 Access Tokens and OIDC ID Tokens. **The WLCG Token Profile version described by this document is '1.0'.**
+Wherever possible, this document builds on existing standards when describing profiles to support current and anticipated WLCG usage.  In particular, three major technologies are identified as providing the basis for this system: OAuth2 (RFC 6749 & RFC 6750), [OpenID Connect](http://openid.net/developers/specs/)  and JSON Web Tokens (RFC 7519). Additionally, trust roots are established via OpenID Discovery or OAuth2 Authorization Server Metadata (RFC 8414). This document provides a profile for OAuth2 Access Tokens and OIDC ID Tokens. **The WLCG Token Profile version described by this document is 'x.y'.** _(FIXME)_
 
 The profile for the usage of JSON Web Tokens (RFC 7519) supports distributed authentication and authorization within the WLCG.  The JWT profile is meant as a mechanism to transition away from the existing GSI-based (Globus) system where authentication is based on X.509 proxy certificates and authorization is based on VOMS extensions and identity mapping.
 
@@ -263,7 +271,7 @@ Suggested use cases for the <strong><code>sub</code></strong> claim are suspendi
    <td>We add the <strong><code>wlcg.ver</code></strong> claim to denote the version of the WLCG token profile the relying party must understand to validate the token (claim validation is covered in the next section).  <strong><code>wlcg.ver</code></strong> names MUST comply with the following grammar: 
 <code>vername ::= [0-9]+\.[0-9]+</code>
 <p>
-The <strong><code>wlcg.ver</code></strong> claim corresponds to a version of this document. The initial version of this document constitutes version '1.0'. Although versions are expected to be treated as strings, we adopt a numeric format for simplicity. 
+The <strong><code>wlcg.ver</code></strong> claim corresponds to a version of this document. The initial version of this document constituted version '1.0'. Although versions are expected to be treated as strings, we adopt a numeric format for simplicity. 
    </td>
    <td>Required
    </td>
