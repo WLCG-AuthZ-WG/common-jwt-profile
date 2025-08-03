@@ -950,8 +950,21 @@ So, given a token header and payload (shown here not base64 encoded for human re
 
 
 ```
-{"alg":"RS256","typ":"JWT","kid":"key1"}
-{"jti":"40ce5a87-e419-4bdf-9e11-61dfb160f89d","sub":"e1eb758b-b73c-4761-bfff-adc793da409c","exp":1522064875,"iss":"https://dteam.wlcg.example","iat":1522057675,"scope":["read:/store","write:/store/user/aresearcher"],"nbf":1522057675,"wlcg.ver":"1.0"}
+{
+    "alg": "RS256",
+    "typ": "JWT",
+    "kid": "key1"
+}
+{
+    "jti": "40ce5a87-e419-4bdf-9e11-61dfb160f89d",
+    "sub": "e1eb758b-b73c-4761-bfff-adc793da409c",
+    "exp": 1522064875,
+    "iss": "https://dteam.wlcg.example",
+    "iat": 1522057675,
+    "scope": "storage.read:/store storage.write:/store/user/aresearcher",
+    "nbf": 1522057675,
+    "wlcg.ver": "1.0"
+}
 ```
 
 
@@ -1327,7 +1340,7 @@ Note this is a very minimal token for this JWT profile, contains no group inform
 ```
 {
     "wlcg.ver": "1.0",
-"sub": "e1eb758b-b73c-4761-bfff-adc793da409c",
+    "sub": "e1eb758b-b73c-4761-bfff-adc793da409c",
     "iss": "https://dteam.wlcg.example",
     "wlcg.groups": [
       "/dteam/VO-Admin", 
@@ -1346,7 +1359,7 @@ Note this is a very minimal token for this JWT profile, contains no group inform
     "eduperson_assurance" : [
       "https://refeds.org/assurance/profile/espresso"
     ],
-"acr": "https://refeds.org/profile/mfa"
+    "acr": "https://refeds.org/profile/mfa"
 }
 ```
 
@@ -1394,7 +1407,7 @@ In this example, the `nonce`, `preferred_username`, `name`, and `email` claims a
     "exp": 1555060391,
     "iat": 1555059791,
     "jti": "aef94c8c-0fea-490f-9027-ff444dd66d8c",
-    "scope": "storage.read:/store storage.create:/store/mc/datasetA compute.create:/",
+    "scope": "storage.read:/store storage.create:/store/mc/datasetA compute.create",
     "eduperson_assurance": [
       "https://refeds.org/assurance/profile/espresso"
     ],
