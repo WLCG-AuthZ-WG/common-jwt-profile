@@ -969,7 +969,7 @@ So, given a token header and payload (shown here not base64 encoded for human re
     "exp": 1522064875,
     "iss": "https://dteam.wlcg.example",
     "iat": 1522057675,
-    "scope": "storage.read:/store storage.write:/store/user/aresearcher",
+    "scope": "storage.read:/store storage.modify:/store/user/aresearcher",
     "nbf": 1522057675,
     "wlcg.ver": "1.0"
 }
