@@ -471,7 +471,7 @@ For a given storage resource, the defined authorizations include:
     This allows the same token to be used for both operations, while
     avoiding the need to include the `storage.read` scope for every given
     path in addition.
-    The `storage.stage` scope also serves the following related operations:
+    The `storage.stage` scope also authorizes the following related operations:
     * `poll` - Inquire about the localities of the given files.
       * A separate scope for that operation is under discussion (Aug 2025).
     * `abort` - Ask for a stage operation to be canceled.
