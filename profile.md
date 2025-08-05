@@ -47,7 +47,7 @@ _Authored by the WLCG AuthZ Working Group_
 
 This document describes how WLCG users may use the available geographically distributed resources without X.509 credentials.  In this model, clients are issued with bearer tokens; these tokens are subsequently used to interact with resources.  The tokens may contain authorization groups and/or capabilities, according to the preference of the virtual organization (VO), applications, and relying parties.  Each VO acts as an _attribute authority_ with its own policies on the issuance and contents of tokens.
 
-Wherever possible, this document builds on existing standards when describing profiles to support current and anticipated WLCG usage.  In particular, three major technologies are identified as providing the basis for this system: OAuth2 (RFC 6749 & RFC 6750), [OpenID Connect](http://openid.net/developers/specs/)  and JSON Web Tokens (RFC 7519). Additionally, trust roots are established via OpenID Discovery or OAuth2 Authorization Server Metadata (RFC 8414). This document provides a profile for OAuth2 Access Tokens and OIDC ID Tokens. **The WLCG Token Profile version described by this document is 'x.y'.** _(FIXME)_
+Wherever possible, this document builds on existing standards when describing profiles to support current and anticipated WLCG usage.  In particular, three major technologies are identified as providing the basis for this system: OAuth2 (RFC 6749 & RFC 6750), [OpenID Connect](https://openid.net/developers/specs/)  and JSON Web Tokens (RFC 7519). Additionally, trust roots are established via OpenID Discovery or OAuth2 Authorization Server Metadata (RFC 8414). This document provides a profile for OAuth2 Access Tokens and OIDC ID Tokens. **The WLCG Token Profile version described by this document is 'x.y'.** _(FIXME)_
 
 The profile for the usage of JSON Web Tokens (RFC 7519) supports distributed authentication and authorization within the WLCG.  The JWT profile is meant as a mechanism to transition away from the existing GSI-based (Globus) system where authentication is based on X.509 proxy certificates and authorization is based on VOMS extensions and identity mapping.
 
@@ -380,13 +380,13 @@ If the relying party provides a non-HTTPS-based service, a URI should be used.  
 
 ### ID Token Claims
 
-For the ID Token schema, we rely on the OpenID Connect (OIDC) standard, and in particular on the [core specification](http://openid.net/specs/openid-connect-core-1_0.html). OpenID Connect is "a simple identity layer on top of the OAuth 2.0 protocol. It allows Clients to verify the identity of the End-User based on the authentication performed by an Authorization Server, as well as to obtain basic profile information about the End-User in an interoperable and REST-like manner." (for more information on OpenID Connect, refer to [http://openid.net/connect/](http://openid.net/connect/)).  We expect the validation of these tokens to additionally follow the corresponding flows in the OIDC standard (see [ID token validation](http://openid.net/specs/openid-connect-core-1_0.html#IDTokenValidation) and [code flow token validation](http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowTokenValidation)).
+For the ID Token schema, we rely on the OpenID Connect (OIDC) standard, and in particular on the [core specification](https://openid.net/specs/openid-connect-core-1_0.html). OpenID Connect is "a simple identity layer on top of the OAuth 2.0 protocol. It allows Clients to verify the identity of the End-User based on the authentication performed by an Authorization Server, as well as to obtain basic profile information about the End-User in an interoperable and REST-like manner." (for more information on OpenID Connect, refer to [https://openid.net/connect/](https://openid.net/connect/)).  We expect the validation of these tokens to additionally follow the corresponding flows in the OIDC standard (see [ID token validation](https://openid.net/specs/openid-connect-core-1_0.html#IDTokenValidation) and [code flow token validation](https://openid.net/specs/openid-connect-core-1_0.html#CodeFlowTokenValidation)).
 
 OpenID Connect implements authentication as an extension to the OAuth 2.0 authorization process. Use of this extension is requested by Clients by including the `openid` scope value in the Authorization Request. Information about the authentication performed is returned in a JSON Web Token (JWT) often called an ID Token. The discussion on the OpenID Connect flows used to obtain the ID token is out of the scope of this document but referred to in the Appendix.
 
-In the following section we describe the schema for identity-related claims included in the ID token. Some of these claims MAY also be included in an access token, when the token is obtained through an OpenID Connect flow, or returned as the result of a call to the [userinfo](http://openid.net/specs/openid-connect-core-1_0.html#UserInfo) endpoint exposed by the OpenID Connect Provider issuing the token, or as the result of an [access token introspection](https://www.rfc-editor.org/rfc/rfc7662.html) at the same provider.
+In the following section we describe the schema for identity-related claims included in the ID token. Some of these claims MAY also be included in an access token, when the token is obtained through an OpenID Connect flow, or returned as the result of a call to the [userinfo](https://openid.net/specs/openid-connect-core-1_0.html#UserInfo) endpoint exposed by the OpenID Connect Provider issuing the token, or as the result of an [access token introspection](https://www.rfc-editor.org/rfc/rfc7662.html) at the same provider.
 
-The following additional claims are defined for WLCG ID Tokens. Other identity-related [claims](http://openid.net/specs/openid-connect-core-1_0.html#Claims) could be included in the ID Token, or returned in the result of calls to the userinfo or token introspection endpoint, following the recommendations of the [OpenID Connect core profile](http://openid.net/specs/openid-connect-core-1_0.html).
+The following additional claims are defined for WLCG ID Tokens. Other identity-related [claims](https://openid.net/specs/openid-connect-core-1_0.html#Claims) could be included in the ID Token, or returned in the result of calls to the userinfo or token introspection endpoint, following the recommendations of the [OpenID Connect core profile](https://openid.net/specs/openid-connect-core-1_0.html).
 
 
 <table>
@@ -405,7 +405,7 @@ The following additional claims are defined for WLCG ID Tokens. Other identity-r
    </td>
    <td>OpenID
    </td>
-   <td>The <strong><code>auth_time</code></strong> claim represents the time when the End-User authentication occurred. The claim value is a JSON number representing the number of seconds from 1970-01-01T0:0:0Z as measured in UTC until the End-User authentication time. As in the <a href="http://openid.net/specs/openid-connect-core-1_0.html">OpenID Connect core profile</a>, the claim is REQUIRED when requested explicitly in the authentication request, otherwise is OPTIONAL.
+   <td>The <strong><code>auth_time</code></strong> claim represents the time when the End-User authentication occurred. The claim value is a JSON number representing the number of seconds from 1970-01-01T0:0:0Z as measured in UTC until the End-User authentication time. As in the <a href="https://openid.net/specs/openid-connect-core-1_0.html">OpenID Connect core profile</a>, the claim is REQUIRED when requested explicitly in the authentication request, otherwise is OPTIONAL.
    </td>
    <td>Optional, but when requested it MUST be present
    </td>
@@ -536,7 +536,7 @@ For all `storage.*` scopes, `$PATH` MUST be specified (it may be `/` to authoriz
 
 The scope claim MAY include multiple authorizations of the same scope name, e.g. `storage.create:/foo storage.create:/bar`.
 
-In the case of batch or computing resources, additional discussion is required to define finer-grained resources.  Currently, the authorizations of the relevant scopes (`compute.read, compute.modify, compute.create, compute.cancel`) refer to all jobs owned by the issuer.  For example, a token with `compute.read` scope issued by [https://cms-auth.web.cern.ch](https://cms-auth.web.cern.ch) would be able to query the status of any CMS job at the resource.
+In the case of batch or computing resources, additional discussion is required to define finer-grained resources.  Currently, the authorizations of the relevant scopes (`compute.read, compute.modify, compute.create, compute.cancel`) refer to all jobs owned by the issuer.  For example, a token with `compute.read` scope issued by [https://cms-auth.cern.ch](https://cms-auth.cern.ch) would be able to query the status of any CMS job at the resource.
 
 When rendered in JSON, the value of the `scope` claim should be a space-separated list if there is more than one authorization present.
 
@@ -897,7 +897,7 @@ base_path = /users/dteam
 ```
 
 
-Here, the service administrator explicitly lists the issuers they trust (such as [https://wlcg.example/dteam](https://wlcg.example/dteam)) and restricts each to a specific directory.  The technical mechanism for verifying a token based on the trusted issuer's name is given in the next section.
+Here, the service administrator explicitly lists the issuers they trust (such as `https://wlcg.example/dteam`) and restricts each to a specific directory.  The technical mechanism for verifying a token based on the trusted issuer's name is given in the next section.
 
 
 ## Token Verification
@@ -931,8 +931,8 @@ The RP needs to get hold of the `https://dteam.wlcg.example` issuer's keys for r
 
 ```
 {  
-   "issuer":"https://dteam.wlcg.example",
-   "jwks_uri":"https://dteam.wlcg.example/oauth2/certs",
+   "issuer": "https://dteam.wlcg.example",
+   "jwks_uri": "https://dteam.wlcg.example/oauth2/certs",
 }
 ```
 
@@ -1168,9 +1168,9 @@ OAuth is about delegating access to resources to third-party applications. This 
 
 #### Authorization code flow
 
-The authorization code flow is defined in [RFC 6749](https://www.rfc-editor.org/rfc/rfc6749.html#section-4.1 ) and extended in the [OpenID Connect core specification](http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth ). This flow is used to obtain access tokens, ID tokens and refresh tokens and is optimized for confidential clients (i.e., server-side applications).
+The authorization code flow is defined in [RFC 6749](https://www.rfc-editor.org/rfc/rfc6749.html#section-4.1 ) and extended in the [OpenID Connect core specification](https://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth ). This flow is used to obtain access tokens, ID tokens and refresh tokens and is optimized for confidential clients (i.e., server-side applications).
 
-In WLCG, we require the use of the OpenID Connect version of the code flow, as described [here](http://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth), which in practice means that the 'openid' scope must be always included in authorization requests.
+In WLCG, we require the use of the OpenID Connect version of the code flow, as described [here](https://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth), which in practice means that the 'openid' scope must be always included in authorization requests.
 
 
 #### Refresh token flow
@@ -1432,7 +1432,7 @@ In this example, the `nonce`, `preferred_username`, `name`, and `email` claims a
 ## Notes
 
 [^1]:
-     https://www.rfc-editor.org/rfc/rfc6749.html#section-1.4
+     [RFC 6749 section 1.4](https://www.rfc-editor.org/rfc/rfc6749.html#section-1.4)
 
 [^2]:
      Note: in the OpenID Connect core specification, the ID token is intended primarily to contain information about the authentication, while profile information such as the user's name and email is typically retrieved via the UserInfo endpoint. Since this puts a strain on the OP, we prefer to make - as much as possible - use of self-contained tokens and return all the claims in the ID token
@@ -1447,10 +1447,10 @@ In this example, the `nonce`, `preferred_username`, `name`, and `email` claims a
      From GFD-I.182, the VOMS spec for FQANs (Sect. 3.4.1.4)
 
 [^6]:
-     https://aarc-project.eu/guidelines
+     [AARC guidelines](https://aarc-project.eu/guidelines)
 
 [^7]:
-     Such registrations could be made through IETF or appropriate bodies and made publicly available, e.g. https://www.iana.org/assignments/oauth-parameters/oauth-parameters.xml
+     Such registrations could be made through IETF or appropriate bodies and made publicly available, e.g. see [OAuth parameter assignments](https://www.iana.org/assignments/oauth-parameters/oauth-parameters.xml)
 
 [^8]:
      Note that the motivation for using the name 'scope' here is inspired by the claim language proposed for standardization as part of the OAuth 2.0 Token Exchange specification ([RFC 8693](https://www.rfc-editor.org/rfc/rfc8693.html)), and due to its existing use in SciTokens.
@@ -1459,13 +1459,13 @@ In this example, the `nonce`, `preferred_username`, `name`, and `email` claims a
      RAF still refers to it as eduPersonAssurance, but it will probably change into `eduperson_assurance`, following the OIDCre whitepaper.
 
 [^10]:
-     [https://openid.net/specs/openid-connect-federation-1_0.html](https://openid.net/specs/openid-connect-federation-1_0.html)
+     [OIDC federation](https://openid.net/specs/openid-connect-federation-1_0.html)
 
 [^11]:
-     [https://openid.net/specs/openid-connect-discovery-1_0.html](https://openid.net/specs/openid-connect-discovery-1_0.html)
+     [OIDC discovery](https://openid.net/specs/openid-connect-discovery-1_0.html)
 
 [^12]:
-     [https://openid.net/specs/openid-connect-registration-1_0.html](https://openid.net/specs/openid-connect-registration-1_0.html)
+     [OIDC registration](https://openid.net/specs/openid-connect-registration-1_0.html)
 
 [^13]:
      Note that the OpenID Connect Discovery paper highlights a mechanism that is NOT RFC 5785 compliant and is not aligned with the OAuth discovery standard. After some discussion, this group decided to embrace the OpenID Connect Discovery approach. More details are in the appendix.
@@ -1479,5 +1479,3 @@ In this example, the `nonce`, `preferred_username`, `name`, and `email` claims a
 [^16]:
      The WLCG Authorization Working Group plans to produce guidelines for implementors on this workflow.
 
-
-<!-- Docs to Markdown version 1.0beta18 -->
