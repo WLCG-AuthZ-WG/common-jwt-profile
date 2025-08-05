@@ -185,9 +185,10 @@ One item not addressed in detail in this document is how the issuer decides on w
   <tr>
    <td><strong>Virtual Organization</strong>
    </td>
-   <td>A Virtual Organization (VO) is a grouping of people and/or IT services that is defined only in the specific IT service used to manage the VO and that serves to allow IT resources to be shared just between its members.<br/><br/>
+   <td>A Virtual Organization (VO) is a grouping of people and/or IT services that is defined only in the specific IT service used to manage the VO and that serves to allow IT resources to be shared just between its members.
 
 By construction, the members of a VO work towards common goals through the use of the IT resources which they share. For example:
+
 - the processing and analysis of data produced by an experiment;
 - the provision of shared services to supported projects.
 
@@ -515,17 +516,20 @@ depending on the requested operation(s) to which the authorization applies.
 If it has a trailing `/` character, `$PATH` MUST be treated as a directory.
 
 For example, a scope `storage.create:/foo/bar` must **allow** the creation of:
+
 * a leading directory `/foo` if that path does not exist yet;
 * a directory or file `/foo/bar` if `/foo` is a directory;
 * a directory or file `/foo/bar/qux` if `/foo/bar` is a directory;
 * etc.
 
 That same scope must **deny** the creation of:
+
 * a file `/foo`;
 * a directory or file `/foo/bargain`.
 
 A scope `storage.create:/foo/bar/` where `$PATH` has a trailing `/`
 must also **deny** the creation of:
+
 * a file `/foo/bar`.
 
 For all `storage.*` scopes, `$PATH` MUST be specified (it may be `/` to authorize the entire resource associated with the issuer); if not specified for these scopes, the token MUST be rejected.  A token issuer MUST utilize absolute paths and normalize them according to section 6 of RFC 3986; as in RFC 3986, each component of the path must be URL-escaped. If a relying party encounters a non-conforming token, then it is implementation-defined if it rejects the token or performs path normalization.
