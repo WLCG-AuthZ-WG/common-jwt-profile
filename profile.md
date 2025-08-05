@@ -187,6 +187,7 @@ One item not addressed in detail in this document is how the issuer decides on w
    </td>
    <td>A Virtual Organization (VO) is a grouping of people and/or IT services that is defined only in the specific IT service used to manage the VO and that serves to allow IT resources to be shared just between its members.
 
+<br/>
 By construction, the members of a VO work towards common goals through the use of the IT resources which they share. For example:
 
 - the processing and analysis of data produced by an experiment;
