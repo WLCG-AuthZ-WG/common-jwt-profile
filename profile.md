@@ -52,7 +52,7 @@ _Authored by the WLCG AuthZ Working Group_
       - [Access Token Claims](#access-token-claims)
     - [Authorization](#authorization)
       - [Capability-based Authorization: scope](#capability-based-authorization-scope)
-      - [Group Based Authorization: wlcg.groups](#group-based-authorization-wlcg002Egroups)
+      - [Group Based Authorization: wlcg.groups](#group-based-authorization-wlcggroups)
       - [Interpretation of Authorization by the Resource Server](#interpretation-of-authorization-by-the-resource-server)
     - [Identity Assurance](#identity-assurance)
   - [Scope-based Attribute Selection](#scope-based-attribute-selection)
@@ -606,8 +606,7 @@ Example values of the `scope` claim:
 * `"storage.read:/store storage.create:/store/mc/datasetA"`  This would allow the bearer to read from `/store` and create new files (not overwriting existing data) in `/store/mc/datasetA`.
 
 
-<!-- hack needed to get the ToC to work in MD and HTML via Pandoc -->
-### Group Based Authorization: wlcg&002E;groups
+### Group Based Authorization: wlcg.groups
 
 Authorization may be based on the `wlcg.groups` claim. The value of the `wlcg.groups` claim is an ordered JSON array of case-sensitive strings denoting VO groups of which the token subject is a member. 
 
