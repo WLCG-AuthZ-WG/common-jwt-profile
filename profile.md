@@ -41,6 +41,57 @@ _Authored by the WLCG AuthZ Working Group_
   </tr>
 </table>
 
+# Table of Contents
+
+  - [Introduction](#introduction)
+    - [Glossary](#glossary)
+  - [WLCG Token Profile](#wlcg-token-profile)
+    - [WLCG Token Claims](#wlcg-token-claims)
+      - [Common Claims](#common-claims)
+      - [ID Token Claims](#id-token-claims)
+      - [Access Token Claims ](#access-token-claims-)
+    - [Authorization](#authorization)
+      - [Capability-based Authorization](#-scope-)
+      - [Group Based Authorization](#-wlcg.groups-)
+      - [Interpretation of Authorization by the Resource Server](#interpretation-of-authorization-by-the-resource-server)
+    - [Identity Assurance ](#identity-assurance-)
+  - [Scope-based Attribute Selection](#scope-based-attribute-selection)
+    - [Scope-based Group Selection](#scope-based-group-selection)
+    - [Scope-Based Capability Selection](#scope-based-capability-selection)
+    - [Group-Based Capability Selection](#group-based-capability-selection)
+    - [Requesting Token Versions](#requesting-token-versions)
+  - [Security Considerations](#security-considerations)
+    - [Distribution of Trust](#distribution-of-trust)
+      - [Example](#example)
+    - [Token Verification](#token-verification)
+      - [Metadata lookup](#metadata-lookup)
+      - [Verification Example](#verification-example)
+    - [Token Validation](#token-validation)
+      - [Token Lifetime Guidance](#token-lifetime-guidance)
+      - [Refresh tokens and token revocation](#refresh-tokens-and-token-revocation)
+      - [Claim and Token validation](#claim-and-token-validation)
+    - [Operational Impact of Verification and Refresh](#operational-impact-of-verification-and-refresh)
+  - [Appendix](#appendix)
+    - [Discovery](#discovery)
+      - [What is Discovery (the metadata lookup process)?](#what-is-discovery-(the-metadata-lookup-process)?)
+      - [Well-known URIs](#well-known-uris)
+        - [The OpenID connect approach to well-known URIs](#the-openid-connect-approach-to-well-known-uris)
+        - [The OAuth approach to well-known URIs](#the-oauth-approach-to-well-known-uris)
+    - [OpenID Connect/OAuth authentication and authorization flows for WLCG](#openid-connect/oauth-authentication-and-authorization-flows-for-wlcg)
+        - [Confidential vs public clients](#confidential-vs-public-clients)
+        - [Authorization flows](#authorization-flows)
+        - [Authorization code flow](#authorization-code-flow)
+        - [Refresh token flow](#refresh-token-flow)
+        - [Device flow](#device-flow)
+        - [Client credentials flow](#client-credentials-flow)
+        - [Token exchange flow](#token-exchange-flow)
+    - [Examples](#examples)
+      - [Device flow token request example](#device-flow-token-request-example)
+      - [OAuth2 Auto-Discovery and Token Request](#oauth2-auto-discovery-and-token-request)
+      - [Example Identity Token](#example-identity-token)
+      - [Example Access Token with Groups ](#example-access-token-with-groups-)
+      - [Example Access Token with Authorization Scopes](#example-access-token-with-authorization-scopes)
+    - [Notes](#notes)
 
 
 # Introduction
@@ -867,9 +918,6 @@ scope=wlcg:1.0 wlcg.groups:/atlas/production
 A server may decide to honor the client's token format and version request, ignore the request and issue a token with a different format or version, or return an error.  A client SHOULD NOT assume the returned token has the requested version.
 
 If no specific version is requested, the server may utilize a default version for issued tokens or it may associate a default version with the OAuth client's registration.
-
-
-# 
 
 
 # Security Considerations
