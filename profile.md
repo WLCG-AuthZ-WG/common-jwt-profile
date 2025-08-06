@@ -43,8 +43,6 @@ _Authored by the WLCG AuthZ Working Group_
 
 # Table of Contents
 
-  - [WLCG Common JWT Profiles](#wlcg-common-jwt-profiles)
-  - [Table of Contents](#table-of-contents)
   - [Introduction](#introduction)
     - [Glossary](#glossary)
   - [WLCG Token Profile](#wlcg-token-profile)
@@ -53,8 +51,8 @@ _Authored by the WLCG AuthZ Working Group_
       - [ID Token Claims](#id-token-claims)
       - [Access Token Claims](#access-token-claims)
     - [Authorization](#authorization)
-      - [Capability-based Authorization](#-scope)
-      - [Group Based Authorization](#-wlcg.groups)
+      - [Capability-based Authorization: scope](#capability-based-authorization-scope)
+      - [Group Based Authorization: wlcg.groups](#group-based-authorization-wlcg.groups)
       - [Interpretation of Authorization by the Resource Server](#interpretation-of-authorization-by-the-resource-server)
     - [Identity Assurance](#identity-assurance)
   - [Scope-based Attribute Selection](#scope-based-attribute-selection)
@@ -75,11 +73,11 @@ _Authored by the WLCG AuthZ Working Group_
     - [Operational Impact of Verification and Refresh](#operational-impact-of-verification-and-refresh)
   - [Appendix](#appendix)
     - [Discovery](#discovery)
-      - [What is Discovery (the metadata lookup process)?](#what-is-discovery-(the-metadata-lookup-process)?)
+      - [What is Discovery (the metadata lookup process)?](#what-is-discovery-the-metadata-lookup-process)
       - [Well-known URIs](#well-known-uris)
         - [The OpenID connect approach to well-known URIs](#the-openid-connect-approach-to-well-known-uris)
         - [The OAuth approach to well-known URIs](#the-oauth-approach-to-well-known-uris)
-    - [OpenID Connect/OAuth authentication and authorization flows for WLCG](#openid-connect/oauth-authentication-and-authorization-flows-for-wlcg)
+    - [OpenID Connect/OAuth authentication and authorization flows for WLCG](#openid-connectoauth-authentication-and-authorization-flows-for-wlcg)
         - [Confidential vs public clients](#confidential-vs-public-clients)
         - [Authorization flows](#authorization-flows)
         - [Authorization code flow](#authorization-code-flow)
