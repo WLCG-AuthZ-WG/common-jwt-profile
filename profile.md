@@ -41,7 +41,57 @@ _Authored by the WLCG AuthZ Working Group_
   </tr>
 </table>
 
+# Table of Contents
 
+  - [Introduction](#introduction)
+    - [Glossary](#glossary)
+  - [WLCG Token Profile](#wlcg-token-profile)
+    - [WLCG Token Claims](#wlcg-token-claims)
+      - [Common Claims](#common-claims)
+      - [ID Token Claims](#id-token-claims)
+      - [Access Token Claims](#access-token-claims)
+    - [Authorization](#authorization)
+      - [Capability-based Authorization: scope](#capability-based-authorization-scope)
+      - [Group Based Authorization: wlcg.groups](#group-based-authorization-wlcggroups)
+      - [Interpretation of Authorization by the Resource Server](#interpretation-of-authorization-by-the-resource-server)
+    - [Identity Assurance](#identity-assurance)
+  - [Scope-based Attribute Selection](#scope-based-attribute-selection)
+    - [Scope-based Group Selection](#scope-based-group-selection)
+    - [Scope-Based Capability Selection](#scope-based-capability-selection)
+    - [Group-Based Capability Selection](#group-based-capability-selection)
+    - [Requesting Token Versions](#requesting-token-versions)
+  - [Security Considerations](#security-considerations)
+    - [Distribution of Trust](#distribution-of-trust)
+      - [Example](#example)
+    - [Token Verification](#token-verification)
+      - [Metadata lookup](#metadata-lookup)
+      - [Verification Example](#verification-example)
+    - [Token Validation](#token-validation)
+      - [Token Lifetime Guidance](#token-lifetime-guidance)
+      - [Refresh tokens and token revocation](#refresh-tokens-and-token-revocation)
+      - [Claim and Token validation](#claim-and-token-validation)
+    - [Operational Impact of Verification and Refresh](#operational-impact-of-verification-and-refresh)
+  - [Appendix](#appendix)
+    - [Discovery](#discovery)
+      - [What is Discovery (the metadata lookup process)?](#what-is-discovery-the-metadata-lookup-process)
+      - [Well-known URIs](#well-known-uris)
+        - [The OpenID connect approach to well-known URIs](#the-openid-connect-approach-to-well-known-uris)
+        - [The OAuth approach to well-known URIs](#the-oauth-approach-to-well-known-uris)
+    - [OpenID Connect/OAuth authentication and authorization flows for WLCG](#openid-connectoauth-authentication-and-authorization-flows-for-wlcg)
+        - [Confidential vs public clients](#confidential-vs-public-clients)
+        - [Authorization flows](#authorization-flows)
+        - [Authorization code flow](#authorization-code-flow)
+        - [Refresh token flow](#refresh-token-flow)
+        - [Device flow](#device-flow)
+        - [Client credentials flow](#client-credentials-flow)
+        - [Token exchange flow](#token-exchange-flow)
+    - [Examples](#examples)
+      - [Device flow token request example](#device-flow-token-request-example)
+      - [OAuth2 Auto-Discovery and Token Request](#oauth2-auto-discovery-and-token-request)
+      - [Example Identity Token](#example-identity-token)
+      - [Example Access Token with Groups](#example-access-token-with-groups)
+      - [Example Access Token with Authorization Scopes](#example-access-token-with-authorization-scopes)
+    - [Notes](#notes)
 
 # Introduction
 
@@ -424,7 +474,7 @@ The following additional claims are defined for WLCG ID Tokens. Other identity-r
 
 
 
-### Access Token Claims 
+### Access Token Claims
 
 The Access Token includes information about the authorization and rights the bearer is allowed to make use of. The Access Token is meant to be utilized on distributed services such as for storage or computing, whereas the ID Token is not intended to be sent to resource servers.
 
@@ -471,7 +521,7 @@ Claims defined by the WLCG Authorization Working Group should ideally be registe
 The token profile contains two different approaches to authorization - user attribute-based (e.g. groups or assurance) and capability-based.  
 
 
-### Capability-based Authorization: scope 
+### Capability-based Authorization: scope
 
 Authorization may be based on the scope[^8] claim.  The value of the scope claim is a list of space-delimited, case-sensitive strings (as in OAuth 2.0 Token Exchange [RFC 8693 Section 4.2](https://www.rfc-editor.org/rfc/rfc8693.html#section-4.2)) reflecting authorized activities the bearer of this token may perform. 
 
@@ -556,7 +606,7 @@ Example values of the `scope` claim:
 * `"storage.read:/store storage.create:/store/mc/datasetA"`  This would allow the bearer to read from `/store` and create new files (not overwriting existing data) in `/store/mc/datasetA`.
 
 
-### Group Based Authorization: wlcg.groups 
+### Group Based Authorization: wlcg.groups
 
 Authorization may be based on the `wlcg.groups` claim. The value of the `wlcg.groups` claim is an ordered JSON array of case-sensitive strings denoting VO groups of which the token subject is a member. 
 
@@ -609,7 +659,7 @@ then the service SHOULD make authorization decisions based on the
 group-membership statements.
 
 
-## Identity Assurance 
+## Identity Assurance
 
 The REFEDS Assurance Framework ([RAF v1.0](https://wiki.refeds.org/display/ASS/REFEDS+Assurance+Framework+ver+1.0)) splits assurance into three orthogonal components, namely, identifier uniqueness, identity assurance, and attribute assurance. For simplicity, RAF collapses the components into two assurance profiles Cappuccino and Espresso. [AARC-G021](https://wiki.geant.org/download/attachments/92573909/AARC-G021-Exchange-of-specific-assurance-information-between-Infrastructures.pdf) extends RAF with additional assurance profiles recommended to be used between infrastructures: IGTF-BIRCH, IGTF-DOGWOOD and a new specific profile addressing assurance derived from social-identity sources, AARC-Assam.
 
@@ -867,9 +917,6 @@ scope=wlcg:1.0 wlcg.groups:/atlas/production
 A server may decide to honor the client's token format and version request, ignore the request and issue a token with a different format or version, or return an error.  A client SHOULD NOT assume the returned token has the requested version.
 
 If no specific version is requested, the server may utilize a default version for issued tokens or it may associate a default version with the OAuth client's registration.
-
-
-# 
 
 
 # Security Considerations
@@ -1379,7 +1426,7 @@ Note this is a very minimal token for this JWT profile, contains no group inform
 In this example, the `nonce`, `preferred_username`, `name`, and `email` claims are derived from the OIDC core specification and follow the rules prescribed there.  For example, the OIDC specification states the relying party should NOT treat `preferred_username` as a unique identifier; this is also true in the WLCG profile.
 
 
-### Example Access Token with Groups 
+### Example Access Token with Groups
 
 
 ```
