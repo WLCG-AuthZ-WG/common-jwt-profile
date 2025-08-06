@@ -52,7 +52,7 @@ _Authored by the WLCG AuthZ Working Group_
       - [Access Token Claims](#access-token-claims)
     - [Authorization](#authorization)
       - [Capability-based Authorization: scope](#capability-based-authorization-scope)
-      - [Group Based Authorization: wlcg.groups](#group-based-authorization-wlcggroups)
+      - [Group Based Authorization: wlcg.groups](#group-based-authorization-wlcg-groups)
       - [Interpretation of Authorization by the Resource Server](#interpretation-of-authorization-by-the-resource-server)
     - [Identity Assurance](#identity-assurance)
   - [Scope-based Attribute Selection](#scope-based-attribute-selection)
@@ -605,6 +605,9 @@ Example values of the `scope` claim:
 * `"storage.stage:/tape/subdir storage.read:/protected/data"`  This would allow the bearer to read (and possibly stage) files in `/tape/subdir` and read files in `/protected/data`.
 * `"storage.read:/store storage.create:/store/mc/datasetA"`  This would allow the bearer to read from `/store` and create new files (not overwriting existing data) in `/store/mc/datasetA`.
 
+
+<!-- bespoke anchor to allow the ToC to work in MD as well as HTML via Pandoc -->
+<a id="group-based-authorization-wlcg-groups"></a>
 
 ### Group Based Authorization: wlcg.groups
 
