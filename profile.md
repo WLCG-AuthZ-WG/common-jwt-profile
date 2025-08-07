@@ -617,7 +617,7 @@ The `wlcg.groups` claim value SHALL be a JSON array of JSON strings,
 with each array element asserting membership of the group denoted by that element.
 A token MAY omit the `wlcg.groups` claim when its value would be an empty array.
 The user may provide input on the contents and ordering of this claim; 
-this is covered in [Scope-based Group Selection](#Scope-based-Group-Selection).
+this is covered in [Scope-based Group Selection](#scope-based-group-selection).
 
 The `wlcg.groups` claim provides functionality similar to that of VOMS extensions in an X.509 proxy.  For use cases that previously depended on the concept of VOMS _roles_ the `wlcg.groups` claim supports the concept of _optional groups_ instead.
 
@@ -819,7 +819,7 @@ If an entity is not entitled to a capability, the scope requested may be ignored
 
 An entity may be entitled to capabilities due to membership in a group. The entity may be a member of multiple default and optional groups, supported by a common implementation. In addition, a client shared by multiple entities may not know which capabilities are available to each entity, and the token issuer has that knowledge.
 
-To support this scenario, a `wlcg.capabilityset` scope MAY be included in the scope request to specify the group context.  The parameter given with the `wlcg.capabilityset` scope is exactly the same as the `group` used with `wlcg.groups` as specified in the [Common-Claims section](#Common-Claims) above.  This can determine the resulting `scope` claims in the issued token.
+To support this scenario, a `wlcg.capabilityset` scope MAY be included in the scope request to specify the group context.  The parameter given with the `wlcg.capabilityset` scope is exactly the same as the `group` used with `wlcg.groups` as specified in the [Common-Claims section](#common-claims) above.  This can determine the resulting `scope` claims in the issued token.
 
 Only one `wlcg.capabilityset` SHOULD be included in a single authorization request.  If additionally a scope is requested of the same type (for example `storage.read`) as a scope in the capability set, the explicitly requested scope SHOULD be processed as normal and may result in two scopes of the same type in the access token.  There is no provision for a requester to remove an individual capability from a capability set, but if there is a need for that the token issuer can define a different capability set or the scopes can be reduced later with a token exchange.
 
