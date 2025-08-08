@@ -1447,7 +1447,7 @@ In this example, the `nonce`, `preferred_username`, `name`, and `email` claims a
      From GFD-I.182, the VOMS spec for FQANs (Sect. 3.4.1.4)
 
 [^6]:
-     [AARC guidelines](https://aarc-project.eu/guidelines)
+     [AARC-G069](https://aarc-community.org/guidelines/aarc-g069/)
 
 [^7]:
      Such registrations could be made through IETF or appropriate bodies and made publicly available, e.g. see [OAuth parameter assignments](https://www.iana.org/assignments/oauth-parameters/oauth-parameters.xml)
@@ -1459,13 +1459,13 @@ In this example, the `nonce`, `preferred_username`, `name`, and `email` claims a
      RAF still refers to it as eduPersonAssurance, but it will probably change into `eduperson_assurance`, following the OIDCre whitepaper.
 
 [^10]:
-     [OIDC federation](https://openid.net/specs/openid-connect-federation-1_0.html)
+     [OpenID Federation](https://openid.net/specs/openid-federation-1_0.html)
 
 [^11]:
-     [OIDC discovery](https://openid.net/specs/openid-connect-discovery-1_0.html)
+     [OIDC Discovery](https://openid.net/specs/openid-connect-discovery-1_0.html)
 
 [^12]:
-     [OIDC registration](https://openid.net/specs/openid-connect-registration-1_0.html)
+     [OIDC Dynamic Client Registration](https://openid.net/specs/openid-connect-registration-1_0.html)
 
 [^13]:
      Note that the OpenID Connect Discovery paper highlights a mechanism that is NOT RFC 5785 compliant and is not aligned with the OAuth discovery standard. After some discussion, this group decided to embrace the OpenID Connect Discovery approach. More details are in the appendix.
