@@ -478,7 +478,7 @@ The following additional claims are defined for WLCG ID Tokens. Other identity-r
 
 The Access Token includes information about the authorization and rights the bearer is allowed to make use of. The Access Token is meant to be utilized on distributed services such as for storage or computing, whereas the ID Token is not intended to be sent to resource servers.
 
-The Access Token profile contains two different approaches to authorization - group membership-based and capability-based, see the paragraph 'Interpretation of Authorization by the Resource Server'.  
+The Access Token profile contains two different approaches to authorization - group membership-based and capability-based, see the section [Interpretation of Authorization by the Resource Server](#interpretation-of-authorization-by-the-resource-server).  
 
 When group membership is asserted, it is a statement that the bearer has the access privileges corresponding to the VO's listed groups: it is up to the resource to determine the mapping of the group names to the access privileges.  The technical profile of the group membership is described in the [Common Claims](#common-claims) section and not repeated here.
 
