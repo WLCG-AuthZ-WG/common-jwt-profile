@@ -1312,7 +1312,7 @@ Accept: */*
 Content-Length: 104
 Content-Type: application/x-www-form-urlencoded
 
-grant_type=urn:ietf:params:oauth:grant-type:device_code&device_code=da317e13-d881-4980-ad33-7f4db7169930
+grant_type=urn:ietf:params:oauth:grant-type:device_code&device_code=da317e13-[...]
 ```
 
 
