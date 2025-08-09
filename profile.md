@@ -480,7 +480,7 @@ The Access Token includes information about the authorization and rights the bea
 
 The Access Token profile contains two different approaches to authorization - group membership-based and capability-based, see the paragraph 'Interpretation of Authorization by the Resource Server'.  
 
-When group membership is asserted, it is a statement that the bearer has the access privileges corresponding to the VO's listed groups: it is up to the resource to determine the mapping of the group names to the access privileges.  The technical profile of the group membership is described in the [Common-Claims](#common-claims) section and not repeated here.
+When group membership is asserted, it is a statement that the bearer has the access privileges corresponding to the VO's listed groups: it is up to the resource to determine the mapping of the group names to the access privileges.  The technical profile of the group membership is described in the [Common Claims](#common-claims) section and not repeated here.
 
 When a capability is asserted, it is relative to the VO's coarse-grained authorization; the resource only maps the token to a VO, and then relies on the specified capability in the token for the fine-grained authorization within the VO's authorized area.  In this way, the VO, not the resource, manages the authorizations within its area.
 
@@ -819,7 +819,7 @@ If an entity is not entitled to a capability, the scope requested may be ignored
 
 An entity may be entitled to capabilities due to membership in a group. The entity may be a member of multiple default and optional groups, supported by a common implementation. In addition, a client shared by multiple entities may not know which capabilities are available to each entity, and the token issuer has that knowledge.
 
-To support this scenario, a `wlcg.capabilityset` scope MAY be included in the scope request to specify the group context.  The parameter given with the `wlcg.capabilityset` scope is exactly the same as the `group` used with `wlcg.groups` as specified in the [Common-Claims](#common-claims) section above.  This can determine the resulting `scope` claims in the issued token.
+To support this scenario, a `wlcg.capabilityset` scope MAY be included in the scope request to specify the group context.  The parameter given with the `wlcg.capabilityset` scope is exactly the same as the `group` used with `wlcg.groups` as specified in the [Common Claims](#common-claims) section above.  This can determine the resulting `scope` claims in the issued token.
 
 Only one `wlcg.capabilityset` SHOULD be included in a single authorization request.  If additionally a scope is requested of the same type (for example `storage.read`) as a scope in the capability set, the explicitly requested scope SHOULD be processed as normal and may result in two scopes of the same type in the access token.  There is no provision for a requester to remove an individual capability from a capability set, but if there is a need for that the token issuer can define a different capability set or the scopes can be reduced later with a token exchange.
 
