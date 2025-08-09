@@ -307,7 +307,7 @@ Suggested use cases for the <strong><code>sub</code></strong> claim are suspendi
    </td>
    <td>RFC7519 & OpenID Connect core
    </td>
-   <td>The issuer (<strong><code>iss</code></strong>) of the WLCG JWT. It MUST contain a unique URL for the organization; it is to be used in verification as described in the 'Token Verification' section. For WLCG this would be the VO.
+   <td>The issuer (<strong><code>iss</code></strong>) of the WLCG JWT. It MUST contain a unique URL for the organization; it is to be used in verification as described in the <a href="#token-verification">Token Verification</a> section. For WLCG this would be the VO.
 
    [^4] <!-- must follow a blank line to be recognized within an HTML table! -->
    </td>
@@ -360,7 +360,7 @@ The <strong><code>wlcg.ver</code></strong> claim corresponds to a version of thi
 <p>
 <code>groupname :: = [a-zA-Z0-9][a-zA-Z0-9_.-]*</code>
 <p>
-Usage of this claim is OPTIONAL. However, the <strong><code>wlcg.groups</code></strong> claim is REQUIRED in all tokens issued as a result of an OpenID Connect authentication flow in which wlcg.groups are requested via scopes and the subject is entitled to the groups in question. The group request mechanism is described in more detail in section 'Scope-based Attribute Selection' of this document.
+Usage of this claim is OPTIONAL. However, the <strong><code>wlcg.groups</code></strong> claim is REQUIRED in all tokens issued as a result of an OpenID Connect authentication flow in which wlcg.groups are requested via scopes and the subject is entitled to the groups in question. The group request mechanism is described in more detail in the <a href="#scope-based-group-selection">Scope-based Group Selection</a> section of this document.
 
 <em>Note: it is expected that a more verbose syntax and different claim (eduperson_entitlement), as recommended by <strong>AARC</strong> Guidelines, could also be required in the event that authorization information is exchanged with external Infrastructures.</em>
 
@@ -480,7 +480,7 @@ The Access Token includes information about the authorization and rights the bea
 
 The Access Token profile contains two different approaches to authorization - group membership-based and capability-based, see the paragraph 'Interpretation of Authorization by the Resource Server'.  
 
-When group membership is asserted, it is a statement that the bearer has the access privileges corresponding to the VO's listed groups: it is up to the resource to determine the mapping of the group names to the access privileges.  The technical profile of the group membership is described in the Common Claims section and not repeated here.
+When group membership is asserted, it is a statement that the bearer has the access privileges corresponding to the VO's listed groups: it is up to the resource to determine the mapping of the group names to the access privileges.  The technical profile of the group membership is described in the [Common-Claims](#common-claims) section and not repeated here.
 
 When a capability is asserted, it is relative to the VO's coarse-grained authorization; the resource only maps the token to a VO, and then relies on the specified capability in the token for the fine-grained authorization within the VO's authorized area.  In this way, the VO, not the resource, manages the authorizations within its area.
 
@@ -710,7 +710,7 @@ In the proposed model, there are two types of groups:
 
 Default groups are similar to VOMS groups, while optional groups resemble VOMS roles.
 
-A parametric wlcg.`groups` scope is introduced for group selection that has the following form:
+A parametric `wlcg.groups` scope is introduced for group selection that has the following form:
 
 
 ```
@@ -819,7 +819,7 @@ If an entity is not entitled to a capability, the scope requested may be ignored
 
 An entity may be entitled to capabilities due to membership in a group. The entity may be a member of multiple default and optional groups, supported by a common implementation. In addition, a client shared by multiple entities may not know which capabilities are available to each entity, and the token issuer has that knowledge.
 
-To support this scenario, a `wlcg.capabilityset` scope MAY be included in the scope request to specify the group context.  The parameter given with the `wlcg.capabilityset` scope is exactly the same as the `group` used with `wlcg.groups` as specified in the [Common-Claims section](#common-claims) above.  This can determine the resulting `scope` claims in the issued token.
+To support this scenario, a `wlcg.capabilityset` scope MAY be included in the scope request to specify the group context.  The parameter given with the `wlcg.capabilityset` scope is exactly the same as the `group` used with `wlcg.groups` as specified in the [Common-Claims](#common-claims) section above.  This can determine the resulting `scope` claims in the issued token.
 
 Only one `wlcg.capabilityset` SHOULD be included in a single authorization request.  If additionally a scope is requested of the same type (for example `storage.read`) as a scope in the capability set, the explicitly requested scope SHOULD be processed as normal and may result in two scopes of the same type in the access token.  There is no provision for a requester to remove an individual capability from a capability set, but if there is a need for that the token issuer can define a different capability set or the scopes can be reduced later with a token exchange.
 
@@ -953,11 +953,11 @@ A token MUST be a properly formatted JSON Web Token (JWT), as described by RFC 7
 
 The token MUST be signed with an asymmetric key (RSA- or EC-based signatures); the public key to use to verify the token signature MUST be determined with the following algorithm.
 
-*   Extract the `iss` claim from the unverified token, check that the issuer is among the trusted ones, and determine the JWKS URI using the approach described in the Metadata Lookup section in the Appendix.
+*   Extract the `iss` claim from the unverified token, check that the issuer is among the trusted ones, and determine the JWKS URI using the approach described in the [Metadata lookup](#metadata-lookup) subsection below.
 *   The content served through the JWKS URI MUST be compliant with RFC 7517.  It provides a list of public keys associated with the issuer.   The token MUST contain a key ID (`kid`) claim; the public key to use to verify the token signature MUST be identified by matching the token's `kid` claim with the corresponding key ID in the JWKS key set.
 *   Once the public key is determined, the verification of the token and its signature can proceed as outlined in RFC 7519.
 
-All communication between the resource and the issuer MUST be done over a valid HTTPS connection with hostname verification.  The token issuer SHOULD advertise the public key lifetime by setting the appropriate HTTP caching headers.  The Client SHOULD use HTTP headers to avoid unnecessary downloads. The recommended lifetime of the public key cache is specified in the section on Token Lifetime Guidance.  Client implementations SHOULD cache the public key for an authorization server for at least 1 hour, regardless of the server-provided value. Reducing the lifetime of a key will likely impact network traffic.
+All communication between the resource and the issuer MUST be done over a valid HTTPS connection with hostname verification.  The token issuer SHOULD advertise the public key lifetime by setting the appropriate HTTP caching headers.  The Client SHOULD use HTTP headers to avoid unnecessary downloads. The recommended lifetime of the public key cache is specified in the section on [Token Lifetime Guidance](#token-lifetime-guidance).  Client implementations SHOULD cache the public key for an authorization server for at least 1 hour, regardless of the server-provided value. Reducing the lifetime of a key will likely impact network traffic.
 
 
 ### Metadata lookup
@@ -968,7 +968,7 @@ That is, if the issuer is `https://dteam.wlcg.example`, then the server metadata
 
 The token issuer endpoint is a crucial point of trust between the service and the VO; hence, the TLS connection MUST be validated and verified according to best practices.  The trust roots will be needed by a wide variety of agents, including browser-based and terminal-based clients[^14].
 
-Signature algorithms are enumerated in [RFC 7518 section 3](https://www.rfc-editor.org/rfc/rfc7518.html#section-3).  The HMAC algorithms are incompatible with the WLCG JWT approach; implementations should use the recommended algorithms from the RFC (as of July 2018, this is ES256 or RS256; ES256 should be used when token length is a concern).  Changes to the allowable signature algorithms will be handled using the versioning mechanism described in the Token Validation section.
+Signature algorithms are enumerated in [RFC 7518 section 3](https://www.rfc-editor.org/rfc/rfc7518.html#section-3).  The HMAC algorithms are incompatible with the WLCG JWT approach; implementations should use the recommended algorithms from the RFC (as of July 2018, this is ES256 or RS256; ES256 should be used when token length is a concern).  Changes to the allowable signature algorithms will be handled using the versioning mechanism described in the [Claim and Token validation](#claim-and-token-validation) section.
 
 
 ### Verification Example
@@ -1100,7 +1100,7 @@ One would utilize the `iss` claim in the payload to download the set of public k
 </table>
 
 
-Note the combination of **nbf** (not before) (or **iat**) and **exp** (expiration) provides a notion of token valid lifetime.  WLCG token issuers MUST issue Access tokens with valid lifetime of less than 6 hours; they SHOULD aim for a token lifetime of 20 minutes.  Resource providers MUST NOT accept tokens that have validity longer than 6 hours.  As a pragmatic guard against minor clock skews, they SHOULD accept tokens that are expired since less than 60 seconds.  See the recommendations in [sections 5.3](https://tools.ietf.org/html/rfc6750#section-5.3) and [5.2](https://tools.ietf.org/html/rfc6750#section-5.2) in RFC 6750.  These tokens are purposely shorter-lived as they do not have a token revocation mechanism; the token lifetime should be shorter than the expected revocation response time for authorizations.
+Note the combination of **nbf** (not before) (or **iat**) and **exp** (expiration) provides a notion of token valid lifetime.  WLCG token issuers MUST issue Access tokens with valid lifetime of less than 6 hours; they SHOULD aim for a token lifetime of 20 minutes.  Resource providers MUST NOT accept tokens that have validity longer than 6 hours.  As a pragmatic guard against minor clock skews, they SHOULD accept tokens that are expired since less than 60 seconds.  See the recommendations in sections [5.3](https://tools.ietf.org/html/rfc6750#section-5.3) and [5.2](https://tools.ietf.org/html/rfc6750#section-5.2) in RFC 6750.  These tokens are purposely shorter-lived as they do not have a token revocation mechanism; the token lifetime should be shorter than the expected revocation response time for authorizations.
 
 
 ### Refresh tokens and token revocation
@@ -1291,7 +1291,8 @@ and, after having been authenticated, enter the following code when requested:
 41SGWX
 
 Note that the code above expires in 1800 seconds...
-Once you have correctly authenticated and authorized this device, this script can be restarted to obtain a token.
+Once you have correctly authenticated and authorized this device,
+this script can be restarted to obtain a token.
 
 Proceed? [Y/N] (CTRL-c to abort)
 ```
