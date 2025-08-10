@@ -43,57 +43,58 @@ _Authored by the WLCG AuthZ Working Group_
 
 # Table of Contents
 
-  - [Introduction](#introduction)
-    - [Glossary](#glossary)
-  - [WLCG Token Profile](#wlcg-token-profile)
-    - [WLCG Token Claims](#wlcg-token-claims)
-      - [Common Claims](#common-claims)
-      - [ID Token Claims](#id-token-claims)
-      - [Access Token Claims](#access-token-claims)
-    - [Authorization](#authorization)
-      - [Capability-based Authorization: scope](#capability-based-authorization-scope)
-      - [Group Based Authorization: wlcg.groups](#group-based-authorization-wlcggroups)
-      - [Interpretation of Authorization by the Resource Server](#interpretation-of-authorization-by-the-resource-server)
-    - [Identity Assurance](#identity-assurance)
-  - [Scope-based Attribute Selection](#scope-based-attribute-selection)
-    - [Scope-based Group Selection](#scope-based-group-selection)
-    - [Scope-Based Capability Selection](#scope-based-capability-selection)
-    - [Group-Based Capability Selection](#group-based-capability-selection)
-    - [Requesting Token Versions](#requesting-token-versions)
-  - [Security Considerations](#security-considerations)
-    - [Distribution of Trust](#distribution-of-trust)
-      - [Example](#example)
-    - [Token Verification](#token-verification)
-      - [Metadata lookup](#metadata-lookup)
-      - [Verification Example](#verification-example)
-    - [Token Validation](#token-validation)
-      - [Token Lifetime Guidance](#token-lifetime-guidance)
-      - [Refresh tokens and token revocation](#refresh-tokens-and-token-revocation)
-      - [Claim and Token validation](#claim-and-token-validation)
-    - [Operational Impact of Verification and Refresh](#operational-impact-of-verification-and-refresh)
-  - [Appendix](#appendix)
-    - [Discovery](#discovery)
-      - [What is Discovery (the metadata lookup process)?](#what-is-discovery-the-metadata-lookup-process)
-      - [Well-known URIs](#well-known-uris)
-        - [The OpenID connect approach to well-known URIs](#the-openid-connect-approach-to-well-known-uris)
-        - [The OAuth approach to well-known URIs](#the-oauth-approach-to-well-known-uris)
-    - [OpenID Connect/OAuth authentication and authorization flows for WLCG](#openid-connectoauth-authentication-and-authorization-flows-for-wlcg)
-        - [Confidential vs public clients](#confidential-vs-public-clients)
-        - [Authorization flows](#authorization-flows)
-        - [Authorization code flow](#authorization-code-flow)
-        - [Refresh token flow](#refresh-token-flow)
-        - [Device flow](#device-flow)
-        - [Client credentials flow](#client-credentials-flow)
-        - [Token exchange flow](#token-exchange-flow)
-    - [Examples](#examples)
-      - [Device flow token request example](#device-flow-token-request-example)
-      - [OAuth2 Auto-Discovery and Token Request](#oauth2-auto-discovery-and-token-request)
-      - [Example Identity Token](#example-identity-token)
-      - [Example Access Token with Groups](#example-access-token-with-groups)
-      - [Example Access Token with Authorization Scopes](#example-access-token-with-authorization-scopes)
-    - [Notes](#notes)
+  - [Introduction](#introduction)<a id="toc-000"></a>
+    - [Glossary](#glossary)<a id="toc-010"></a>
+  - [WLCG Token Profile](#wlcg-token-profile)<a id="toc-020"></a>
+    - [WLCG Token Claims](#wlcg-token-claims)<a id="toc-030"></a>
+      - [Common Claims](#common-claims)<a id="toc-040"></a>
+      - [ID Token Claims](#id-token-claims)<a id="toc-050"></a>
+      - [Access Token Claims](#access-token-claims)<a id="toc-060"></a>
+    - [Authorization](#authorization)<a id="toc-070"></a>
+      - [Capability-based Authorization: scope](#capability-based-authorization-scope)<a id="toc-080"></a>
+      - [Group Based Authorization: wlcg.groups](#group-based-authorization-wlcggroups)<a id="toc-090"></a>
+      - [Interpretation of Authorization by the Resource Server](#interpretation-of-authorization-by-the-resource-server)<a id="toc-100"></a>
+    - [Identity Assurance](#identity-assurance)<a id="toc-110"></a>
+  - [Scope-based Attribute Selection](#scope-based-attribute-selection)<a id="toc-120"></a>
+    - [Scope-based Group Selection](#scope-based-group-selection)<a id="toc-130"></a>
+    - [Scope-Based Capability Selection](#scope-based-capability-selection)<a id="toc-140"></a>
+    - [Group-Based Capability Selection](#group-based-capability-selection)<a id="toc-150"></a>
+    - [Requesting Token Versions](#requesting-token-versions)<a id="toc-160"></a>
+  - [Security Considerations](#security-considerations)<a id="toc-170"></a>
+    - [Distribution of Trust](#distribution-of-trust)<a id="toc-180"></a>
+      - [Example](#example)<a id="toc-190"></a>
+    - [Token Verification](#token-verification)<a id="toc-200"></a>
+      - [Metadata lookup](#metadata-lookup)<a id="toc-210"></a>
+      - [Verification Example](#verification-example)<a id="toc-220"></a>
+    - [Token Validation](#token-validation)<a id="toc-230"></a>
+      - [Token Lifetime Guidance](#token-lifetime-guidance)<a id="toc-240"></a>
+      - [Refresh tokens and token revocation](#refresh-tokens-and-token-revocation)<a id="toc-250"></a>
+      - [Claim and Token validation](#claim-and-token-validation)<a id="toc-260"></a>
+    - [Operational Impact of Verification and Refresh](#operational-impact-of-verification-and-refresh)<a id="toc-270"></a>
+  - [Appendix](#appendix)<a id="toc-280"></a>
+    - [Discovery](#discovery)<a id="toc-290"></a>
+      - [What is Discovery (the metadata lookup process)?](#what-is-discovery-the-metadata-lookup-process)<a id="toc-300"></a>
+      - [Well-known URIs](#well-known-uris)<a id="toc-310"></a>
+        - [The OpenID connect approach to well-known URIs](#the-openid-connect-approach-to-well-known-uris)<a id="toc-320"></a>
+        - [The OAuth approach to well-known URIs](#the-oauth-approach-to-well-known-uris)<a id="toc-330"></a>
+    - [OpenID Connect/OAuth authentication and authorization flows for WLCG](#openid-connectoauth-authentication-and-authorization-flows-for-wlcg)<a id="toc-340"></a>
+        - [Confidential vs public clients](#confidential-vs-public-clients)<a id="toc-350"></a>
+        - [Authorization flows](#authorization-flows)<a id="toc-360"></a>
+        - [Authorization code flow](#authorization-code-flow)<a id="toc-370"></a>
+        - [Refresh token flow](#refresh-token-flow)<a id="toc-380"></a>
+        - [Device flow](#device-flow)<a id="toc-390"></a>
+        - [Client credentials flow](#client-credentials-flow)<a id="toc-400"></a>
+        - [Token exchange flow](#token-exchange-flow)<a id="toc-410"></a>
+    - [Examples](#examples)<a id="toc-420"></a>
+      - [Device flow token request example](#device-flow-token-request-example)<a id="toc-430"></a>
+      - [OAuth2 Auto-Discovery and Token Request](#oauth2-auto-discovery-and-token-request)<a id="toc-440"></a>
+      - [Example Identity Token](#example-identity-token)<a id="toc-450"></a>
+      - [Example Access Token with Groups](#example-access-token-with-groups)<a id="toc-460"></a>
+      - [Example Access Token with Authorization Scopes](#example-access-token-with-authorization-scopes)<a id="toc-470"></a>
+    - [Notes](#notes)<a id="toc-480"></a>
 
 # Introduction
+([ToC](#toc-000))
 
 This document describes how WLCG users may use the available geographically distributed resources without X.509 credentials.  In this model, clients are issued with bearer tokens; these tokens are subsequently used to interact with resources.  The tokens may contain authorization groups and/or capabilities, according to the preference of the virtual organization (VO), applications, and relying parties.  Each VO acts as an _attribute authority_ with its own policies on the issuance and contents of tokens.
 
@@ -115,6 +116,7 @@ Items not addressed in detail in this document include how the issuer decides on
 
 
 ## Glossary
+([ToC](#toc-010))
 
 
 <table>
@@ -254,16 +256,19 @@ Each VO has its own membership criteria and each resource provider makes its own
 
 
 # WLCG Token Profile
+([ToC](#toc-020))
 
 A common set of claims is proposed for all WLCG tokens, with additional claims specified for both Identity and Access tokens. Operational experience in the wider community indicates that performance and compatibility issues with existing libraries may be experienced if large tokens are used; this claim set has been developed with claim length minimization as a priority.  
 
 
 ## WLCG Token Claims
+([ToC](#toc-030))
 
 This profile inherits from JSON Web Tokens at its base, including a specific claims language from RFC 7519. In this section, we outline the common WLCG-specific usage of the claims, for Access and ID Tokens, denoting any changes in claim criticality.
 
 
 ### Common Claims
+([ToC](#toc-040))
 
 The following claims may be included in both Access and Identity tokens.
 
@@ -430,6 +435,7 @@ Audiences of this form are preferred (as opposed to a human-readable "site name"
 If the relying party provides a non-HTTPS-based service, a URI should be used.  For example, an HTCondor-CE running at `condor.example.org` may use an audience of the form `condor://condor.example.org`.
 
 ### ID Token Claims
+([ToC](#toc-050))
 
 For the ID Token schema, we rely on the OpenID Connect (OIDC) standard, and in particular on the [core specification](https://openid.net/specs/openid-connect-core-1_0.html). OpenID Connect is "a simple identity layer on top of the OAuth 2.0 protocol. It allows Clients to verify the identity of the End-User based on the authentication performed by an Authorization Server, as well as to obtain basic profile information about the End-User in an interoperable and REST-like manner." (for more information on OpenID Connect, refer to [https://openid.net/connect/](https://openid.net/connect/)).  We expect the validation of these tokens to additionally follow the corresponding flows in the OIDC standard (see [ID token validation](https://openid.net/specs/openid-connect-core-1_0.html#IDTokenValidation) and [code flow token validation](https://openid.net/specs/openid-connect-core-1_0.html#CodeFlowTokenValidation)).
 
@@ -476,6 +482,7 @@ The following additional claims are defined for WLCG ID Tokens. Other identity-r
 
 
 ### Access Token Claims
+([ToC](#toc-060))
 
 The Access Token includes information about the authorization and rights the bearer is allowed to make use of. The Access Token is meant to be utilized on distributed services such as for storage or computing, whereas the ID Token is not intended to be sent to resource servers.
 
@@ -518,11 +525,13 @@ Claims defined by the WLCG Authorization Working Group should ideally be registe
 
 
 ## Authorization
+([ToC](#toc-070))
 
 The token profile contains two different approaches to authorization: user attribute-based (e.g. groups or identity assurance) and capability-based.  
 
 
 ### Capability-based Authorization: scope
+([ToC](#toc-080))
 
 Authorization may be based on the scope[^8] claim.  The value of the scope claim is a list of space-delimited, case-sensitive strings (as in OAuth 2.0 Token Exchange [RFC 8693 Section 4.2](https://www.rfc-editor.org/rfc/rfc8693.html#section-4.2)) reflecting authorized activities the bearer of this token may perform. 
 
@@ -608,6 +617,7 @@ Example values of the `scope` claim:
 
 
 ### Group Based Authorization: wlcg.groups
+([ToC](#toc-090))
 
 Authorization may be based on the `wlcg.groups` claim. The value of the `wlcg.groups` claim is an ordered JSON array of case-sensitive strings denoting VO groups of which the token subject is a member. 
 
@@ -623,6 +633,7 @@ this is covered in [Scope-based Group Selection](#scope-based-group-selection).
 The `wlcg.groups` claim provides functionality similar to that of VOMS extensions in an X.509 proxy.  For use cases that previously depended on the concept of VOMS _roles_ the `wlcg.groups` claim supports the concept of _optional groups_ instead.
 
 ### Interpretation of Authorization by the Resource Server
+([ToC](#toc-100))
 
 When groups are asserted (in an Access Token or ID Token, or both), it is a statement that the bearer has the access privileges corresponding to the VO's listed groups: it is up to the resource to determine the mapping of the group names to the access privileges.  
 
@@ -661,6 +672,7 @@ group-membership statements.
 
 
 ## Identity Assurance
+([ToC](#toc-110))
 
 The REFEDS Assurance Framework ([RAF v1.0](https://wiki.refeds.org/display/ASS/REFEDS+Assurance+Framework+ver+1.0)) splits assurance into three orthogonal components, namely, identifier uniqueness, identity assurance, and attribute assurance. For simplicity, RAF collapses the components into two assurance profiles Cappuccino and Espresso. [AARC-G021](https://wiki.geant.org/download/attachments/92573909/AARC-G021-Exchange-of-specific-assurance-information-between-Infrastructures.pdf) extends RAF with additional assurance profiles recommended to be used between infrastructures: IGTF-BIRCH, IGTF-DOGWOOD and a new specific profile addressing assurance derived from social-identity sources, AARC-Assam.
 
@@ -670,11 +682,13 @@ In the case of this profile, identity assurance information will be sent by the 
 
 
 # Scope-based Attribute Selection
+([ToC](#toc-120))
 
 As defined in Section 3.3 of the OAuth 2.0 specification [RFC6749], 'scopes' can be used to request that specific sets of information be made available as Claim Values. For WLCG, scopes are envisaged for requesting the inclusion of authorization information, returned as instances of the `wlcg.groups` claim and/or the `scope` claim (to convey capabilities). Scopes are also defined to request specific versions of the WLCG token schema.
 
 
 ## Scope-based Group Selection
+([ToC](#toc-130))
 
 VOMS provides two main attribute types:
 
@@ -779,6 +793,7 @@ In the following examples, '/cms' is the only default group.
 
 
 ## Scope-Based Capability Selection
+([ToC](#toc-140))
 
 Each desired capability should be requested in the scope request, following the recommendations of section 3.3 of RFC 6749. 
 
@@ -817,6 +832,7 @@ If an entity is not entitled to a capability, the scope requested may be ignored
 
 
 ## Group-Based Capability Selection
+([ToC](#toc-150))
 
 An entity may be entitled to capabilities due to membership in a group. The entity may be a member of multiple default and optional groups, supported by a common implementation. In addition, a client shared by multiple entities may not know which capabilities are available to each entity, and the token issuer has that knowledge.
 
@@ -896,6 +912,7 @@ Since the user is a member of multiple default groups and is also a member of th
 
 
 ## Requesting Token Versions
+([ToC](#toc-160))
 
 To support future evolutions of the WLCG token format, a client may add the requested token format as part of the scope request.  A client wanting to receive a WLCG token should add the `wlcg` scope to its requests.  If the client wants a specific version of a WLCG token, it should additionally append a `:` character and the version number (e.g., `wlcg:1.0` for a version 1.0 token).
 
@@ -921,9 +938,11 @@ If no specific version is requested, the server may utilize a default version fo
 
 
 # Security Considerations
+([ToC](#toc-170))
 
 
 ## Distribution of Trust
+([ToC](#toc-180))
 
 Within OAuth2 and OpenID Connect, clients need to fully trust the Authorization Servers (AS) or OpenID Connect providers (OP); in our model, these are under the control of the VOs. At the same time, the issuers need to trust the clients to the point that they are willing to hand them a token on behalf of the end-users. Within the X.509 federation as used thus far, this distribution of trust was covered by the IGTF (Interoperable Global Trust Federation) and the e-Infrastructures distributing the set of trusted CAs; in the SAML world, this exchange of trust is handled by the different national federations and by eduGAIN on a global scale in the form of signed metadata exchange. On the other hand, OAuth2 and OIDC so far had very little use for a global trust federation, being used primarily by large social networks, whose business model presumes a single source of identity information (their own), and who typically allow any authenticated user to register new clients without further authorization, leveraging user consent to handle the trust and relying on the familiarity of the users with the limited number of OPs and ASes (everyone knows Google and Facebook). In the R&E context, such a model is not workable: eduGAIN currently has close to 3000 IdPs and close to 2000 SPs requiring additional means of trust. One way is to require explicit approval of clients by the OP and AS operators, similar to what is done within (full mesh) SAML federations, but it was realized that such explicit approval will also not scale if the number of clients and OPs will start to grow. For OIDC, there is currently an effort to create an OIDC federation[^10] which describes a way to distribute and delegate trust by forming 'federations' and 'sub-federations'. By leveraging the OIDC discovery[^11] and OIDC dynamic registration[^12] specifications this then provides a way of automatically obtaining a client ID and secret from OPs in the same OIDC federation.
 
@@ -931,6 +950,7 @@ For the WLCG, we foresee a limited number of registered OAuth2 clients, a small 
 
 
 ### Example
+([ToC](#toc-190))
 
 A typical storage service must be able to map a token issuer (which corresponds to a single VO) to an area within the storage that the issuer is allowed to issue authorizations for.  As an example, the XRootD implementation for JWT-based authorization has the following format:
 
@@ -949,6 +969,7 @@ Here, the service administrator explicitly lists the issuers they trust (such as
 
 
 ## Token Verification
+([ToC](#toc-200))
 
 A token MUST be a properly formatted JSON Web Token (JWT), as described by RFC 7519.  In this subsection, we describe a mechanism to verify the token's authenticity in line with the standard.
 
@@ -962,6 +983,7 @@ All communication between the resource and the issuer MUST be done over a valid 
 
 
 ### Metadata lookup
+([ToC](#toc-210))
 
 All token issuers for the WLCG MUST follow the rules defined in the [OpenID Connect discovery standard](https://openid.net/specs/openid-connect-discovery-1_0.html), i.e. provide the server metadata at the `.well-known/openid-configuration` sub-resource[^13].
 
@@ -973,6 +995,7 @@ Signature algorithms are enumerated in [RFC 7518 section 3](https://www.rfc-edit
 
 
 ### Verification Example
+([ToC](#toc-220))
 
 The RP needs to get hold of the `https://dteam.wlcg.example` issuer's keys for remote verification (which is necessary for scalability). For verification, a _minimal_ OIDC discovery configuration file would be:
 
@@ -1032,9 +1055,11 @@ One would utilize the `iss` claim in the payload to download the set of public k
 
 
 ## Token Validation
+([ToC](#toc-230))
 
 
 ### Token Lifetime Guidance
+([ToC](#toc-240))
 
 
 <table>
@@ -1105,6 +1130,7 @@ Note the combination of **nbf** (not before) (or **iat**) and **exp** (expiratio
 
 
 ### Refresh tokens and token revocation
+([ToC](#toc-250))
 
 Refresh tokens are credentials that can be used by client applications to obtain new access or ID tokens (when such tokens are about to expire) or to obtain access tokens with identical or narrower scope from an OAuth Authorization Server. Unlike access tokens, refresh tokens are intended for use only with authorization servers and are never sent to resource servers. Furthermore, the client needs to authenticate at the Authorization Server using its client credentials when using its refresh tokens.
 
@@ -1118,6 +1144,7 @@ To contain security incidents related to the leakage of refresh tokens, it is re
 
 
 ### Claim and Token validation
+([ToC](#toc-260))
 
 The claims in a WLCG token are meant to indicate an identity or manage access to a resource.  For example, in the authorization schema, additional claims might add restrictions to the corresponding bearer's authorizations: if an unknown claim is skipped, the resource provider may inadvertently offer overly broad authorizations.  On the other hand, requiring _all_ claims to be processed may reduce the flexibility and ability to add future features.
 
@@ -1129,6 +1156,7 @@ Additionally, signature algorithms RS256 and ES256 MUST be supported.
 
 
 ## Operational Impact of Verification and Refresh
+([ToC](#toc-270))
 
 For operational stability and scalability, it would be desirable to put reasonable constraints on the frequency at which token-issuing services need to be contacted by the vast majority of relevant workflows.
 
@@ -1142,12 +1170,15 @@ As refresh tokens are longer-lived, different considerations apply to them. Firs
 
 
 # Appendix
+([ToC](#toc-280))
 
 
 ## Discovery
+([ToC](#toc-290))
 
 
 ### What is Discovery (the metadata lookup process)?
+([ToC](#toc-300))
 
 For the [OpenID connect discovery standard](https://openid.net/specs/openid-connect-discovery-1_0.html) it is "a mechanism for an OpenID Connect Relying Party to discover the End-User's OpenID Provider and obtain information needed to interact with it, including its OAuth 2.0 endpoint locations."
 
@@ -1155,11 +1186,13 @@ For the [OAuth authorization server metadata](https://datatracker.ietf.org/doc/d
 
 
 ### Well-known URIs
+([ToC](#toc-310))
 
 According to [RFC 5785](https://www.rfc-editor.org/rfc/rfc5785.html), a well-known URI is a URI whose path component begins with the characters '/.well-known/', and whose scheme is "HTTP", "HTTPS", or another scheme that has explicitly been specified to use well-known URIs.
 
 
 #### The OpenID connect approach to well-known URIs
+([ToC](#toc-320))
 
 The OpenID Connect discovery mechanism states that the well-known URI for an OpenID Connect provider is computed as follows (assuming the client knows the Issuer string of such provider):
 
@@ -1172,6 +1205,7 @@ As clarified [here](https://openid.net/specs/openid-connect-discovery-1_0.html#P
 
 
 #### The OAuth approach to well-known URIs
+([ToC](#toc-330))
 
 The [OAuth authorization server metadata standard](https://www.rfc-editor.org/rfc/rfc8414.html#section-3) states that:
 
@@ -1188,11 +1222,13 @@ For multi-tenant OpenID Connect providers, WLCG AuthZ WG should recommend that a
 
 
 ## OpenID Connect/OAuth authentication and authorization flows for WLCG
+([ToC](#toc-340))
 
 This appendix provides a brief introduction to the main authentication/authorization flows provided by OpenID Connect and OAuth that will be used by WLCG services to integrate token-based authentication and authorization.
 
 
 #### Confidential vs public clients
+([ToC](#toc-350))
 
 The OAuth specification defines two client application types (confidential and public) based on their ability to authenticate securely with the authorization server:
 
@@ -1205,6 +1241,7 @@ Some authorization flows or capabilities are available only to confidential clie
 
 
 #### Authorization flows
+([ToC](#toc-360))
 
 <div style="text-align: center"><img src="authorization_flows.png" style="width: 50vw"/></div>
 
@@ -1215,6 +1252,7 @@ OAuth is about delegating access to resources to third-party applications. This 
 
 
 #### Authorization code flow
+([ToC](#toc-370))
 
 The authorization code flow is defined in [RFC 6749](https://www.rfc-editor.org/rfc/rfc6749.html#section-4.1 ) and extended in the [OpenID Connect core specification](https://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth ). This flow is used to obtain access tokens, ID tokens and refresh tokens and is optimized for confidential clients (i.e., server-side applications).
 
@@ -1222,6 +1260,7 @@ In WLCG, we require the use of the OpenID Connect version of the code flow, as d
 
 
 #### Refresh token flow
+([ToC](#toc-380))
 
 The [refresh token flow](https://www.rfc-editor.org/rfc/rfc6749.html#section-6) is also targeted at confidential clients and is used to obtain new access tokens when tokens are expired or about to expire. This flow does not require the user's presence and is mainly used to support offline activities, when a client application needs to act on behalf of a user for a possibly unbounded amount of time.
 
@@ -1229,24 +1268,29 @@ Refresh tokens can be obtained using any flow that supports them (e.g., the auth
 
 
 #### Device flow
+([ToC](#toc-390))
 
 The [device flow](https://tools.ietf.org/html/draft-ietf-oauth-device-flow-15) is an authorization flow developed in support of devices with limited input capabilities. In WLCG, we will use this flow mainly to support command line interface (CLI) applications, while preserving the flexibility of using a browser for the user authentication flow.
 
 
 #### Client credentials flow
+([ToC](#toc-400))
 
 Sometimes client applications need to interact with services in a way that is not bound to any specific user, but to the client application itself. In support of this use case OAuth provides the [client credentials flow](https://www.rfc-editor.org/rfc/rfc6749.html#section-4.4).
 
 
 #### Token exchange flow
+([ToC](#toc-410))
 
 The [OAuth 2.0 Token Exchange](https://www.rfc-editor.org/rfc/rfc8693.html) flow can be used to implement delegation and token privileges attenuation across a chain of services.
 
 
 ## Examples
+([ToC](#toc-420))
 
 
 ### Device flow token request example
+([ToC](#toc-430))
 
 The OAuth device code flow enables OAuth on devices that have internet connectivity but lack a browser or an easy way to enter text. In this flow, the device instructs the user to open a URL on a secondary device such as a smartphone or computer in order to complete the authorization. There is no communication channel required between the user's two devices.
 
@@ -1334,6 +1378,7 @@ And gets back the requested tokens:
 
 
 ### OAuth2 Auto-Discovery and Token Request
+([ToC](#toc-440))
 
 Suppose an end-user would like to request a token from the issuer at [https://cmsweb.cern.ch](https://cmsweb.cern.ch).  First, auto-discovery must be performed at the endpoint to determine the token issuer:
 
@@ -1396,6 +1441,7 @@ Note this is a very minimal token for this JWT profile, contains no group inform
 
 
 ### Example Identity Token
+([ToC](#toc-450))
 
 
 ```
@@ -1429,6 +1475,7 @@ In this example, the `nonce`, `preferred_username`, `name`, and `email` claims a
 
 
 ### Example Access Token with Groups
+([ToC](#toc-460))
 
 
 ```
@@ -1456,6 +1503,7 @@ In this example, the `nonce`, `preferred_username`, `name`, and `email` claims a
 
 
 ### Example Access Token with Authorization Scopes
+([ToC](#toc-470))
 
 
 ```
@@ -1479,6 +1527,7 @@ In this example, the `nonce`, `preferred_username`, `name`, and `email` claims a
 
 <!-- Footnotes themselves at the bottom. -->
 ## Notes
+([ToC](#toc-480))
 
 [^1]:
      [RFC 6749 section 1.4](https://www.rfc-editor.org/rfc/rfc6749.html#section-1.4)
