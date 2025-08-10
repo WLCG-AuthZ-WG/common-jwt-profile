@@ -43,7 +43,7 @@ _Authored by the WLCG AuthZ Working Group_
 
 # Table of Contents
 
-  - [Introduction](#introduction)
+  - [Introduction](#introduction)<a id="toc-introduction"></a>
     - [Glossary](#glossary)
   - [WLCG Token Profile](#wlcg-token-profile)
     - [WLCG Token Claims](#wlcg-token-claims)
@@ -94,6 +94,7 @@ _Authored by the WLCG AuthZ Working Group_
     - [Notes](#notes)
 
 # Introduction
+[&#x21A9;](#toc-introduction)
 
 This document describes how WLCG users may use the available geographically distributed resources without X.509 credentials.  In this model, clients are issued with bearer tokens; these tokens are subsequently used to interact with resources.  The tokens may contain authorization groups and/or capabilities, according to the preference of the virtual organization (VO), applications, and relying parties.  Each VO acts as an _attribute authority_ with its own policies on the issuance and contents of tokens.
 
