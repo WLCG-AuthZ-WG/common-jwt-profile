@@ -109,9 +109,9 @@ We do not see the VO-based identity being authenticated from a bespoke username/
 
 Note that the authorization model is VO-centric: the VO is authorizing access to its distributed pool of resources. The user authentication and the resource authorization are independent in such a way that a user authenticating with e.g. a SAML (Security Assertion Markup Language) assertion issued by their home organization with a certain validity period may be provisioned by the VO with an OAuth2 Access Token with a different validity period.
 
-Although VOs could implement their own solutions according to an agreed specification, it is hoped that a common implementation can be used (analogous to how VOMS-Admin is operated at CERN).
+Although VOs could implement their own solutions according to an agreed specification, it is hoped that a common implementation can be used (analogous to how VOMS-Admin was operated at CERN).
 
-One item not addressed in detail in this document is how the issuer decides on whether to issue a token - and how the token transits from the issuer to the client.  It is envisioned that Access and ID Tokens linked to a user identity be acquired through OIDC flows and that WLCG VOs will decide on their issuing policy. An exception to this is the OAuth2 Client Credential Authentication flow, since there is no user identity associated with the client. OAuth2 flows may be used following OIDC authentication, for example for token exchange or introspection. A description of these flows is provided in the Appendix.
+Items not addressed in detail in this document include how the issuer decides on whether to issue a token and how the token transits from the issuer to the client.  It is envisioned that Access and ID Tokens linked to a user identity be acquired through OIDC flows and that WLCG VOs will decide on their issuing policy. An exception to this is the OAuth2 Client Credential Authentication flow, since there is no user identity associated with the client. OAuth2 flows may be used following OIDC authentication, for example for token exchange or introspection. A description of these flows is provided in the Appendix.
 
 
 ## Glossary
@@ -320,6 +320,7 @@ Suggested use cases for the <strong><code>sub</code></strong> claim are suspendi
    <td>WLCG AuthZ WG
    </td>
    <td>We add the <strong><code>wlcg.ver</code></strong> claim to denote the version of the WLCG token profile the relying party must understand to validate the token (claim validation is covered in the next section).  <strong><code>wlcg.ver</code></strong> names MUST comply with the following grammar: 
+<p>
 <code>vername ::= [0-9]+\.[0-9]+</code>
 <p>
 The <strong><code>wlcg.ver</code></strong> claim corresponds to a version of this document. The initial version of this document constituted version '1.0'. Although versions are expected to be treated as strings, we adopt a numeric format for simplicity. 
@@ -478,7 +479,7 @@ The following additional claims are defined for WLCG ID Tokens. Other identity-r
 
 The Access Token includes information about the authorization and rights the bearer is allowed to make use of. The Access Token is meant to be utilized on distributed services such as for storage or computing, whereas the ID Token is not intended to be sent to resource servers.
 
-The Access Token profile contains two different approaches to authorization - group membership-based and capability-based, see the section [Interpretation of Authorization by the Resource Server](#interpretation-of-authorization-by-the-resource-server).  
+The Access Token profile contains two different approaches to authorization: group membership-based and capability-based, see the section [Interpretation of Authorization by the Resource Server](#interpretation-of-authorization-by-the-resource-server).  
 
 When group membership is asserted, it is a statement that the bearer has the access privileges corresponding to the VO's listed groups: it is up to the resource to determine the mapping of the group names to the access privileges.  The technical profile of the group membership is described in the [Common Claims](#common-claims) section and not repeated here.
 
@@ -518,7 +519,7 @@ Claims defined by the WLCG Authorization Working Group should ideally be registe
 
 ## Authorization
 
-The token profile contains two different approaches to authorization - user attribute-based (e.g. groups or assurance) and capability-based.  
+The token profile contains two different approaches to authorization: user attribute-based (e.g. groups or identity assurance) and capability-based.  
 
 
 ### Capability-based Authorization: scope
@@ -697,9 +698,9 @@ We propose to use **scopes** to implement an attribute selection mechanism equiv
 
 
 
-*   [https://openid.net/specs/openid-connect-core-1_0.html#ScopeClaims](https://openid.net/specs/openid-connect-core-1_0.html#ScopeClaims)
+*   [OIDC Scope Claims](https://openid.net/specs/openid-connect-core-1_0.html#ScopeClaims)
 
-where scopes are defined and mapped to claims that are returned in access tokens, ID tokens, and results for [userinfo endpoint](https://openid.net/specs/openid-connect-core-1_0.html#UserInfo) and [token introspection](https://www.rfc-editor.org/rfc/rfc7662.html)requests.
+where scopes are defined and mapped to claims that are returned in access tokens, ID tokens, and results for [userinfo endpoint](https://openid.net/specs/openid-connect-core-1_0.html#UserInfo) and [token introspection](https://www.rfc-editor.org/rfc/rfc7662.html) requests.
 
 In the proposed model, there are two types of groups:
 
@@ -926,7 +927,7 @@ If no specific version is requested, the server may utilize a default version fo
 
 Within OAuth2 and OpenID Connect, clients need to fully trust the Authorization Servers (AS) or OpenID Connect providers (OP); in our model, these are under the control of the VOs. At the same time, the issuers need to trust the clients to the point that they are willing to hand them a token on behalf of the end-users. Within the X.509 federation as used thus far, this distribution of trust was covered by the IGTF (Interoperable Global Trust Federation) and the e-Infrastructures distributing the set of trusted CAs; in the SAML world, this exchange of trust is handled by the different national federations and by eduGAIN on a global scale in the form of signed metadata exchange. On the other hand, OAuth2 and OIDC so far had very little use for a global trust federation, being used primarily by large social networks, whose business model presumes a single source of identity information (their own), and who typically allow any authenticated user to register new clients without further authorization, leveraging user consent to handle the trust and relying on the familiarity of the users with the limited number of OPs and ASes (everyone knows Google and Facebook). In the R&E context, such a model is not workable: eduGAIN currently has close to 3000 IdPs and close to 2000 SPs requiring additional means of trust. One way is to require explicit approval of clients by the OP and AS operators, similar to what is done within (full mesh) SAML federations, but it was realized that such explicit approval will also not scale if the number of clients and OPs will start to grow. For OIDC, there is currently an effort to create an OIDC federation[^10] which describes a way to distribute and delegate trust by forming 'federations' and 'sub-federations'. By leveraging the OIDC discovery[^11] and OIDC dynamic registration[^12] specifications this then provides a way of automatically obtaining a client ID and secret from OPs in the same OIDC federation.
 
-For the WLCG, we foresee a limited number of registered OAuth2 clients - a small number per supported VO.  This registration may be done via federation or out-of-band mechanisms; registration is not prescribed here.  There will be a large number of unregistered resource servers that will need to verify the issued token; this verification is described in the next section.  Additional features - web-based federated login, token inspection, or token exchange - will require registration, pragmatically limiting these features to the VOs.
+For the WLCG, we foresee a limited number of registered OAuth2 clients, a small number per supported VO.  This registration may be done via federation or out-of-band mechanisms; registration is not prescribed here.  There will be a large number of unregistered resource servers that will need to verify the issued token; this verification is described in the next section.  Additional features like web-based federated login, token inspection, or token exchange, will require registration, pragmatically limiting these features to the VOs.
 
 
 ### Example
@@ -1298,7 +1299,7 @@ Proceed? [Y/N] (CTRL-c to abort)
 ```
 
 
-The user can then authenticate with his browser and grant access to the device client. Once the authentication flow on the browser is complete, the user comes back to her terminal and types Y to proceed.
+The user can then authenticate with their browser and grant access to the device client. Once the authentication flow on the browser is complete, the user comes back to their terminal and types Y to proceed.
 
 The script then submits the following HTTP request:
 
