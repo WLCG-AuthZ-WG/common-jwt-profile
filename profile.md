@@ -380,7 +380,7 @@ Usage of this claim is OPTIONAL. However, the <strong><code>wlcg.groups</code></
    </td>
    <td>RFC7519 & OpenID Connect core
    </td>
-   <td>The <strong><code>aud</code></strong> claim represents the audience or audiences the token is intended for. In the general case, the <strong><code>aud</code></strong> value is an array of case-sensitive strings. As specified in <a href="https://www.rfc-editor.org/rfc/rfc7519.html#section-4.1.3" target="_blank">RFC 7519 section 4.1.3</a>, in the common special case when there is one audience, the aud value MAY be a single case-sensitive string. The special string value of 'https://wlcg.cern.ch/jwt/v1/any' signifies that the issuer intends the token to be valid for all relying parties.  See the discussion below for further guidance on picking values for the `aud` claim.
+   <td>The <strong><code>aud</code></strong> claim represents the audience or audiences the token is intended for. In the general case, the <strong><code>aud</code></strong> value is an array of case-sensitive strings. As specified in <a href="https://www.rfc-editor.org/rfc/rfc7519.html#section-4.1.3" target="_blank">RFC 7519 section 4.1.3</a>, in the common special case when there is one audience, the aud value MAY be a single case-sensitive string. The special string value of 'https://wlcg.cern.ch/jwt/v1/any' signifies that the issuer intends the token to be valid for all relying parties.  See the discussion below for further guidance on picking values for the <code>aud</code> claim.
    </td>
    <td>Required
    </td>
@@ -492,7 +492,7 @@ When group membership is asserted, it is a statement that the bearer has the acc
 
 When a capability is asserted, it is relative to the VO's coarse-grained authorization; the resource only maps the token to a VO, and then relies on the specified capability in the token for the fine-grained authorization within the VO's authorized area.  In this way, the VO, not the resource, manages the authorizations within its area.
 
-An access token SHOULD include at least the <strong><code>scope</code></strong> or <strong><code>wlcg.groups</code></strong> claim.
+An access token SHOULD include at least the **`scope`** or **`wlcg.groups`** claim.
 
 The following additional claims are defined for Access Tokens.
 
@@ -1148,9 +1148,9 @@ To contain security incidents related to the leakage of refresh tokens, it is re
 
 The claims in a WLCG token are meant to indicate an identity or manage access to a resource.  For example, in the authorization schema, additional claims might add restrictions to the corresponding bearer's authorizations: if an unknown claim is skipped, the resource provider may inadvertently offer overly broad authorizations.  On the other hand, requiring _all_ claims to be processed may reduce the flexibility and ability to add future features.
 
-To handle this challenge, each token MUST provide a <strong><code>wlcg.ver</code></strong> (version) attribute, whose value corresponds to an enumerated set of claims described earlier in this document.  For that version of the token format, the corresponding claims MUST be handled by the implementation.  Any additional claim present MUST be ignored (for access tokens, these claims MUST NOT be used in authorization decisions).
+To handle this challenge, each token MUST provide a **`wlcg.ver`** (version) attribute, whose value corresponds to an enumerated set of claims described earlier in this document.  For that version of the token format, the corresponding claims MUST be handled by the implementation.  Any additional claim present MUST be ignored (for access tokens, these claims MUST NOT be used in authorization decisions).
 
-Each client library implementation MUST know the versions it supports; if it encounters a token whose <strong><code>wlcg.ver</code></strong> value is not supported by the implementation, the token MUST be rejected as invalid.
+Each client library implementation MUST know the versions it supports; if it encounters a token whose **`wlcg.ver`** value is not supported by the implementation, the token MUST be rejected as invalid.
 
 Additionally, signature algorithms RS256 and ES256 MUST be supported.
 
