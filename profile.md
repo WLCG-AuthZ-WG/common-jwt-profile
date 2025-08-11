@@ -517,7 +517,7 @@ target="_blank">RFC 7519 section 4.1.3</a>, in the common special case when
 there is one audience, the aud value MAY be a single case-sensitive string.
 The special string value of 'https://wlcg.cern.ch/jwt/v1/any' signifies that
 the issuer intends the token to be valid for all relying parties.  See the
-discussion below for further guidance on picking values for the <code>aud<code> claim.
+discussion below for further guidance on picking values for the <code>aud</code> claim.
    </td>
    <td>Required
    </td>
