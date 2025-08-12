@@ -602,18 +602,17 @@ When rendered in JSON, the value of the `scope` claim should be a space-separate
 
 Example values of the `scope` claim:
 
-* `"storage.read:/"  `This would allow a job (or any bearer) to read any file owned by the VO.
-* `"storage.read:/protected storage.create:/protected/subdir"` This
-    allows a job to read data in the `/protected` subdirectory, and
-    create and manage content in the `/protected/subdir` subdirectory,
-    provided the operations are non-destructive.
-* `"storage.read:/protected storage.modify:/protected/subdir"` This
-    allows a job to read the VO's data in the `/protected`
+* **`"storage.read:/"`** - This allows the bearer to read any file owned by the VO.
+* **`"storage.read:/protected storage.create:/protected/subdir"`** - This
+    allows the bearer to read data in the `/protected` subdirectory, and
+    create new content in the `/protected/subdir` subdirectory
+    without affecting existing data.
+* **`"storage.read:/protected storage.modify:/protected/subdir"`** - This
+    allows the bearer to read the VO's data in the `/protected`
     subdirectory, as well as create, manage, and delete content in the
     `/protected/subdir` directory.
-* `"compute.create"`  This would allow the bearer to submit jobs to a batch system on behalf of the issuing VO.
-* `"storage.stage:/tape/subdir storage.read:/protected/data"`  This would allow the bearer to read (and possibly stage) files in `/tape/subdir` and read files in `/protected/data`.
-* `"storage.read:/store storage.create:/store/mc/datasetA"`  This would allow the bearer to read from `/store` and create new files (not overwriting existing data) in `/store/mc/datasetA`.
+* **`"storage.stage:/tape/subdir storage.read:/protected/data"`** - This allows the bearer to stage and/or read files in `/tape/subdir` and read files in `/protected/data`.
+* **`"compute.create"`** - This allows the bearer to submit jobs to a batch system on behalf of the issuing VO.
 
 
 ### Group Based Authorization: wlcg.groups
