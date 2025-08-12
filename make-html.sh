@@ -15,6 +15,7 @@ pandoc -o $out -css profile.css profile.md &&
 	s/\xE2\x80\x9D/&rdquo\;/g;
 	s/\xE2\x80\x98/&lsquo\;/g;
 	s/\xE2\x80\x99/&rsquo\;/g;
+	s/\xE2\x80\x94/&mdash\;/g;
 	s/\xC2\xA0/&nbsp\;/g;
 	s/(<a [^>]+>)\xE2\x86\xA9\xEF\xB8\x8E/&nbsp;&nbsp;&nbsp;$1&#x21A9\;/g;
     ' $out
