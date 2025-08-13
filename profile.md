@@ -471,14 +471,29 @@ For a given storage resource, the defined authorizations include:
     This allows the same token to be used for both operations, while
     avoiding the need to include the `storage.read` scope for every given
     path in addition.
-    The `storage.stage` scope also authorizes the following related operations:
-    * `poll` - Inquire about the localities of the given files.
-      * A separate scope for that operation is under discussion (Aug 2025).
-    * `abort` - Ask for a stage operation to be canceled.
-    * `release` - Indicate the given files no longer need to be kept online.
+    Discussions on how to support various related operations have not been
+    finalized at the time of writing (August 2025), but it looks likely for
+    the `storage.stage` scope to authorize also the following operations:
+    * `poll` - Inquire about the localities (nearline and/or online) of the
+      given files.
+      * A separate scope for that operation is under discussion as well.
+    * `abort` / `cancel` - Ask for a stage operation to be canceled.
+    * `evict` / `release` - Indicate the given files no longer need to be
+      kept online.
+    * `pin` / `unpin` - Indicate the given files must / must no longer be
+      'pinned' to the staging cache; not all storage systems support this.
 
     **Note:** storage services may impose additional constraints on who is
     authorized to stage data.
+
+All `storage.*` scopes also authorize `stat` operations on the files
+or directories matching the given paths. For example, a client can use the
+same `storage.create:/dir/file` scope to check if the given file appears
+to be in good shape on the storage system after it was uploaded there.
+
+It has not been decided yet if the `storage.read` scope can also be used
+to _list directories_ or that a new scope will be designated for that.
+
 
 For a given computing resource, the defined authorization activities include:
 
