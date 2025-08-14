@@ -328,7 +328,7 @@ Suggested use cases for the <strong><code>sub</code></strong> claim are suspendi
 <p>
 <code>vername ::= [0-9]+\.[0-9]+</code>
 <p>
-The <strong><code>wlcg.ver</code></strong> claim corresponds to a version of this document. The initial version of this document constituted version '1.0'. Although versions are expected to be treated as strings, we adopt a numeric format for simplicity. 
+The value of the <strong><code>wlcg.ver</code></strong> claim is intended to correspond to the version of this document. However, the initial version of this document constituted version '1.0', and since it contained a requirement that libraries should reject all other versions, '1.0' MUST continue to be used also for tokens that adhere to version '1.1' of this document until it can be assured that all software that processes those tokens has been upgraded to at least the '1.1' standard.
    </td>
    <td>Required
    </td>
