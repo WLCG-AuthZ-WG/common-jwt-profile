@@ -1164,7 +1164,7 @@ The claims in a WLCG token are meant to indicate an identity or manage access to
 
 To handle this challenge, each token MUST provide a **`wlcg.ver`** (version) attribute, whose value corresponds to an enumerated set of claims described earlier in this document.  For that version of the token format, the corresponding claims MUST be handled by the implementation.  Any additional claim present MUST be ignored (for access tokens, these claims MUST NOT be used in authorization decisions).
 
-**`wlcg.ver`** versions are in the form of `MAJOR.MINOR`.  The `MAJOR` number indicates a series of `MINOR` versions that are at least upward compatible with each other.  Each client library implementation MUST know the `MAJOR` numbers it supports; if it encounters a token whose `MAJOR` number is not supported by the implementation, the token MUST be rejected as invalid.  If newer `MINOR` numbers are encountered the library SHOULD accept them.  The library SHOULD ignore claims that it does not recognize.
+**`wlcg.ver`** versions are in the form of `MAJOR.MINOR`.  The `MAJOR` number indicates a series of `MINOR` versions that are at least upward compatible with each other.  Each client library implementation MUST know the `MAJOR` numbers it supports; if it encounters a token whose `MAJOR` number is not supported by the implementation, the token MUST be rejected as invalid.  If newer `MINOR` numbers are encountered the library MUST accept them.
 
 Additionally, signature algorithms RS256 and ES256 MUST be supported.
 
