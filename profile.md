@@ -1544,6 +1544,9 @@ In this example, the `nonce`, `preferred_username`, `name`, and `email` claims a
 ## 5.4. Related Publications
 ([ToC](#toc-480))
 
+- [WLCG Bearer Token Discovery](https://zenodo.org/records/3937438) &mdash;
+  Describes how clients may discover WLCG bearer tokens for subsequent use,
+  either from their environment or from well-defined locations.
 
 <!-- Footnotes themselves at the bottom. -->
 ## 5.5. Notes
