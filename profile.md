@@ -1471,7 +1471,7 @@ Note this is a very minimal token for this JWT profile, contains no group inform
     ],
     "preferred_username": "aresearcher",  
     "nonce": "334b0e05b65a3",
-    "aud": "https:///dteam-test-client.example.org",
+    "aud": "https://dteam-test-client.example.org",
     "auth_time": 1523363636,
     "name": "A Researcher",
     "exp": 1523365436,
