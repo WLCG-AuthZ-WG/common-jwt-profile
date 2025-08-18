@@ -458,8 +458,8 @@ We aim to define a common set of authorizations (particularly storage-related au
 For a given storage resource, the defined authorizations include:
 
 *   **storage.read**: Read data.  Only applies to 'online' resources 
-    such as disk, as opposed to 'nearline' resources such as tape, 
-    where the **stage** authorization may need to be used instead (see below), 
+    such as disk, as opposed to 'nearline' resources such as tape, where
+    the **stage** authorization may need to be used instead (see below), 
     because the `storage.read` scope only allows _staged_ data to be read.
 *   **storage.create**: Upload data.  This includes renaming files if the destination file does not already exist. This capability includes the creation of directories and subdirectories at the specified path, and the creation of any non-existent directories required to create the path itself. This authorization does **not** permit overwriting or deletion of stored data.  The driving use case for a separate `storage.create` scope is to enable the stage-out of data from jobs on a worker node.
 *   **storage.modify**: Change data.  This includes renaming files, creating new files, and writing data.  This permission includes overwriting or replacing stored data in addition to deleting or truncating data.  This is a strict superset of `storage.create`.
@@ -474,25 +474,22 @@ For a given storage resource, the defined authorizations include:
     Discussions on how to support various related operations have not been
     finalized at the time of writing (August 2025), but it looks likely for
     the `storage.stage` scope to authorize also the following operations:
-    * `poll` - Inquire about the localities (nearline and/or online) of the
-      given files.
+    * `poll` &mdash; Inquire about the localities (nearline and/or online)
+      of the given files.
       * A separate scope for that operation is under discussion as well.
-    * `abort` / `cancel` - Ask for a stage operation to be canceled.
-    * `evict` / `release` - Indicate the given files no longer need to be
-      kept online.
-    * `pin` / `unpin` - Indicate the given files must / must no longer be
-      'pinned' to the staging cache; not all storage systems support this.
+    * `abort` / `cancel` &mdash; Ask for a stage operation to be canceled.
+    * `evict` / `release` &mdash; Indicate the given files no longer need to
+      be kept online.
+    * `pin` / `unpin` &mdash; Indicate the given files must, or no longer,
+      be 'pinned' to the staging cache; not all storage systems support this.
 
     **Note:** storage services may impose additional constraints on who is
     authorized to stage data.
 
-All `storage.*` scopes also authorize `stat` operations on the files
+All `storage.*` scopes also authorize **`stat`** operations on the files
 or directories matching the given paths. For example, a client can use the
 same `storage.create:/dir/file` scope to check if the given file appears
 to be in good shape on the storage system after it was uploaded there.
-
-It has not been decided yet if the `storage.read` scope can also be used
-to _list directories_ or that a new scope will be designated for that.
 
 
 For a given computing resource, the defined authorization activities include:
