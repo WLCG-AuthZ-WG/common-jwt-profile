@@ -9,6 +9,7 @@ keep='(compute\.\w+ *)+|(storage\.\w+:/\S* *)+|scope|wlcg\.groups|(/\w+)+'
 
 pandoc -o $out -css profile.css profile.md &&
     perl -i -pe '
+	s/(href="#)[0-9]+-+/$1/;
 	s/^(<h[1-6] +id="[^"]*)\./$1/;
 	s,\xE2\x80\x9C('"$keep"')\xE2\x80\x9D,"$1",g;
 	s/\xE2\x80\x9C/&ldquo\;/g;
