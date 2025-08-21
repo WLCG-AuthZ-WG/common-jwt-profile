@@ -486,11 +486,14 @@ For a given storage resource, the defined authorizations include:
     **Note:** storage services may impose additional constraints on who is
     authorized to stage data.
 
-All `storage.*` scopes also authorize **`stat`** operations on the files
-or directories matching the given paths. For example, a client can use the
-same `storage.create:/dir/file` scope to check if the given file appears
-to be in good shape on the storage system after it was uploaded there.
+All `storage.*` scopes also authorize **`"stat"`** operations on the files or
+directories matching the given paths, i.e. queries about _metadata_ like the
+_size_ or _checksum_ of a file. For example, a client can use the same
+`storage.create:/dir/file` scope to check if the given file appears to be in
+good shape on the storage system right after it was uploaded there.
 
+At the time of writing (August 2025), it was decided to postpone the
+specification of the scope for _listing directories_ on storage services.
 
 For a given computing resource, the defined authorization activities include:
 
