@@ -541,13 +541,13 @@ We aim to define a common set of authorizations (particularly storage-related au
 
 For a given storage resource, the defined authorizations include:
 
-*   **storage.read**: Read data.  Only applies to 'online' resources 
+*   **storage.read** &mdash; Read data.  Only applies to 'online' resources 
     such as disk, as opposed to 'nearline' resources such as tape, where
     the **stage** authorization may need to be used instead (see below), 
     because the `storage.read` scope only allows _staged_ data to be read.
-*   **storage.create**: Upload data.  This includes renaming files if the destination file does not already exist. This capability includes the creation of directories and subdirectories at the specified path, and the creation of any non-existent directories required to create the path itself. This authorization does **not** permit overwriting or deletion of stored data.  The driving use case for a separate `storage.create` scope is to enable the stage-out of data from jobs on a worker node.
-*   **storage.modify**: Change data.  This includes renaming files, creating new files, and writing data.  This permission includes overwriting or replacing stored data in addition to deleting or truncating data.  This is a strict superset of `storage.create`.
-*   **storage.stage**: Stage and/or read data, plus related operations.
+*   **storage.create** &mdash; Upload data.  This includes renaming files if the destination file does not already exist. This capability includes the creation of directories and subdirectories at the specified path, and the creation of any non-existent directories required to create the path itself. This authorization does **not** permit overwriting or deletion of stored data.  The driving use case for a separate `storage.create` scope is to enable the stage-out of data from jobs on a worker node.
+*   **storage.modify** &mdash; Change data.  This includes renaming files, creating new files, and writing data.  This permission includes overwriting or replacing stored data in addition to deleting or truncating data.  This is a strict superset of `storage.create`.
+*   **storage.stage** &mdash; Stage and/or read data, plus related operations.
     This scope allows data to be _staged_, when needed, from a 'nearline'
     resource to an 'online' resource, to allow the data to be read.
     Because staging is always done in order to read the given data next,
@@ -579,12 +579,12 @@ good shape on the storage system right after it was uploaded there.
 At the time of writing (August 2025), it was decided to postpone the
 specification of the scope for _listing directories_ on storage services.
 
-For a given computing resource, the defined authorization activities include:
+For a given computing resource, the defined authorizations include:
 
-*   **compute.read:** 'Read' or query information about job status and attributes.
-*   **compute.modify:** Modify or change the attributes of an existing job.
-*   **compute.create:** Create or submit a new job at the computing resource.
-*   **compute.cancel:** Delete a job from the computing resource, potentially terminating a running job.
+*   **compute.read** &mdash; 'Read' or query information about job status and attributes.
+*   **compute.modify** &mdash; Modify or change the attributes of an existing job.
+*   **compute.create** &mdash; Create or submit a new job at the computing resource.
+*   **compute.cancel** &mdash; Delete a job from the computing resource, potentially terminating a running job.
 
 We use explicit "storage" and "compute" prefixes in the scope names to prevent token confusion at the issuer; if the unadorned string 'create' were used for both storage and compute cases, a token meant for uploading job results could potentially be usable for submitting jobs to a computing resource.
 
