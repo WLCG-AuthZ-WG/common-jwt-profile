@@ -1354,7 +1354,7 @@ on the capability set indicated in the scope request:
    <td><code>scope=wlcg.capabilityset:/dune/pro storage.read:/dune/data</code>
    </td>
    <td><code>"scope": "storage.read:/dune storage.create:/dune/data
-    storage.read:/dune/data"</code>
+storage.read:/dune/data"</code>
    </td>
   </tr>
 </table>
