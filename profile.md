@@ -723,13 +723,13 @@ Token is not intended to be sent to resource servers.
 The Access Token profile contains two different approaches to authorization:
 group membership-based and capability-based, see the section [Interpretation
 of Authorization by the Resource
-Server](#interpretation-of-authorization-by-the-resource-server).
+Server](#223-interpretation-of-authorization-by-the-resource-server).
 
 When group membership is asserted, it is a statement that the bearer has the
 access privileges corresponding to the VO's listed groups: it is up to the
 resource to determine the mapping of the group names to the access
 privileges.  The technical profile of the group membership is described in
-the [Common Claims](#common-claims) section and not repeated here.
+the [Common Claims](#211-common-claims) section and not repeated here.
 
 When a capability is asserted, it is relative to the VO's coarse-grained
 authorization; the resource only maps the token to a VO, and then relies on
@@ -951,7 +951,7 @@ Example values of the `scope` claim:
 Authorization may be based on the `wlcg.groups` claim. The value of the
 `wlcg.groups` claim is an ordered JSON array of case-sensitive strings
 denoting VO groups of which the token subject is a member.
-The group name syntax is described in the [Common Claims](#common-claims)
+The group name syntax is described in the [Common Claims](#211-common-claims)
 section.
 
 For authorization decisions, relying parties MUST NOT consider any group
@@ -965,7 +965,7 @@ with each array element asserting membership of the group denoted by that
 element.  A token MAY omit the `wlcg.groups` claim when its value would be an
 empty array.  The user may provide input on the contents and ordering of this
 claim; this is covered in [Scope-based Group
-Selection](#scope-based-group-selection).
+Selection](#31-scope-based-group-selection).
 
 The `wlcg.groups` claim provides functionality similar to that of VOMS
 extensions in an X.509 proxy.  For use cases that previously depended on the
@@ -1270,7 +1270,7 @@ issuer has that knowledge.
 To support this scenario, a `wlcg.capabilityset` scope MAY be included in
 the scope request to specify the group context.  The parameter given with
 the `wlcg.capabilityset` scope is exactly the same as the `group` used with
-`wlcg.groups` as specified in the [Common Claims](#common-claims) section
+`wlcg.groups` as specified in the [Common Claims](#211-common-claims) section
 above.  This can determine the resulting `scope` claims in the issued token.
 
 Only one `wlcg.capabilityset` SHOULD be included in a single authorization
@@ -1482,7 +1482,7 @@ determined with the following algorithm.
 
 *   Extract the `iss` claim from the unverified token, check that the issuer
     is among the trusted ones, and determine the JWKS URI using the approach
-    described in the [Metadata lookup](#metadata-lookup) subsection below.
+    described in the [Metadata lookup](#421-metadata-lookup) subsection below.
 *   The content served through the JWKS URI MUST be compliant with RFC 7517.
     It provides a list of public keys associated with the issuer.   The token
     MUST contain a key ID (`kid`) claim; the public key to use to verify the
@@ -1496,7 +1496,7 @@ valid HTTPS connection with hostname verification.  The token issuer SHOULD
 advertise the public key lifetime by setting the appropriate HTTP caching
 headers.  The Client SHOULD use HTTP headers to avoid unnecessary downloads.
 The recommended lifetime of the public key cache is specified in the section
-on [Token Lifetime Guidance](#token-lifetime-guidance).  Client
+on [Token Lifetime Guidance](#431-token-lifetime-guidance).  Client
 implementations SHOULD cache the public key for an authorization server for
 at least 1 hour, regardless of the server-provided value. Reducing the
 lifetime of a key will likely impact network traffic.
@@ -1533,7 +1533,7 @@ should use the recommended algorithms from the RFC (as of July 2018, this is
 ES256 or RS256; ES256 should be used when token length is a concern).
 Changes to the allowable signature algorithms will be handled using the
 versioning mechanism described in the [Claim and Token
-validation](#claim-and-token-validation) section.
+validation](#433-claim-and-token-validation) section.
 
 
 ### 4.2.2. Verification Example
