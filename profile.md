@@ -1076,26 +1076,64 @@ One would utilize the `iss` claim in the payload to download the set of public k
 ### 4.3.1. Token Lifetime Guidance
 ([ToC](#toc-240))
 
+In the six years since v1.0 of the WLCG Common JWT Profiles was proposed and accepted,
+it has become clear that for certain critical workflows it may be overly complex
+or expensive to implement token lifetimes exactly according to the following table,
+given that those workflows may be deemed to have adequate mitigation to compensate
+for the increased risk inherent to longer lifetimes. Major examples are:
+
+- Third-party copies orchestrated through File Transfer Service (FTS) instances.
+  - Mitigation options / factors:
+    - narrow scopes;
+    - absence of `storage.modify` scope;
+    - specific audiences;
+    - use of the 'pull mode' avoids delegating credentials needed for writing;
+    - FTS production instances are well-managed services trusted by their VOs.
+- Grid job submissions by pilot frameworks.
+  - Mitigation options / factors:
+    - long-lived compute tokens are not delegated to Computing Elements;
+    - specific audiences.
+- Grid job workflows orchestrated through pilot frameworks.
+  - Mitigation options / factors:
+    - long-lived pilot tokens can only be used to obtain payloads;
+    - payloads have narrowly scoped tokens;
+    - absence of `storage.modify` scope;
+    - specific audiences.
+
+Token lifetime recommendations should rather be considered per workflow,
+with the following table providing **default** values recommended in
+the `AARC-G081`
+[draft](https://docs.google.com/document/d/1U9vvJfWuE8oO7u0FcGVGr3KySvBqwjnkzKO8TKzgoX4/)
+guidelines, to be published
+[here](https://aarc-community.org/guidelines/aarc-g081/)
+as part of the catalog of
+[AARC guidelines](https://aarc-community.org/guidelines/). If these values 
+are not suitable for a given workflow, alternative **mitigation** MUST be 
+**agreed** through a risk assessment involving security experts within 
+the affected community and **put in place** to keep the security risks 
+of that workflow at a level that is deemed acceptable:
 
 <table>
   <tr>
    <td><strong>Token Type</strong>
    </td>
-   <td><strong>Recommended Lifetime</strong>
+   <td><strong>Default Recommended Lifetime</strong>
    </td>
-   <td><strong>Minimum Lifetime</strong>
+   <td><strong>Default Minimum Lifetime</strong>
    </td>
-   <td><strong>Maximum Lifetime</strong>
+   <td><strong>Default Maximum Lifetime</strong>
    </td>
    <td><strong>Justification</strong>
    </td>
   </tr>
   <tr>
-   <td>Access Token & ID Token[^15]  
+   <td>Access Token & ID Token
+
+   [^15] <!-- must follow a blank line to be recognized within an HTML table! -->
    </td>
-   <td>20 minutes
+   <td>1 hour
    </td>
-   <td>5 minutes
+   <td>15 minutes
    </td>
    <td>6 hours
    </td>
@@ -1105,11 +1143,11 @@ One would utilize the `iss` claim in the payload to download the set of public k
   <tr>
    <td>Refresh Token
    </td>
-   <td>10 days
+   <td>30 days
    </td>
    <td>1 day
    </td>
-   <td>30 days
+   <td>400 days
    </td>
    <td>Refresh token lifetimes should be kept bounded, but can be longer-lived as they are revocable.  Meant to be long-lived enough to be on a 'human timescale.'  Refresh tokens are not necessarily signed and not tied to the issuer's public key lifetime.
    </td>
@@ -1141,7 +1179,24 @@ One would utilize the `iss` claim in the payload to download the set of public k
 </table>
 
 
-Note the combination of **nbf** (not before) (or **iat**) and **exp** (expiration) provides a notion of token valid lifetime.  WLCG token issuers MUST issue Access tokens with valid lifetime of less than 6 hours; they SHOULD aim for a token lifetime of 20 minutes.  Resource providers MUST NOT accept tokens that have validity longer than 6 hours.  As a pragmatic guard against minor clock skews, they SHOULD accept tokens that are expired since less than 60 seconds.  See the recommendations in [sections 5.3](https://tools.ietf.org/html/rfc6750#section-5.3) and [5.2](https://tools.ietf.org/html/rfc6750#section-5.2) in RFC 6750.  These tokens are purposely shorter-lived as they do not have a token revocation mechanism; the token lifetime should be shorter than the expected revocation response time for authorizations.
+Note the combination of **nbf** (not before) and **exp** (expiration)
+provides a notion of token valid lifetime.  As a pragmatic guard against
+minor clock skews, the **nbf** claim can be slightly backdated w.r.t. the
+actual time of issuance recorded in the **iat** claim, to allow freshly
+minted tokens to be used immediately at services whose clocks skews lie
+within an acceptable range 
+([RFC 7519 section 4.1.5](https://www.rfc-editor.org/rfc/rfc7519.html#section-4.1.5)).
+That range would in practice be limited to a few minutes at most, with a default
+recommended value of 60 seconds. We are not concerned about the effects of
+clock skews near the end of a token's lifetime, because any use of tokens
+near the end of their validity is fragile in practice and would not be helped
+much by adding a further, short grace period.  By default, access tokens are
+purposely short-lived as they do not have a revocation mechanism.  See the
+recommendations in RFC 6750 sections
+[5.3](https://www.rfc-editor.org/rfc/rfc6750.html#section-5.3) and
+[5.2](https://www.rfc-editor.org/rfc/rfc6750.html#section-5.2),
+[RFC 6819 section 5.1.5](https://www.rfc-editor.org/rfc/rfc6819.html#section-5.1.5), and
+[RFC 9700 section 2.3](https://www.rfc-editor.org/rfc/rfc9700.html#section-2.3).
 
 
 ### 4.3.2. Refresh tokens and token revocation
@@ -1175,13 +1230,26 @@ Additionally, signature algorithms RS256 and ES256 MUST be supported.
 
 For operational stability and scalability, it would be desirable to put reasonable constraints on the frequency at which token-issuing services need to be contacted by the vast majority of relevant workflows.
 
-By design, access tokens should be issued not long before they are used and hence can have short lifetimes. As a consequence, token issuers may already experience high request rates for issuing tokens alone. The usage of tokens in ALICE grid workflows has demonstrated the feasibility of such services on the scale of the LHC experiments, though some consideration should be given to corresponding requirements on the experiment services that provide such functionality. It would be desirable not to add yet more load on those services for other reasons. For the verification of an access token, there would ideally be no need to contact the issuer at all, as is currently the case for VOMS proxies. 
+By default, access tokens should be issued not long before they are used and hence may have short lifetimes. As a consequence, token issuers may already experience high request rates for issuing tokens alone. The usage of tokens in ALICE grid workflows has demonstrated the feasibility of such services on the scale of the LHC experiments, though some consideration should be given to corresponding requirements on the services that provide such functionality. It would be desirable not to add yet more load on those services for other reasons. For the verification of an access token, there would ideally be no need to contact the issuer at all, as is the case for VOMS proxies. 
 
 Access tokens are signed by keys with a lifetime for which a relatively short upper limit, as defined above, is deemed desirable. Each grid service supporting such tokens will regularly need to query each issuer for its set of currently valid public keys. For example, it might do that a few times per day and cache the results, as is currently done for CRLs. Such functionality may be similarly provided by an independent utility invoked by `cron`. 
 
-As access tokens typically will have short lifetimes of the order of 1 hour, there is no need to implement any revocation for them, whereas a revoked public key would simply no longer be served by the issuer.
+As access tokens will either have short lifetimes of the order of hours, or have sufficient other mitigation in place, there is no need to implement any revocation for them, whereas a revoked public key would simply no longer be served by the issuer.
 
-As refresh tokens are longer-lived, different considerations apply to them. First, their maximum lifetime may need to be able to bridge the many hours that a pilot job may spend in a batch queue before it is able to start an actual user payload for which a fresh access token needs to be obtained. Similarly, a file transfer request may need to wait for many hours or even days in the queue of an FTS instance. Furthermore, certain payload jobs may need to run for many hours before their output can be uploaded. Today, the longest payloads need at least the better part of a day, possibly more. It would thus seem desirable to allow refresh tokens to have a maximum lifetime of at least 1 day. It would also be desirable to have the maximum not much higher, to limit the amount of damage that could be inflicted by a third party that came into possession of such a token. As refresh tokens are only used to obtain fresh access tokens from the original issuer, only the latter is concerned with refresh token revocation. The issuer is expected to provide a service endpoint where any such token can be revoked by its owner. It might be desirable for standard workflows to revoke a refresh token as soon as it is deemed to be no longer needed, though that would add to the request rates experienced by the issuer.
+As refresh tokens are longer-lived, different considerations apply to them.
+First, if access tokens are kept short-lived, the maximum lifetime of refresh
+tokens may need to cover up to O(1 day) that some grid job payloads may need.
+Similarly, a file transfer request may need to wait for up to several days in
+the queue of a File Transfer Service (FTS) instance. It therefore is desirable
+to allow refresh tokens to have a lifetime of at least 1 day,
+while FTS workflows may rather need multiple days.
+As a refresh token can only be used by the client to which it was issued,
+abuse of a refresh token implies the credentials of that client have been
+compromised as well, in which case a first remedy would be to disable the latter,
+which would also make its stolen refresh tokens useless.
+It might seem desirable for standard workflows to revoke a refresh token as soon
+as it is deemed to be no longer needed, but such behaviour would add to the request rates
+experienced by the issuer, without much benefit in terms of security.
 
 
 # 5. Appendix
