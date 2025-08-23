@@ -600,7 +600,13 @@ for `storage.modify:/baz` implies a write authorization for the resources at `/b
 Resources accepting scopes MUST handle these resource-based authorizations as described in this
 document; implementers should be aware this differs from the standard handling of OAuth2 scopes.
 
-This authorization scheme is not equivalent to POSIX semantics.  When mapping this authorization scheme to a POSIX-like filesystem, some considerations must be made for user and group ownership.  For example, if a token is issued with authorization `storage`.`read:/home`, an implementation MUST override normal POSIX access control and give the bearer access to all users' home directories.
+**Note:** this authorization scheme differs from traditional POSIX semantics.
+For example, suppose that several users in a VO each have a private home
+directory `/home/$USER` on a storage service for that VO. A token issued by
+that VO and containing any `storage.*` scope referring to `/home` then
+authorizes a corresponding access to any of those home directories, whereas
+on a POSIX file system, access to a `/home` directory does **not** imply
+access to any of its subdirectories.
 
 `$PATH` MUST be treated as an **exact** match for a directory or a file,
 depending on the requested operation(s) to which the authorization applies.
