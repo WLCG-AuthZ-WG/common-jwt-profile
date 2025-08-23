@@ -329,7 +329,7 @@ Suggested use cases for the <strong><code>sub</code></strong> claim are suspendi
 <p>
 <code>vername ::= [0-9]+\.[0-9]+</code>
 <p>
-The <strong><code>wlcg.ver</code></strong> claim corresponds to a version of this document. The initial version of this document constituted version '1.0'. Although versions are expected to be treated as strings, we adopt a numeric format for simplicity. 
+The value of the <strong><code>wlcg.ver</code></strong> claim is intended to correspond to the version of this document. However, the initial version of this document constituted version '1.0', and since it contained a requirement that libraries should reject all other versions, '1.0' MUST continue to be used also for tokens that adhere to version '1.1' of this document until it can be assured that all software that processes those tokens has been upgraded to at least the '1.1' standard.
    </td>
    <td>Required
    </td>
@@ -1251,7 +1251,7 @@ The claims in a WLCG token are meant to indicate an identity or manage access to
 
 To handle this challenge, each token MUST provide a **`wlcg.ver`** (version) attribute, whose value corresponds to an enumerated set of claims described earlier in this document.  For that version of the token format, the corresponding claims MUST be handled by the implementation.  Any additional claim present MUST be ignored (for access tokens, these claims MUST NOT be used in authorization decisions).
 
-Each client library implementation MUST know the versions it supports; if it encounters a token whose **`wlcg.ver`** value is not supported by the implementation, the token MUST be rejected as invalid.
+**`wlcg.ver`** versions are in the form of `MAJOR.MINOR`.  The `MAJOR` number indicates a series of `MINOR` versions that are at least upward compatible with each other and do not add anything that is required to be processed.  Each client library implementation MUST know the `MAJOR` numbers it supports; if it encounters a token whose `MAJOR` number is not supported by the implementation, the token MUST be rejected as invalid.  If newer `MINOR` numbers are encountered the library MUST accept them.
 
 Additionally, signature algorithms RS256 and ES256 MUST be supported.
 
