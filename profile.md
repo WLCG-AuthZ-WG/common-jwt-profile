@@ -313,7 +313,7 @@ Suggested use cases for the <strong><code>sub</code></strong> claim are suspendi
    </td>
    <td>RFC7519 & OpenID Connect core
    </td>
-   <td>The issuer (<strong><code>iss</code></strong>) of the WLCG JWT. It MUST contain a unique URL for the organization; it is to be used in verification as described in the <a href="#token-verification">Token Verification</a> section. For WLCG this would be the VO.
+   <td>The issuer (<strong><code>iss</code></strong>) of the WLCG JWT. It MUST contain a unique URL for the organization; it is to be used in verification as described in the <a href="#token-verification">Token Verification</a> section. A given issuer MUST issue tokens for only a <strong>single</strong> VO. The VO on whose behalf a token was issued MAY thus be identified from the <strong><code>iss</code></strong> claim alone.
 
    [^4] <!-- must follow a blank line to be recognized within an HTML table! -->
    </td>
@@ -367,6 +367,7 @@ The <strong><code>wlcg.ver</code></strong> claim corresponds to a version of thi
 <p>
 <code>groupname :: = [a-zA-Z0-9][a-zA-Z0-9_.-]*</code>
 <p>
+The root group name MUST be the name of the VO.
 Usage of this claim is OPTIONAL. However, the <strong><code>wlcg.groups</code></strong> claim is REQUIRED in all tokens issued as a result of an OpenID Connect authentication flow in which wlcg.groups are requested via scopes and the subject is entitled to the groups in question. The group request mechanism is described in more detail in the <a href="#scope-based-group-selection">Scope-based Group Selection</a> section of this document.
 
 <em>Note: it is expected that a more verbose syntax and different claim (eduperson_entitlement), as recommended by <strong>AARC</strong> Guidelines, could also be required in the event that authorization information is exchanged with external Infrastructures.</em>
@@ -653,6 +654,7 @@ Example values of the `scope` claim:
 ([ToC](#toc-090))
 
 Authorization may be based on the `wlcg.groups` claim. The value of the `wlcg.groups` claim is an ordered JSON array of case-sensitive strings denoting VO groups of which the token subject is a member. 
+The group name syntax is described in the [Common Claims](#common-claims) section.
 
 For authorization decisions, relying parties MUST NOT consider any group memberships that are **not** asserted by the OP in the token.  Particularly, membership in a child group (e.g. `/cms/uscms`) does not imply membership in the parent group (`/cms`).
 
