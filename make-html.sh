@@ -10,7 +10,7 @@ keep='https:\S+|(compute\.\w+ *)+|(storage\.\w+:/\S* *)+|scope|wlcg\.groups|(/\w
 pandoc --ascii -o $out -css profile.css profile.md &&
     perl -i -pe '
 	s/(href="#)(\d+-)/$1s$2/;
-	if (s/^(<h[1-6] +id=")([^"]+">)((\d+\.)+)/$1s$3-$2/) {
+	if (s/^(<h[1-6] +id=")([^"]+">)((\d+\.)+)/$1s$3-$2$3/) {
 	    while (s/^(<h[1-6] +id="[^"]*)\./$1/) {
 	    }
 	}
