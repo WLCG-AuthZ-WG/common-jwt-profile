@@ -919,8 +919,8 @@ In the case of computing resources, additional discussion may still be
 required to define finer-grained access.  Currently, Computing Element
 services in WLCG typically map a token's `sub` attribute to a local account
 for the given VO and use that account to submit jobs to the local batch
-system.  The `compute.*` scopes then may refer not just to the jobs submitted
-on behalf of the given `sub`, but also to other jobs, if any, owned by that
+system.  The `compute.*` scopes then may affect not just the jobs submitted
+on behalf of the given `sub`, but also other jobs, if any, running under that
 account.
 
 When rendered in JSON, the value of the `scope` claim should be a
