@@ -423,7 +423,7 @@ MUST NOT be accepted for processing.
    </td>
    <td>The issuer (<strong><code>iss</code></strong>) of the WLCG JWT. It
 MUST contain a unique URL for the organization; it is to be used in
-verification as described in the <a href="#token-verification">Token
+verification as described in the <a href="#42-token-verification">Token
 Verification</a> section. A given issuer MUST issue tokens for only a
 <strong>single</strong> VO. The VO on whose behalf a token was issued MAY
 thus be identified from the <strong><code>iss</code></strong> claim alone.
@@ -503,7 +503,7 @@ Usage of this claim is OPTIONAL. However, the
 issued as a result of an OpenID Connect authentication flow in which
 wlcg.groups are requested via scopes and the subject is entitled to the
 groups in question. The group request mechanism is described in more detail
-in the <a href="#scope-based-group-selection">Scope-based Group
+in the <a href="#31-scope-based-group-selection">Scope-based Group
 Selection</a> section of this document.
 
 <em>Note: it is expected that a more verbose syntax and different claim
