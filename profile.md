@@ -424,8 +424,8 @@ MUST NOT be accepted for processing.
    <td>The issuer (<strong><code>iss</code></strong>) of the WLCG JWT. It
 MUST contain a unique URL for the organization; it is to be used in
 verification as described in the <a href="#42-token-verification">Token
-Verification</a> section. A given issuer MUST issue tokens for only a
-<strong>single</strong> VO. The VO on whose behalf a token was issued MAY
+Verification</a> section. A given issuer currently MUST issue tokens for only
+a <strong>single</strong> VO. The VO on whose behalf a token was issued MAY
 thus be identified from the <strong><code>iss</code></strong> claim alone.
 
    [^4] <!-- must follow a blank line to be recognized within an HTML table! -->
