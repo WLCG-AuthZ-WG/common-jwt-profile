@@ -24,5 +24,6 @@ pandoc --ascii -o $out -css profile.css profile.md &&
 	s/\xC2\xA0/&nbsp\;/g;
 	s/(<a [^>]+>)\xE2\x86\xA9\xEF\xB8\x8E/&nbsp\;&nbsp\;&nbsp\;$1&#x21A9\;/g;
 	s/(<a [^>]+>&#x21A9\;)/&nbsp\;&nbsp\;&nbsp\;$1/g;
-    ' $out
+    ' $out &&
+    ls -l $out
 

@@ -12,21 +12,48 @@ table {
     border-spacing: 0;
     border-bottom: 1px solid black;
     border-top: 1px solid black;
+    break-before: auto;
 }           
+tr {
+    break-inside: avoid;
+}
 th {    
     padding: 3px 10px;
     background-color: white;
-    border-top: none;
+    border-top: 1px solid black;
     border-left: 1px solid black;
     border-right: 1px solid black;
     border-bottom: 2px solid black;
+    break-after: avoid;
+    break-inside: avoid;
 }
 td {
     padding: 3px 10px;
-    border-top: none;
+    border-top: 1px solid black;
     border-left: 1px solid black;
     border-right: 1px solid black;
     border-bottom: 1px solid black;
+}
+@media print {
+    body {
+        font-size: x-small;
+    }
+    table { 
+        font-size: x-small;
+    }
+}
+@page {
+    size: 8.3in 11in;
+    margin-top: 1cm;
+    margin-left: 1cm;
+    margin-right: 1cm;
+    margin-bottom: 1cm;
+
+    counter-increment: pageNumber;
+
+    @bottom-right {
+        content: counter(pageNumber);
+    }
 }
 </style>
 

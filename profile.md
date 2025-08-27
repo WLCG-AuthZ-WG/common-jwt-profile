@@ -7,6 +7,7 @@ _Authored by the WLCG AuthZ Working Group_
 
 
 <table>
+ <thead>
   <tr>
    <td><strong>Date</strong>
    </td>
@@ -15,6 +16,7 @@ _Authored by the WLCG AuthZ Working Group_
    <td><strong>Comment</strong>
    </td>
   </tr>
+ </thead>
   <tr>
    <td>17.09.2019
    </td>
@@ -168,6 +170,7 @@ provided in the Appendix.
 
 
 <table>
+ <thead>
   <tr>
    <td><strong>Term</strong>
    </td>
@@ -176,6 +179,7 @@ provided in the Appendix.
    <td><strong>WLCG Example (if applicable)</strong>
    </td>
   </tr>
+ </thead>
   <tr>
    <td><strong>OAuth 2.0</strong>
    </td>
@@ -372,6 +376,7 @@ The following claims may be included in both Access and Identity tokens.
 
 
 <table>
+ <thead>
   <tr>
    <td><strong>Claim</strong>
    </td>
@@ -384,6 +389,7 @@ The following claims may be included in both Access and Identity tokens.
    [^3] <!-- must follow a blank line to be recognized within an HTML table! -->
    </td>
   </tr>
+ </thead>
   <tr>
    <td>sub
    </td>
@@ -666,6 +672,7 @@ profile](https://openid.net/specs/openid-connect-core-1_0.html).
 
 
 <table>
+ <thead>
   <tr>
    <td><strong>Claim</strong>
    </td>
@@ -676,6 +683,7 @@ profile](https://openid.net/specs/openid-connect-core-1_0.html).
    <td><strong>Required?</strong>
    </td>
   </tr>
+ </thead>
   <tr>
    <td>auth_time
    </td>
@@ -744,6 +752,7 @@ The following additional claims are defined for Access Tokens.
 
 
 <table>
+ <thead>
   <tr>
    <td><strong>Claim</strong>
    </td>
@@ -754,6 +763,7 @@ The following additional claims are defined for Access Tokens.
    <td><strong>Required?</strong>
    </td>
   </tr>
+ </thead>
   <tr>
    <td>scope
    </td>
@@ -1170,12 +1180,14 @@ In the following examples, '/cms' is the only default group.
 
 
 <table>
+ <thead>
   <tr>
    <td><strong>Scope Request</strong>
    </td>
    <td><strong>Claim Result</strong>
    </td>
   </tr>
+ </thead>
   <tr>
    <td><code>scope=wlcg.groups</code>
    </td>
@@ -1230,12 +1242,14 @@ verify the scopes present in the returned token.
 
 
 <table>
+ <thead>
   <tr>
    <td><strong>Scope Request</strong>
    </td>
    <td><strong>Claim Result</strong>
    </td>
   </tr>
+ </thead>
   <tr>
    <td><code>scope=storage.read:/home/joe</code>
    </td>
@@ -1294,12 +1308,14 @@ In the following examples, a user has the following entitlements based on
 their group memberships:
 
 <table>
+ <thead>
   <tr>
    <td><strong>Group</strong>
    </td>
    <td><strong>Entitlements</strong>
    </td>
   </tr>
+ </thead>
   <tr>
    <td><code>/microboone</code>
    </td>
@@ -1325,12 +1341,14 @@ of the `/dune/pro` (production) optional group, the resulting claims depend
 on the capability set indicated in the scope request:
 
 <table>
+ <thead>
   <tr>
    <td><strong>Scope Request</strong>
    </td>
    <td><strong>Claim Result</strong>
    </td>
   </tr>
+ </thead>
   <tr>
    <td><code>scope=wlcg.capabilityset:/microboone</code>
    </td>
@@ -1649,6 +1667,7 @@ the affected community and **put in place** to keep the security risks of that
 workflow at a level that is deemed acceptable:
 
 <table>
+ <thead>
   <tr>
    <td><strong>Token Type</strong>
    </td>
@@ -1661,6 +1680,7 @@ workflow at a level that is deemed acceptable:
    <td><strong>Justification</strong>
    </td>
   </tr>
+ </thead>
   <tr>
    <td>Access Token & ID Token
 
@@ -2011,7 +2031,7 @@ clients.  Most WLCG services can be classified as confidential clients.
 ([ToC](#toc-360))
 
 <div style="text-align: center"><img src="authorization_flows.png"
-style="width: 50vw"/></div>
+style="width: 60%"/></div>
 
 
 The image above, adapted from
