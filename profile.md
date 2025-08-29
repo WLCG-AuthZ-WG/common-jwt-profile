@@ -2400,6 +2400,8 @@ also true in the WLCG profile.
 ## 5.5. Notes
 ([ToC](#toc-490))
 
+This section serves the footnotes that follow.
+
 [^1]:
      [RFC 6749 section 1.4](https://www.rfc-editor.org/rfc/rfc6749.html#section-1.4)
 
