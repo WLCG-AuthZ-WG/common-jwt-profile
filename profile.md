@@ -507,10 +507,10 @@ The root group name MUST be the name of the VO.
 Usage of this claim is OPTIONAL. However, the
 <strong><code>wlcg.groups</code></strong> claim is REQUIRED in all tokens
 issued as a result of an OpenID Connect authentication flow in which
-wlcg.groups are requested via scopes and the subject is entitled to the
-groups in question. The group request mechanism is described in more detail
-in the <a href="#31-scope-based-group-selection">Scope-based Group
-Selection</a> section of this document.
+<strong><code>wlcg.groups</code></strong> are requested via scopes and the
+subject is entitled to the groups in question. The group request mechanism is
+described in more detail in the <a href="#31-scope-based-group-selection">
+Scope-based Group Selection</a> section of this document.
 
 <em>Note: it is expected that a more verbose syntax and different claim
 (eduperson_entitlement), as recommended by <strong>AARC</strong> Guidelines,
@@ -1884,7 +1884,7 @@ workflows may rather need multiple days.
 As a refresh token can only be used by the client to which it was issued,
 abuse of a refresh token implies the credentials of that client have been
 compromised as well, in which case a first remedy would be to disable the latter,
-which would also make its stolen refresh tokens useless.
+which would also make its compromised refresh tokens useless.
 
 It might seem desirable for standard workflows to revoke a refresh token as soon
 as it is deemed to be no longer needed, but such behaviour would add to the
