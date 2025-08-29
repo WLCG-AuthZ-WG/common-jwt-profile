@@ -1669,7 +1669,7 @@ workflow at a level that is deemed acceptable:
 <table>
  <thead>
   <tr>
-   <td><strong>Token Type</strong>
+   <td><strong>Credential or Cache</strong>
    </td>
    <td><strong>Default Recommended Lifetime</strong>
    </td>
@@ -1713,17 +1713,32 @@ to the issuer's public key lifetime.
    </td>
   </tr>
   <tr>
-   <td>Issuer Public Key Cache
+   <td>Issuer Public Key Cache Refresh
    </td>
    <td>6 hours
    </td>
    <td>1 hour
    </td>
+   <td>6 hours
+   </td>
+   <td>The public key cache refresh period determines the effective revocation
+time of the public key(s) to be used for token verification.
+   </td>
+  </tr>
+  <tr>
+   <td>Issuer Public Key Cache Expiration
+   </td>
+   <td>2 days
+   </td>
+   <td>1 day
+   </td>
    <td>4 days
    </td>
-   <td>The public key cache lifetime defines the minimum revocation time of
-the public key.  The actual lifetime is the maximum allowable downtime of
-the public key server.
+   <td>The public key cache expiration period determines the maximum allowable
+unavailability of the public key server. Among various possible causes would be
+temporary network connectivity problems anywhere between the cache location and
+the public key server. Resolution of such problems can easily take a day.
+The proposed maximum period would allow long weekends to be covered.
    </td>
   </tr>
   <tr>
