@@ -3,16 +3,15 @@
 set -e
 
 FILENAME="profile"
-
 TMP=$(mktemp -d)
-
 UTILS="utils"
-
 TARGET="BUILD"
+VERBOSE="nope"
 
 while [ $# -gt 0 ]; do
     case "$1" in
     clean)      TARGET="CLEAN"                                          ;;
+    -v)         VERBOSE="yep"                                           ;;
     esac
     shift
 done
@@ -29,6 +28,10 @@ done
     echo -n "${FILENAME}"
     rm -f ${FILENAME}.pdf ${FILENAME}.docx
     echo "...done"
+}
+
+[[ ${VERBOSE} == "yep" ]] && {
+    cat ${TMP}/pdf.log
 }
 
 [ -d "${TMP}" ] && rm -rf "${TMP}"
