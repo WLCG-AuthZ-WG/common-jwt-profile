@@ -810,17 +810,21 @@ For a given storage resource, the defined authorizations include:
     such as disk, as opposed to 'nearline' resources such as tape, where
     the **stage** authorization may need to be used instead (see below),
     because the `storage.read` scope only allows _staged_ data to be read.
-*   **storage.create** &mdash; Upload data.  This includes renaming files if
-    the destination file does not already exist. This capability includes the
-    creation of directories and subdirectories at the specified path, and the
-    creation of any non-existent directories required to create the path itself.
-    This authorization does **not** permit overwriting or deletion of stored
-    data.  The driving use case for a separate `storage.create` scope is to
-    enable the stage-out of data from jobs on a worker node.
+
+*   **storage.create** &mdash; Upload data.
+    This capability includes the creation of directories and subdirectories
+    starting from the specified path, and the creation of any non-existent
+    directories required to create the path itself. This capability does
+    ***not*** permit deleting, overwriting, or replacing stored data.
+    With that proviso, this capability also allows _renaming files_
+    between any (sub)directories starting from the path(s) provided as 
+    parameter(s) to the `storage.create` scope(s) included in a given token.
+
 *   **storage.modify** &mdash; Change data.  This includes renaming files,
     creating new files, and writing data.  This permission includes overwriting
     or replacing stored data in addition to deleting or truncating data.  This
     is a strict superset of `storage.create`.
+
 *   **storage.stage** &mdash; Stage and/or read data, plus related operations.
     This scope allows data to be _staged_, when needed, from a 'nearline'
     resource to an 'online' resource, to allow the data to be read.
@@ -852,6 +856,15 @@ good shape on the storage system right after it was uploaded there.
 
 At the time of writing (August 2025), it was decided to postpone the
 specification of the scope for _listing directories_ on storage services.
+
+The driving use case for a separate `storage.create` scope is to enable the 
+stage-out of data from jobs running on a worker node, while preventing them 
+from being able to delete any data. Limited renaming functionality is 
+included to allow any file to be uploaded first with a temporary name on the 
+storage service, to be subsequently renamed by the client only if the upload 
+is deemed to have been successful, and otherwise to be deleted by a suitably 
+empowered service of the VO. Full renaming functionality is available through
+the `storage.modify` scope. 
 
 For a given computing resource, the defined authorizations include:
 
