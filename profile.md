@@ -1600,7 +1600,7 @@ example:
             "e": "AQAB",
             "kid": "key1",
             "kty": "RSA",
-            "n": "oj5UxvZGgQ[...]mQ==",
+            "n": "oj5UxvZG[...]",
             "use": "sig"
         }
     ]
@@ -2234,7 +2234,7 @@ Accept: */*
 Content-Length: 104
 Content-Type: application/x-www-form-urlencoded
 
-grant_type=urn:ietf:params:oauth:grant-type:device_code&device_code=da317e13-[...]
+grant_type=urn:ietf:params:oauth:grant-type:device_code&device_code=da31[...]
 
 ```
 
@@ -2244,12 +2244,12 @@ And gets back the requested tokens:
 
 ```
 {
-  "access_token": "eyJraWQiOi[...]MN9E",
+  "access_token": "eyJraWQi[...]MN9E",
   "token_type": "Bearer",
-  "refresh_token": "eyJhbGciOi[...]ifQ.",
+  "refresh_token": "eyJhbGci[...]ifQ.",
   "expires_in": 3599,
   "scope": "email openid offline_access profile",
-  "id_token": "eyJraWQiOi[...]ffWQ"
+  "id_token": "eyJraWQi[...]ffWQ"
 }
 ```
 
@@ -2303,7 +2303,7 @@ grant_type=client_credentials&expire_in=3600&scope=storage.read:/home/joe
 < Content-Length: 374
 < Content-Type: application/json
 < 
-{"access_token": "eyJ0eXAiOi[...]79fQ", "token_type": "bearer", "expires_in": 3600}
+{"access_token": "eyJ0eXAi[...]", "token_type": "bearer", "expires_in": 3600}
 ```
 
 
@@ -2408,7 +2408,7 @@ also true in the WLCG profile.
     "exp": 1555060391,
     "iat": 1555059791,
     "jti": "aef94c8c-0fea-490f-9027-ff444dd66d8c",
-    "scope": "storage.read:/store storage.create:/store/mc/datasetA compute.create",
+    "scope": "storage.read:/dir storage.create:/dir/datasetA compute.create",
     "eduperson_assurance": [
       "https://refeds.org/assurance/profile/espresso"
     ],

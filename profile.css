@@ -4,8 +4,8 @@ body {
     text-align: justify;
     font-size: x-large;
     width: 90%
-}   
-table { 
+}
+table {
     font-size: x-large;
     margin-left: auto;
     margin-right: auto;
@@ -13,11 +13,11 @@ table {
     border-bottom: 1px solid black;
     border-top: 1px solid black;
     break-before: auto;
-}           
+}
 tr {
     break-inside: avoid;
 }
-th {    
+th {
     padding: 3px 10px;
     background-color: white;
     border-top: 1px solid black;
@@ -36,10 +36,10 @@ td {
 }
 @media print {
     body {
-        font-size: x-small;
+        font-size: small;
     }
-    table { 
-        font-size: x-small;
+    table {
+        font-size: small;
     }
 }
 @page {
