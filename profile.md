@@ -30,7 +30,8 @@ _Authored by the WLCG AuthZ Working Group_
    </td>
    <td>1.0
    </td>
-   <td>Version published on Zenodo
+   <td>Version published on <a href="https://zenodo.org/records/3460258">
+Zenodo</a>
    </td>
   </tr>
   <tr>
@@ -2420,9 +2421,19 @@ also true in the WLCG profile.
 ## 5.4. Related Publications
 ([ToC](#toc-480))
 
+- [WLCG Common JWT profiles source 
+  repository](https://github.com/WLCG-AuthZ-WG/common-jwt-profile) &mdash;
+  Allows issues to be reported and changes to be proposed for new versions.
+
 - [WLCG Bearer Token Discovery](https://zenodo.org/records/3937438) &mdash;
   Describes how clients may discover WLCG bearer tokens for subsequent use,
   either from their environment or from well-defined locations.
+
+- [WLCG Token Transition Timeline](https://zenodo.org/records/7014668) &mdash;
+  Describes technical matters that needed or still need to be considered to
+  permit a smooth transition from legacy methods and systems towards adequate,
+  convenient and sustainable use of tokens across the WLCG infrastructure.
+
 
 <!-- Footnotes themselves at the bottom. -->
 ## 5.5. Notes
