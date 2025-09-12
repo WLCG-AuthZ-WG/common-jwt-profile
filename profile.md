@@ -1776,7 +1776,7 @@ Note the combination of **nbf** (not before) and **exp** (expiration)
 provides a notion of token valid lifetime.  As a pragmatic guard against
 minor clock skews, the **nbf** claim can be slightly backdated w.r.t. the
 actual time of issuance recorded in the **iat** claim, to allow freshly
-minted tokens to be used immediately at services whose clocks skews lie
+minted tokens to be used immediately at services whose clock skews lie
 within an acceptable range ([RFC 7519 section
 4.1.5](https://www.rfc-editor.org/rfc/rfc7519.html#section-4.1.5)).  That
 range would in practice be limited to a few minutes at most, with a default
@@ -2047,7 +2047,7 @@ authorization server:
 *   Confidential client applications (e.g., server-side applications) are
     capable of maintaining the confidentiality of their credentials or are
     capable of providing secure client authentication through other means.
-*   Public client applications (e.g., Javascript single page or mobile
+*   Public client applications (e.g., JavaScript single page or mobile
     applications running on the user device) are by design incapable of storing
     client credentials securely or do not have other means that allow for secure
     client authentication.
