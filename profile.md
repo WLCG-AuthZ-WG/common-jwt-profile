@@ -1738,7 +1738,7 @@ to the issuer's public key lifetime.
    <td>The public key cache refresh period determines the effective revocation
 time of the public key(s) to be used for token verification. It also equates
 to the minimum duration for a <em>new</em> key to have already been published
-before it starts getting used for signing tokens.
+before it should start to be used for signing tokens.
    </td>
   </tr>
   <tr>
