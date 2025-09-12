@@ -1736,7 +1736,9 @@ to the issuer's public key lifetime.
    <td>6 hours
    </td>
    <td>The public key cache refresh period determines the effective revocation
-time of the public key(s) to be used for token verification.
+time of the public key(s) to be used for token verification. It also equates
+to the minimum duration for a <em>new</em> key to have already been published
+before it should start to be used for signing tokens.
    </td>
   </tr>
   <tr>
@@ -1753,6 +1755,10 @@ unavailability of the public key server. Among various possible causes would be
 temporary network connectivity problems anywhere between the cache location and
 the public key server. Resolution of such problems can easily take a day.
 The proposed maximum period would allow long weekends to be covered.
+
+To help minimize token validation failures due to key rotation, any new key
+ought to be published in advance for at least the key cache expiration period,
+before it starts getting used for signing tokens.
    </td>
   </tr>
   <tr>
