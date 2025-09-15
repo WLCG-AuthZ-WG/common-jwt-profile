@@ -1738,8 +1738,8 @@ to the issuer's public key lifetime.
    <td>The public key cache refresh period determines the effective revocation
 time of the public key(s) to be used for token verification. It also equates
 to the minimum duration for a <em>new</em> key to have already been published
-before it should start to be used for signing tokens. A security incident may
-force keys to be rotated sooner.
+before it should start to be used for signing tokens.
+A security incident may force a new key to be used sooner.
    </td>
   </tr>
   <tr>
@@ -1759,8 +1759,8 @@ The proposed maximum period would allow long weekends to be covered.
 
 To help minimize token validation failures due to key rotation, any new key
 ought to be published in advance for at least the key cache expiration period,
-before it starts getting used for signing tokens. A security incident may force
-keys to be rotated sooner.
+before it starts getting used for signing tokens.
+A security incident may force a new key to be used sooner.
    </td>
   </tr>
   <tr>
