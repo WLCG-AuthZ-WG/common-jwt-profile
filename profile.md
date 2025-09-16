@@ -1740,6 +1740,8 @@ time of the public key(s) to be used for token verification. It also equates
 to the minimum duration for a <em>new</em> key to have already been published
 before it should start to be used for signing tokens.
 A security incident may force a new key to be used sooner.
+This could be a good justification for more frequent refreshes of the cache
+as well as more frequently refreshed access tokens.
    </td>
   </tr>
   <tr>
