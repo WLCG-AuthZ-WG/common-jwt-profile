@@ -39,7 +39,7 @@ Zenodo</a>
    </td>
    <td>1.1
    </td>
-   <td>Version published on <a href="https://zenodo.org/records/3460258">
+   <td>Version published on <a href="https://zenodo.org/records/17185276">
 Zenodo</a>
    </td>
   </tr>
