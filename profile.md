@@ -841,7 +841,7 @@ For a given storage resource, the defined authorizations include:
     the `storage.stage` scope to authorize also the following operations:
     * `poll` &mdash; Inquire about the localities (nearline and/or online)
       of the given files.
-      * A separate scope for that operation is under discussion as well.
+      * A separate scope just for that operation is available as well.
     * `abort` / `cancel` &mdash; Ask for a stage operation to be canceled.
     * `evict` / `release` &mdash; Indicate the given files no longer need to
       be kept online.
@@ -850,6 +850,11 @@ For a given storage resource, the defined authorizations include:
 
     **Note:** storage services may impose additional constraints on who is
     authorized to stage data.
+
+*   **storage.poll** &mdash; Inquire about the localities (nearline and/or online)
+    of the given files. This scope exists to allow file locality polling to
+    be done without having to bestow the client under consideration with the
+    full privileges of the **stage** scope.
 
 All `storage.*` scopes also authorize **`"stat"`** operations on the files or
 directories matching the given paths, i.e. queries about _metadata_ like the
