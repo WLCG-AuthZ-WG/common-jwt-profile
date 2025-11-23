@@ -43,6 +43,14 @@ Zenodo</a>
 Zenodo</a>
    </td>
   </tr>
+  <tr>
+   <td>DD.MM.2025
+   </td>
+   <td>x.y
+   </td>
+   <td>Under construction!
+   </td>
+  </tr>
 </table>
 
 # Table of Contents
@@ -811,7 +819,7 @@ For a given storage resource, the defined authorizations include:
 
 *   **storage.read** &mdash; Read data.  Only applies to 'online' resources
     such as disk, as opposed to 'nearline' resources such as tape, where
-    the **stage** authorization may need to be used instead (see below),
+    the **stage** authorization may be needed to bring the data 'online' first,
     because the `storage.read` scope only allows _staged_ data to be read.
 
 *   **storage.create** &mdash; Upload data.
@@ -828,17 +836,14 @@ For a given storage resource, the defined authorizations include:
     or replacing stored data in addition to deleting or truncating data.  This
     is a strict superset of `storage.create`.
 
-*   **storage.stage** &mdash; Stage and/or read data, plus related operations.
+*   **storage.stage** &mdash; Stage data, plus related operations.
     This scope allows data to be _staged_, when needed, from a 'nearline'
-    resource to an 'online' resource, to allow the data to be read.
-    Because staging is always done in order to read the given data next,
-    the `storage.stage` scope has been made a superset of `storage.read`.
-    This allows the same token to be used for both operations, while
-    avoiding the need to include the `storage.read` scope for every given
-    path in addition.
-    Discussions on how to support various related operations have not been
-    finalized at the time of writing (August 2025), but it looks likely for
-    the `storage.stage` scope to authorize also the following operations:
+    resource (tape) to an 'online' resource (disk), to allow the data to be read.
+    While previous versions of this document allowed the stage scope itself
+    to be used for reading the data as well, this optimization was found to
+    cause a potential concern with respect to the separation of privileges
+    in data management systems, and it has therefore been removed. <br/>
+    The `storage.stage` scope also authorizes the following operations:
     * `poll` &mdash; Inquire about the localities (nearline and/or online)
       of the given files.
       * A separate scope for that operation is under discussion as well.
