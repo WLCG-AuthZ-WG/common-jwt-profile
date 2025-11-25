@@ -853,17 +853,18 @@ For a given storage resource, the defined authorizations include:
 
 *   **storage.poll** &mdash; Inquire about the localities (nearline and/or online)
     of the given files. This scope exists to allow file locality polling to
-    be done without having to bestow the client under consideration with the
-    full privileges of the **stage** scope.
+    be done without having to bestow the client under consideration with any
+    further privileges.
 
-All `storage.*` scopes also authorize **`"stat"`** operations on the files or
-directories matching the given paths, i.e. queries about _metadata_ like the
-_size_ or _checksum_ of a file. For example, a client can use the same
+The `storage.{read,create,modify,stage}` scopes also authorize **`"stat"`**
+operations on the files or directories matching the given paths, i.e. queries
+about _metadata_ like the _size_, _checksum_ or _locality_ of a file.
+For example, a client can use the same
 `storage.create:/dir/file` scope to check if the given file appears to be in
 good shape on the storage system right after it was uploaded there.
 
-At the time of writing (August 2025), it was decided to postpone the
-specification of the scope for _listing directories_ on storage services.
+A specification of the scope for _listing directories_ on storage services
+has been postponed until further notice.
 
 The driving use case for a separate `storage.create` scope is to enable the 
 stage-out of data from jobs running on a worker node, while preventing them 
@@ -873,6 +874,11 @@ storage service, to be subsequently renamed by the client only if the upload
 is deemed to have been successful, and otherwise to be deleted by a suitably 
 empowered service of the VO. Full renaming functionality is available through
 the `storage.modify` scope. 
+
+The driving use case for a separate `storage.poll` scope is to allow
+third-party File Transfer Service instances and similar systems to be
+supplied with wide, long-lived tokens for the polling operations in
+stage and/or archive workflows, while avoiding data sensitivity concerns.
 
 For a given computing resource, the defined authorizations include:
 
