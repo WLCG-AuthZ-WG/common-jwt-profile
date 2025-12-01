@@ -858,7 +858,9 @@ For a given storage resource, the defined authorizations include:
     While previous versions of this document allowed the stage scope itself
     to be used for reading the data as well, this optimization was found to
     cause a potential concern with respect to the separation of privileges
-    in data management systems, and it has therefore been removed. <br/>
+    in data management systems, and it has therefore been removed.
+    Implementations that conform to this document MUST apply the current
+    definition regardless of the value of the `wlcg.ver` claim in the token. <br/>
     The `storage.stage` scope also authorizes the following operations:
     * `poll` &mdash; Inquire about the localities (nearline and/or online)
       of the given files.
