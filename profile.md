@@ -43,6 +43,14 @@ Zenodo</a>
 Zenodo</a>
    </td>
   </tr>
+  <tr>
+   <td>DD.MM.2025
+   </td>
+   <td>x.y
+   </td>
+   <td>Under construction!
+   </td>
+  </tr>
 </table>
 
 # Table of Contents
@@ -118,7 +126,7 @@ Connect](https://openid.net/developers/specs/)  and JSON Web Tokens (RFC
 OAuth2 Authorization Server Metadata (RFC 8414). This document provides a
 profile for OAuth2 Access Tokens and OIDC ID Tokens.
 
-**The WLCG Token Profile version described by this document is '1.1'.**
+**The WLCG Token Profile version described by this document is 'x.y'.**
 
 The profile for the usage of JSON Web Tokens (RFC 7519) supports distributed
 authentication and authorization within the WLCG.  The JWT profile is meant
@@ -803,16 +811,31 @@ Token Exchange [RFC 8693 Section
 authorized activities the bearer of this token may perform.
 
 We aim to define a common set of authorizations (particularly
-storage-related authorizations), but envision additional authorizations will
+storage-related authorizations), but envision further authorizations will
 be added to meet new use cases. The interpretation of such authorizations
 would result in a list of operations the bearer is allowed to perform.
 
+In the following descriptions, distinction is made between two classes of
+storage system resources:
+
+*   An 'online' resource has its data available for immediate reading.
+    At the time of writing, such resources are typically provided in the
+    form of spinning and/or solid-state disks, possibly with significant
+    amounts of RAM as a caching layer.
+*   A 'nearline' resource may first require a _staging_ operation to be
+    performed on the data that a client would like to read, as further
+    described below. At the time of writing, such resources are provided
+    through magnetic-tape libraries, but may at some point start making
+    use of alternative technologies.
+
+The disk buffer that a tape library uses for making data on tape available
+for reading, i.e. for _staging_ the data, is considered an 'online' resource.
+
 For a given storage resource, the defined authorizations include:
 
-*   **storage.read** &mdash; Read data.  Only applies to 'online' resources
-    such as disk, as opposed to 'nearline' resources such as tape, where
-    the **stage** authorization may need to be used instead (see below),
-    because the `storage.read` scope only allows _staged_ data to be read.
+*   **storage.read** &mdash; Read data from an 'online' resource.
+    For data residing on a 'nearline' resource, a _staging_ operation using
+    the **stage** authorization described below may need to be applied first.
 
 *   **storage.create** &mdash; Upload data.
     This capability includes the creation of directories and subdirectories
@@ -828,17 +851,17 @@ For a given storage resource, the defined authorizations include:
     or replacing stored data in addition to deleting or truncating data.  This
     is a strict superset of `storage.create`.
 
-*   **storage.stage** &mdash; Stage and/or read data, plus related operations.
-    This scope allows data to be _staged_, when needed, from a 'nearline'
-    resource to an 'online' resource, to allow the data to be read.
-    Because staging is always done in order to read the given data next,
-    the `storage.stage` scope has been made a superset of `storage.read`.
-    This allows the same token to be used for both operations, while
-    avoiding the need to include the `storage.read` scope for every given
-    path in addition.
-    Discussions on how to support various related operations have not been
-    finalized at the time of writing (August 2025), but it looks likely for
-    the `storage.stage` scope to authorize also the following operations:
+*   **storage.stage** &mdash; Stage data, plus related operations.
+    This scope allows data residing on a 'nearline' resource to be _staged_
+    in order to allow the data to be read during the time that an 'online'
+    copy of the given data is kept available by the given storage service. <br/>
+    While previous versions of this document allowed the stage scope itself
+    to be used for reading the data as well, this optimization was found to
+    cause a potential concern with respect to the separation of privileges
+    in data management systems, and it has therefore been removed.
+    Implementations that conform to this document MUST apply the current
+    definition regardless of the value of the `wlcg.ver` claim in the token. <br/>
+    The `storage.stage` scope also authorizes the following operations:
     * `poll` &mdash; Inquire about the localities (nearline and/or online)
       of the given files.
       * A separate scope for that operation is under discussion as well.
