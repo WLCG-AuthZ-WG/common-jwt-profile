@@ -126,7 +126,7 @@ Connect](https://openid.net/developers/specs/)  and JSON Web Tokens (RFC
 OAuth2 Authorization Server Metadata (RFC 8414). This document provides a
 profile for OAuth2 Access Tokens and OIDC ID Tokens.
 
-**The WLCG Token Profile version described by this document is '1.1'.**
+**The WLCG Token Profile version described by this document is 'x.y'.**
 
 The profile for the usage of JSON Web Tokens (RFC 7519) supports distributed
 authentication and authorization within the WLCG.  The JWT profile is meant
