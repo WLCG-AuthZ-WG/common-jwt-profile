@@ -48,7 +48,7 @@ Zenodo</a>
    </td>
    <td>1.2
    </td>
-   <td>Version published on <a href="https://doi.org/10.5281/zenodo.3460257">
+   <td>Version published on <a href="https://zenodo.org/records/17937372">
 Zenodo</a>
    </td>
   </tr>
