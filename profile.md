@@ -1108,9 +1108,14 @@ containing a `sub` claim of the form `host:fully.qualified.domain` where
 `fully.qualified.domain` is a full DNS name or alias for the client
 host, combined with a `scope` claim containing **`host.auth`**.
 
-It probably makes the most sense to obtain these types of tokens using
+These types of tokens are intended to be obtained using
 the [Client credentials flow](#526-client-credentials-flow) where the
-client holds its own client ID and secret.
+client holds its own client ID and secret.  In that case RFC 9068
+section 2.2 indicates that the value of the `sub` claim SHOULD 
+correspond to the client ID, so the recommended way to do that is
+for the `host:fully.qualified.domain` to be defined first in the
+client ID and from there copied into the `sub`.
+
 
 ## 2.3. Identity Assurance
 ([ToC](#toc-110))
