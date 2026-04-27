@@ -1101,7 +1101,9 @@ group-membership statements.
 For host to host communication it is sometimes sufficient for a server
 host to simply verify the name of a client host.  This is analogous to
 a client using its own X.509 host certificate to authenticate itself to
-a service.
+a service.  For example, this could be used for readonly access to an
+API that provides configuration information that another host needs but
+is not made public.
 
 This type of authorization may be done by using an access token
 containing a `sub` claim of the form `host:fully.qualified.domain` where
