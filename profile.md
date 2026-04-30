@@ -1098,26 +1098,32 @@ group-membership statements.
 ### 2.2.4. Host-based Authorization
 ([ToC](#toc-105))
 
-For host to host communication it is sometimes sufficient for a server
-host to simply verify the name of a client host.  This is analogous to
-a client using its own X.509 host certificate to authenticate itself to
-a service.  For example, this could be used for readonly access to an
-API that provides configuration information that another host needs but
-is not made public.
+For host to host communication it is sometimes more convenient for a
+Resource Provider to verify that tokens came from particular client
+hosts, rather than inventing a new scope specific for that provider.
+This is analogous to a client using its own X.509 host certificate to
+authenticate itself to a service.  For example, this could be used for
+readonly access to an API that provides configuration information that
+another host needs but is not made public.
 
 This type of authorization may be done by using an access token
-containing a `sub` claim of the form `host:fully.qualified.domain` where
-`fully.qualified.domain` is a full DNS name or alias for the client
-host, combined with a `scope` claim containing **`host.auth`**.
+containing a unique `sub` claim that gets registered in the Resource
+Provider, combined with a `scope` claim containing a **`host.auth`** scope.
 
 These types of tokens are intended to be obtained using
 the [Client credentials flow](#526-client-credentials-flow) where the
 client holds its own client ID and secret.  In that case RFC 9068
 section 2.2 indicates that the value of the `sub` claim SHOULD 
-correspond to the client ID, so the recommended way to do that is
-for the `host:fully.qualified.domain` to be defined first in the
-client ID and from there copied into the `sub`.
+correspond to the client ID, so the recommended way to do this is
+for the token issuer to copy the client ID into the `sub` claim.
 
+As a convenience to administrators of Resource Providers that accept
+these types of access tokens, it is recommended that the client ID
+(and therefore `sub`) be set by the administrators of the token 
+issuer to be of the form `host:fully.qualified.domain`, where
+`fully.qualified.domain` is a DNS name associated with the client host.
+That will ensure that they are unique while also making it easy to
+both communicate what to register and find out where the client is.
 
 ## 2.3. Identity Assurance
 ([ToC](#toc-110))
