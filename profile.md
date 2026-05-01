@@ -2485,6 +2485,9 @@ also true in the WLCG profile.
   Defines a system-wide cache of JWKS information for issuers of interest
   that multiple token-parsing libraries can reuse.
 
+- [WLCG Token Usage Risk Assessment](https://zenodo.org/records/19608058) &mdash;
+  Token usage risk assessment for routine use cases present in WLCG, EGI and OSG.
+
 
 <!-- Footnotes themselves at the bottom. -->
 ## 5.5. Notes
