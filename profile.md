@@ -1098,32 +1098,42 @@ group-membership statements.
 ### 2.2.4. Host-based Authorization
 ([ToC](#toc-105))
 
-For host to host communication it is sometimes more convenient for a
-Resource Provider to verify that tokens came from particular client
-hosts, rather than inventing a new scope specific for that provider.
-This is analogous to a client using its own X.509 host certificate to
-authenticate itself to a service.  For example, this could be used for
-readonly access to an API that provides configuration information that
-another host needs but is not made public.
+For service to service communication it is sometimes most convenient for
+the consumer of an access token, the Resource Provider, to verify that
+a token came from a particular client service.  The alternative would
+be to invent a new scope specific to that Resource Provider and make it
+available to all the accepted clients, and that is not always practical.
+For example, this could be used for readonly access to an API that
+provides configuration information that other services need but is not
+made public.
 
-This type of authorization may be done by using an access token
-containing a unique `sub` claim that gets registered in the Resource
-Provider, combined with a `scope` claim containing a **`host.auth`** scope.
+For this type of authorization the standard OAuth2 grant to use is the
+client credentials grant specified in
+[RFC 6749 section 4.4](https://datatracker.ietf.org/doc/html/rfc6749#section-4.4),
+where the client obtains an access token by authenticating using only its
+client identifier and secret. The JWT Profile for OAuth 2.0 Access Tokens in
+[RFC 9068 section 2.2](https://datatracker.ietf.org/doc/html/rfc9068#section-2.2)
+further indicates that in that case the `sub` claim in the access token
+SHOULD correspond to the client identifier, and the easiest way to do
+that is for the Authorization Server to copy the client identifier into
+the `sub` claim.
 
-These types of tokens are intended to be obtained using
-the [Client credentials flow](#526-client-credentials-flow) where the
-client holds its own client ID and secret.  In that case RFC 9068
-section 2.2 indicates that the value of the `sub` claim SHOULD 
-correspond to the client ID, so the recommended way to do this is
-for the token issuer to copy the client ID into the `sub` claim.
+Since the Resource Provider needs to know the client identifier for
+configuring its authorization policies, it is convenient and less
+prone to errors if it is predictable and in a human readable format.
+At the same time the client identifier needs to be guaranteed globally
+unique.  The way to do that recommended by this profile is to use a
+client identifier (and therefore `sub`) of the form
+`host:fully.qualified.domain`, where `fully.qualified.domain` is a DNS
+name associated with the client host.
+It is important to point out that there is no actual verification of the
+client hostname being done at any point in the flow, the format is only
+chosen to make it an easily predictable and guaranteed globally unique
+string.
 
-As a convenience to administrators of Resource Providers that accept
-these types of access tokens, it is recommended that the client ID
-(and therefore `sub`) be set by the administrators of the token 
-issuer to be of the form `host:fully.qualified.domain`, where
-`fully.qualified.domain` is a DNS name associated with the client host.
-That will ensure that they are unique while also making it easy to
-both communicate what to register and find out where the client is.
+In order to indicate to the Resource Provider that the access token is
+conveying authorization based on the `sub` claim, the token SHOULD also
+include **`host.auth`** in the `scope` claim.
 
 ## 2.3. Identity Assurance
 ([ToC](#toc-110))
