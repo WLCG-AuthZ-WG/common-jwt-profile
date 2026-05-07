@@ -67,6 +67,7 @@ Zenodo</a>
     - [2.2.1. Capability-based Authorization: scope](#221-capability-based-authorization-scope)<a id="toc-080"></a>
     - [2.2.2. Group Based Authorization: wlcg.groups](#222-group-based-authorization-wlcggroups)<a id="toc-090"></a>
     - [2.2.3. Interpretation of Authorization by the Resource Server](#223-interpretation-of-authorization-by-the-resource-server)<a id="toc-100"></a>
+    - [2.2.4. Host-based Authorization](#224-host-based-authorization)<a id="toc-105"></a>
   - [2.3. Identity Assurance](#23-identity-assurance)<a id="toc-110"></a>
 - [3. Scope-based Attribute Selection](#3-scope-based-attribute-selection)<a id="toc-120"></a>
   - [3.1. Scope-based Group Selection](#31-scope-based-group-selection)<a id="toc-130"></a>
@@ -1094,6 +1095,45 @@ If the token contains none of the capability statements defined above
 then the service SHOULD make authorization decisions based on the
 group-membership statements.
 
+### 2.2.4. Host-based Authorization
+([ToC](#toc-105))
+
+For service to service communication it is sometimes most convenient for
+the consumer of an access token, the Resource Provider, to verify that
+a token came from a particular client service.  The alternative would
+be to invent a new scope specific to that Resource Provider and make it
+available to all the accepted clients, and that is not always practical.
+For example, this could be used for readonly access to an API that
+provides configuration information that other services need but is not
+made public.
+
+For this type of authorization the standard OAuth2 grant to use is the
+client credentials grant specified in
+[RFC 6749 section 4.4](https://datatracker.ietf.org/doc/html/rfc6749#section-4.4),
+where the client obtains an access token by authenticating using only its
+client identifier and secret. The JWT Profile for OAuth 2.0 Access Tokens in
+[RFC 9068 section 2.2](https://datatracker.ietf.org/doc/html/rfc9068#section-2.2)
+further indicates that in that case the `sub` claim in the access token
+SHOULD correspond to the client identifier, and the easiest way to do
+that is for the Authorization Server to copy the client identifier into
+the `sub` claim.
+
+Since the Resource Provider needs to know the client identifier for
+configuring its authorization policies, it is convenient and less
+prone to errors if it is predictable and in a human readable format.
+At the same time the client identifier needs to be guaranteed globally
+unique.  The way to do that recommended by this profile is to use a
+client identifier (and therefore `sub`) of the form
+`host:fully.qualified.domain`, where `fully.qualified.domain` is a DNS
+name associated with the client host.
+It is important to point out that there is no actual verification of the
+client hostname being done at any point in the flow, the format is only
+chosen to make it an easily predictable and guaranteed globally unique
+string.
+
+In order to indicate to the Resource Provider that the access token is
+conveying authorization based on the `sub` claim, the token SHOULD also
+include **`host.auth`** in the `scope` claim.
 
 ## 2.3. Identity Assurance
 ([ToC](#toc-110))
