@@ -925,8 +925,8 @@ resource.
 The operation definitions are currently kept open-ended and intended to be
 interpreted and evolved by the WLCG community.
 
-A scope MAY additionally provide a resource path, which further limits the
-authorization.  A path is provided following the template `$AUTHZ:$PATH`
+Certain scopes MUST additionally provide a resource path, which further limits
+the authorization.  A path is provided following the template `$AUTHZ:$PATH`
 where `$AUTHZ` denotes a specific authorization and `$PATH` denotes the path.
 For example, the scope `storage.read:/foo` would provide a read authorization
 for the resource(s) at `/foo` but not `/bar`.
