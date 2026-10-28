@@ -1748,13 +1748,11 @@ Major examples are:
 
 Token lifetime recommendations should rather be considered per workflow,
 with the following table providing **default** values recommended in the
-`AARC-G081`
-[draft](https://docs.google.com/document/d/1U9vvJfWuE8oO7u0FcGVGr3KySvBqwjnkzKO8TKzgoX4/)
-guidelines, to be published
-[here](https://aarc-community.org/guidelines/aarc-g081/) as part of the
-catalog of [AARC guidelines](https://aarc-community.org/guidelines/). If
+[AARC-G081](https://aarc-community.org/guidelines/aarc-g081/) guidelines, as part
+of the catalog of [AARC guidelines](https://aarc-community.org/guidelines/). If
 these values are not suitable for a given workflow, alternative **mitigation**
-MUST be **agreed** through a risk assessment involving security experts within
+MUST be **agreed** through a risk assessment (like the one for
+[WLCG](https://zenodo.org/records/19608058)) involving security experts within
 the affected community and **put in place** to keep the security risks of that
 workflow at a level that is deemed acceptable:
 
