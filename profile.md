@@ -883,7 +883,9 @@ For a given storage resource, the defined authorizations include:
     further privileges.
 
 The `storage.{read,create,modify,stage}` scopes also authorize **`"stat"`**
-operations on the files or directories matching the given paths, i.e. queries
+operations on the files or directories matching the given paths, as well as
+on any parent directory in those paths. Such operations include queries
+about the _existence_ of a given file or directory, as well as queries
 about _metadata_ like the _size_, _checksum_ or _locality_ of a file.
 For example, a client can use the same
 `storage.create:/dir/file` scope to check if the given file appears to be in
