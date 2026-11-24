@@ -1002,7 +1002,7 @@ Example values of the `scope` claim:
   as well as create, manage, and delete content in the `"/protected/subdir"`
   directory.
 * **`"storage.stage:/tape/subdir storage.read:/protected/data"`** &mdash;
-  This allows the bearer to stage files into `"/tape/subdir"` and
+  This allows the bearer to stage files located in `"/tape/subdir"` and
   read files in `"/protected/data"`.
 * **`"compute.create"`** &mdash; This allows the bearer to submit jobs to a
   batch system on behalf of the issuing VO.
